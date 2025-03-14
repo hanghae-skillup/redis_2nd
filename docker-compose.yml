@@ -1,0 +1,18 @@
+services:
+  db: # mysql 연결
+    image: mysql:latest
+    restart: always # 컨테이너 종료 시 재시작
+    container_name: ${MYSQL_DATABASE} # 컨테이너 이름
+    environment: # 환경 변수 설정
+      MYSQL_DATABASE: cinema_db # 데이터베이스 이름
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD} # 루트 비밀번호
+      MYSQL_USER: ${MYSQL_USER} # 사용자 이름
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD} # 비밀번호
+      TZ: Asia/Seoul # timezone 설정
+    ports: # 호스트와 컨테이너 간의 포트 매핑
+      - '3306:3306' # [host]:[container]
+    volumes: # volumes 설정하지 않을 시 MySQL 컨테이너가 종료되면 컨테이너 내부의 데이터가 삭제됨
+      - 'mysql_cinema_data:/var/lib/mysql' # 데이터 영구 저장
+
+volumes:
+  mysql_cinema_data:
