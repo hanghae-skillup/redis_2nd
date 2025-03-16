@@ -19,15 +19,15 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "schedules")
+@Table(name = "schedule")
 public class ScheduleEntity extends BaseEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	private LocalDateTime startTime;
+	private LocalDateTime startAt;
 
-	private LocalDateTime endTime;
+	private LocalDateTime endAt;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "movie_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
@@ -40,7 +40,7 @@ public class ScheduleEntity extends BaseEntity {
 	public Schedule toSchedule() {
 		return new Schedule(movie.getId(), movie.getTitle(), movie.getRating(), movie.getReleasedAt(),
 			movie.getPosterUrl(),
-			movie.getRunningTime(), movie.getGenre(), screen.getId(), screen.getName(), startTime, endTime);
+			movie.getRunningTime(), movie.getGenre(), screen.getId(), screen.getName(), startAt, endAt);
 	}
 
 }

@@ -36,8 +36,8 @@ public class ScheduleCoreRepository implements ScheduleRepository {
 			.fetchJoin()
 			.join(schedule.screen)
 			.fetchJoin()
-			.where(schedule.startTime.goe(currentDate))
-			.orderBy(schedule.movie.releasedAt.desc(), schedule.startTime.asc())
+			.where(schedule.startAt.goe(currentDate))
+			.orderBy(schedule.movie.releasedAt.desc(), schedule.startAt.asc())
 			.fetch();
 
 		return scheduleEntities.stream()
