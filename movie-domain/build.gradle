@@ -1,0 +1,17 @@
+plugins {
+    id 'org.springframework.boot' version '3.2.3'
+    id 'java'
+}
+
+repositories {
+    mavenCentral()  // ✅ 개별 모듈에서도 추가 (보장용)
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.hibernate:hibernate-core:6.1.0.Final'
+
+    // ✅ Lombok 추가
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+}
