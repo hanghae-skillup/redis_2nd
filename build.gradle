@@ -1,0 +1,57 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version "3.4.3"
+}
+
+group = 'org.example'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+subprojects {
+    group 'com.app'
+    version '0.0.1'
+    sourceCompatibility = '11'
+
+    if (project.name != 'movie-domain-module') {
+        apply plugin: 'org.springframework.boot'
+        apply plugin: 'io.spring.dependency-management'
+    }
+    apply plugin: 'java-library'
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        compileOnly 'org.projectlombok:lombok:1.18.26'
+        annotationProcessor 'org.projectlombok:lombok:1.18.26'
+    }
+}
+
+bootJar {
+    enabled = false
+}
+
+jar {
+    enabled = true
+}
+
+test {
+    useJUnitPlatform()
+}
+
+project(':movie-infrastructure-module') {
+    dependencies {
+        implementation project(':movie-domain-module')
+    }
+}
+
+project(':movie-api-module') {
+    dependencies {
+        implementation project(':movie-domain-module')
+        implementation project(':movie-infrastructure-module')
+    }
+}
