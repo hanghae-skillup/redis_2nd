@@ -7,7 +7,6 @@ import java.util.List;
 
 public interface ShowtimeRepository{
 
-    List<Showtime> findByMovieId(Long movieId);
-
     List<Showtime> findByReleaseDateLessThanEqual(LocalDate localDate);
+
 }

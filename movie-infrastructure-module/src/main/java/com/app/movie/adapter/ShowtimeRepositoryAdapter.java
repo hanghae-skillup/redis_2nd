@@ -26,12 +26,6 @@ public class ShowtimeRepositoryAdapter implements ShowtimeRepository {
         this.showtimeJpaRepository = showtimeJpaRepository;
     }
 
-    @Override
-    public List<Showtime> findByMovieId(Long movieId) {
-        List<ShowtimeEntity> showtimeEntities = showtimeJpaRepository.findByMovieId(movieId);
-        List<Showtime> showtimes = showtimeEntities.stream().map(ShowtimeMapper::convertToDomain).toList();
-        return showtimes;
-    }
 
     @Override
     public List<Showtime> findByReleaseDateLessThanEqual(LocalDate localDate) {

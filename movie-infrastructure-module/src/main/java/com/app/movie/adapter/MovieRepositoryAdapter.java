@@ -22,12 +22,4 @@ public class MovieRepositoryAdapter implements MovieRepository {
         this.movieJpaRepository = movieJpaRepository;
     }
 
-
-    @Override
-    public List<Movie> findByReleaseDateLessThanEqual(LocalDate date) {
-        List<MovieEntity> movieEntities = movieJpaRepository.findByReleaseDateLessThanEqual(date);
-        List<Movie> movies = movieEntities.stream().map(MovieMapper::convertToDomain).toList();
-        return movies;
-    }
-
 }

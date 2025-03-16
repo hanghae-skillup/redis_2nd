@@ -7,6 +7,4 @@ import java.util.List;
 
 public interface MovieRepository {
 
-    List<Movie> findByReleaseDateLessThanEqual(LocalDate date);
-
 }
