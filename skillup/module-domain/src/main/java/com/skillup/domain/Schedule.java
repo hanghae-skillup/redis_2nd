@@ -17,4 +17,15 @@ public class Schedule {
     private LocalDateTime start_time;
     private LocalDateTime end_time;
 
+    @ManyToOne
+    @JoinColumn(name = "movie_no", insertable = false, updatable = false)
+    private Movie movie;
+
+    @ManyToOne
+    @JoinColumn(name = "screen_no", insertable = false, updatable = false)
+    private Screen screen;
+
+    public String getScreenName() {
+        return screen != null ? screen.getName() : null;
+    }
 }
