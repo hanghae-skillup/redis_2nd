@@ -1,1 +1,6 @@
 rootProject.name = 'cinema'
+include 'cinema-domain'
+include 'cinema-core'
+include 'cinema-api'
+include 'cinema-persistence'
+include 'cinema-common'

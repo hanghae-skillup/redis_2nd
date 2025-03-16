@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: hanghae-cinema
+  datasource:
+    url: jdbc:mysql://localhost:3306/cinema_db?characterEncoding=UTF-8&serverTimezone=UTC
+    username: root
+    password: cinema
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate.timezone.default_storage: NORMALIZE_UTC
+      hibernate.jdbc.time_zone: UTC

@@ -1,0 +1,20 @@
+plugins {
+    id 'org.springframework.boot'
+}
+
+bootJar {
+    enabled = true
+    mainClass = 'com.hanghae.cinema.CinemaApplication'
+}
+
+jar {
+    enabled = false
+}
+
+dependencies {
+    implementation project(':cinema-domain')
+    implementation project(':cinema-common')
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    runtimeOnly 'com.mysql:mysql-connector-j'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+}
