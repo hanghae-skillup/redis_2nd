@@ -1,4 +1,4 @@
-package project.redis.Movie;
+package project.redis.movie;
 
 import java.time.LocalDateTime;
 import lombok.AccessLevel;
@@ -16,5 +16,13 @@ public class Movie {
     public static Movie of(String movieName, MovieRate movieRate, LocalDateTime movieReleaseDate,
                            String movieThumbnailImage, Integer movieRunningTime, MovieGenre movieGenre) {
         return new Movie(movieName, movieRate, movieReleaseDate, movieThumbnailImage, movieRunningTime, movieGenre);
+    }
+
+    public boolean isReleasedBefore(LocalDateTime date) {
+        return movieReleaseDate.isBefore(date);
+    }
+
+    public int compareReleaseDate(Movie movieToCompare) {
+        return movieToCompare.movieReleaseDate.compareTo(this.movieReleaseDate);
     }
 }

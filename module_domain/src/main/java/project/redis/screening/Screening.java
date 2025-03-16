@@ -3,8 +3,8 @@ package project.redis.screening;
 import java.time.LocalDateTime;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
-import project.redis.Movie.Movie;
 import project.redis.cinema.Cinema;
+import project.redis.movie.Movie;
 
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Screening {

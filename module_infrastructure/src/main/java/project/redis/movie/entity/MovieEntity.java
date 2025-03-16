@@ -15,9 +15,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import project.redis.Movie.MovieGenre;
-import project.redis.Movie.MovieRate;
 import project.redis.common.entity.BaseEntity;
+import project.redis.movie.MovieGenre;
+import project.redis.movie.MovieRate;
 
 @Entity
 @Table(name = "movie")

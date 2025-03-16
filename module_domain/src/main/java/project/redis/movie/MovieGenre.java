@@ -1,4 +1,4 @@
-package project.redis.Movie;
+package project.redis.movie;
 
 import lombok.Getter;
 
