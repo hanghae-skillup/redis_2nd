@@ -6,6 +6,11 @@ import org.springframework.data.jpa.repository.Query
 
 interface MovieJpaRepository : JpaRepository<MovieEntity, Long> {
 
-    @Query("SELECT m FROM movies m join fetch m.screenings ORDER BY m.releaseDate DESC")
+    @Query(""" 
+        SELECT m FROM movies m
+        JOIN FETCH m.screenings s
+        JOIN FETCH s.theater
+        ORDER BY m.releaseDate DESC
+    """)
     fun findAllByOrderByReleaseDateDesc(): List<MovieEntity>
 }
