@@ -12,7 +12,6 @@ class MovieControllerV1(
     private val service: MovieService
 ) {
 
-
     @GetMapping
     fun getAllScreeningMovies(): ResponseEntity<GetMovieScreeningResponses> {
         return ResponseEntity.ok(
