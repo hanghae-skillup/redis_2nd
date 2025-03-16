@@ -1,0 +1,9 @@
+rootProject.name = 'skillup'
+
+include 'module-api'
+include 'module-service'
+include 'module-domain'
+include 'module-persistence'
+include 'module-main'
+
+
