@@ -5,3 +5,4 @@
 ## Table Design
 ![erd_movie](https://github.com/user-attachments/assets/826d501d-e844-4d19-8130-912920bbda9d)
 
+## Architecture
