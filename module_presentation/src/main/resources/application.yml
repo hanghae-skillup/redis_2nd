@@ -12,3 +12,4 @@ spring:
     properties:
       hibernate:
         format_sql: true                          # SQL 쿼리 포맷팅
+        dialect: org.hibernate.dialect.MySQL8Dialect
