@@ -1,10 +1,9 @@
 package com.app.movie.mapper;
 
-import com.app.movie.entity.GenreEntity;
+
 import com.app.movie.entity.MovieEntity;
 import com.app.movie.entity.ShowtimeEntity;
 import com.app.movie.entity.TheaterEntity;
-import com.app.movie.model.Genre;
 import com.app.movie.model.Movie;
 import com.app.movie.model.Showtime;
 import com.app.movie.model.Theater;
