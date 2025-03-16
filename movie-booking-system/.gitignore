@@ -1,0 +1,54 @@
+### Gradle ###
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+
+### IntelliJ IDEA ###
+.idea/
+*.iml
+out/
+*.ipr
+*.iws
+
+### Logs ###
+logs/
+*.log
+
+### Compiled Java classes ###
+bin/
+target/
+*.class
+
+### Dependency Caches ###
+.mvn/
+**/target/
+**/out/
+**/bin/
+**/.classpath
+**/.project
+**/.settings/
+!gradle/wrapper/gradle-wrapper.jar
+
+### OS Specific ###
+.DS_Store
+Thumbs.db
+
+### Lombok Cache ###
+.lombok/
+
+### Environment Variables ###
+.env
+*.env
+
+### Database Files ###
+*.db
+*.h2.db
+*.mv.db
+*.sqlite
+
+### Docker ###
+docker-compose.override.yml
+*.pid
+
+### Node Modules (if Frontend is included) ###
+node_modules/
