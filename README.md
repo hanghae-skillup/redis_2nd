@@ -39,6 +39,25 @@ docker compose -p cinema up -d
 ![context_map.png](/docs/images/context_map.png)
 
 
-### 테이블 erd
+### DB table erd
 ![table_erd.png](/docs/images/table_erd.png)
 
+### Multi Module Architecture
+![multi_module.png](/docs/images/multi_module.png)
+- 의존 방향은 presentation > application > domain
+  - 바로 윗단계의 모듈만 참조 가능
+  - ex) presentation 에서 domain 모듈이 참조 불가하다
+
+#### 1. domain
+- 도메인에 대한 핵심 비즈니스 로직을 처리한다
+- 도메인 엔티티와 도메인 서비스가 위치한다
+
+#### 2. application
+- 도메인 엔티티와 도메인 서비스를 이용하여 요구사항을 충족하는 흐름을 제어한다
+- @Service 역할을 하는 파일이 위치한다
+- dto가 위치한다
+  - 도메인 모델을 dto로 변환하는 로직을 dto가 담당한다
+
+#### 3. presentation
+- application 모듈의 service를 호출하여 dto를 리턴하는 역할만을 담당한다
+- @Controller 역할을 하는 파일이 위치한다
