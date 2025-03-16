@@ -1,0 +1,14 @@
+plugins {
+    id 'java'
+}
+
+allprojects {
+    repositories {
+        mavenCentral()
+    }
+    ext {
+        springBootVersion = "3.2.2"
+    }
+}
+
+// 의존성은 각 모듈에 정의하도록 설정
