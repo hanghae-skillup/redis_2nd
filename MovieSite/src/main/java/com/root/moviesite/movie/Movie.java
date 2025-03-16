@@ -1,11 +1,14 @@
 package com.root.moviesite.movie;
 
 import com.root.moviesite.Timestamped;
+import com.root.moviesite.position.Position;
 import com.root.moviesite.user.User;
 import jakarta.persistence.*;
 import lombok.Getter;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -14,6 +17,9 @@ public class Movie extends Timestamped {
     @GeneratedValue(strategy = GenerationType.AUTO)
 //    UnsignedLong
     private long id;
+
+    @OneToMany
+    private List<Position> positions = new ArrayList<>();
 
     @ManyToOne(optional = false)
     @JoinTable(name = "movies_userId",
