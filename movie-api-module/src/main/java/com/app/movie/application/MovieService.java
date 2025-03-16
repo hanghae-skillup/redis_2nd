@@ -13,10 +13,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -53,7 +50,9 @@ public class MovieService {
                                     .map(e -> new TheaterShowtime(
                                             e.getKey().getId(),
                                             e.getKey().getName(),
-                                            e.getValue(),
+                                            e.getValue().stream()
+                                                    .sorted()
+                                                    .collect(Collectors.toList()),
                                             movie.getDuration()))
                                     .toList();
 
@@ -71,7 +70,9 @@ public class MovieService {
                             dto.setTheaterShowtimes(theaterShowtime);
                             return dto;
                         }
-                ).collect(Collectors.toList());
+                )
+                .sorted(Comparator.comparing(MovieResponseDto::getReleaseDate).reversed())
+                .collect(Collectors.toList());
 
         return movieResponseDtoList;
     }
