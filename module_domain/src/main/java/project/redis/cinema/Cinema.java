@@ -5,9 +5,6 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Cinema {
-    public static final int ROWS = 5;
-    public static final int COLUMNS = 5;
-
     private String cinemaName;
     private CinemaSeats cinemaSeats;
 
