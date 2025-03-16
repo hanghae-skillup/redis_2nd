@@ -21,7 +21,7 @@ public abstract class BaseEntity {
 	@CreatedBy
 	private Long createdBy;
 	@LastModifiedBy
-	private Long modifiedBy;
+	private Long updatedBy;
 
 	public LocalDateTime getCreatedAt() {
 		return createdAt;
@@ -35,7 +35,7 @@ public abstract class BaseEntity {
 		return createdBy;
 	}
 
-	public Long getModifiedBy() {
-		return modifiedBy;
+	public Long getUpdatedBy() {
+		return updatedBy;
 	}
 }
