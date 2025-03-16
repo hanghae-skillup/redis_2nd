@@ -1,4 +1,6 @@
-package com.cinema.rds.entity;
+package com.cinema.rds.domains.user;
+
+import com.cinema.rds.domains.common.BaseEntity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -7,11 +9,11 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "seats")
-public class SeatEntity extends BaseEntity {
+@Table(name = "users")
+public class UserEntity extends BaseEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	private String position;
+	private String name;
 }

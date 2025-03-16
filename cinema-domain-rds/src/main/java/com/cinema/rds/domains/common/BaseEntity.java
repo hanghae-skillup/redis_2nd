@@ -1,4 +1,4 @@
-package com.cinema.rds.entity;
+package com.cinema.rds.domains.common;
 
 import java.time.LocalDateTime;
 

@@ -1,6 +1,6 @@
-package com.cinema.rds.entity;
+package com.cinema.rds.domains.screen;
 
-import java.time.LocalDateTime;
+import com.cinema.rds.domains.common.BaseEntity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,17 +9,11 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "reservations")
-public class ReservationEntity extends BaseEntity {
+@Table(name = "seats")
+public class SeatEntity extends BaseEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	private Long scheduleId;
-
-	private Long seatId;
-
-	private Long userId;
-
-	private LocalDateTime reservedAt;
+	private String position;
 }

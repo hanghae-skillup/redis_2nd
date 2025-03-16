@@ -4,11 +4,9 @@ public enum Genre {
 	ACTION,
 	COMEDY,
 	DRAMA,
-	FANTASY,
 	HORROR,
 	ROMANCE,
-	SCI_FI,
-	THRILLER;
+	SCI_FI;
 
 	Genre() {
 	}
