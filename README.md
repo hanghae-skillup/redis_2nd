@@ -89,4 +89,140 @@ module-domain : 비즈니스모델
 
 </details>
 
+### api 응답구조
+```json
+[
+  {
+    "movieName": "영화이름",
+    "movieRating": "영화등급",
+    "releaseDate": "개봉일",
+    "runningTime": "러닝타임(분)",
+    "genre": "장르",
+    "schedules": [
+      {
+        "startTime": "시작시간",
+        "endTime": "종료시간",
+        "screenName": "상영관이름"
+      },
+      ...
+    ],
+    "screenNames": [
+      "상영관이름",
+      ...
+    ]
+  },
+...
+]
+
+```
+
+<details>
+  <summary>예시</summary>
+  
+```json
+[
+  {
+    "movieName": "기생충",
+    "movieRating": "15세 이상 관람가",
+    "releaseDate": "2025-03-16",
+    "runningTime": 132,
+    "genre": "드라마",
+    "thumbnail": "https://example.com/parasite-thumbnail.jpg",
+    "schedules": [
+      {
+        "startTime": "2025-03-16T14:00:00",
+        "endTime": "2025-03-16T16:30:00",
+        "screenName": "스크린 1"
+      },
+      {
+        "startTime": "2025-03-16T16:30:00",
+        "endTime": "2025-03-16T19:00:00",
+        "screenName": "스크린 2"
+      }
+    ],
+    "screenNames": [
+      "스크린 1",
+      "스크린 2"
+    ]
+  },
+  {
+    "movieName": "백투더퓨처",
+    "movieRating": "12세 이상 관람가",
+    "releaseDate": "2025-03-16",
+    "runningTime": 116,
+    "genre": "SF",
+    "thumbnail": "https://example.com/backtothefuture-thumbnail.jpg",
+    "schedules": [
+      {
+        "startTime": "2025-03-16T14:00:00",
+        "endTime": "2025-03-16T16:30:00",
+        "screenName": "스크린 1"
+      },
+      {
+        "startTime": "2025-03-16T16:30:00",
+        "endTime": "2025-03-16T19:00:00",
+        "screenName": "스크린 2"
+      }
+    ],
+    "screenNames": [
+      "스크린 1",
+      "스크린 2"
+    ]
+  },
+  {
+    "movieName": "어벤져스",
+    "movieRating": "15세 이상 관람가",
+    "releaseDate": "2025-03-16",
+    "runningTime": 143,
+    "genre": "액션",
+    "thumbnail": "https://example.com/avengers-thumbnail.jpg",
+    "schedules": [
+      {
+        "startTime": "2025-03-16T14:00:00",
+        "endTime": "2025-03-16T16:30:00",
+        "screenName": "스크린 1"
+      },
+      {
+        "startTime": "2025-03-16T16:30:00",
+        "endTime": "2025-03-16T19:00:00",
+        "screenName": "스크린 2"
+      }
+    ],
+    "screenNames": [
+      "스크린 1",
+      "스크린 2"
+    ]
+  },
+  {
+    "movieName": "토이스토리 4",
+    "movieRating": "전체 관람가",
+    "releaseDate": "2025-03-16",
+    "runningTime": 100,
+    "genre": "애니메이션",
+    "thumbnail": "https://example.com/toystory4-thumbnail.jpg",
+    "schedules": [
+      {
+        "startTime": "2025-03-16T14:00:00",
+        "endTime": "2025-03-16T16:00:00",
+        "screenName": "스크린 1"
+      }
+    ],
+    "screenNames": [
+      "스크린 1"
+    ]
+  }
+]
+
+```
+
+</details>
+
+
+<details>
+  <summary>1주차에 하지 못한 것들</summary>
+  <pre>
+  * db ddl문 및 데이터 삽입 쿼리 실행하도록 docker 설정
+  * IntelliJ Http Request를 이용한 요청테스트</pre>
+</details>
+
 
