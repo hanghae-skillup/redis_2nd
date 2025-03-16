@@ -17,6 +17,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import project.redis.Movie.MovieGenre;
 import project.redis.Movie.MovieRate;
+import project.redis.common.entity.BaseEntity;
 
 @Entity
 @Table(name = "movie")
@@ -24,7 +25,7 @@ import project.redis.Movie.MovieRate;
 @Builder
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class MovieEntity {
+public class MovieEntity extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,7 +40,7 @@ public class MovieEntity {
 
     @Column(nullable = false)
     private LocalDateTime movieReleaseDate;
-    
+
     private String movieThumbnailImage;
 
     @Column(nullable = false)
