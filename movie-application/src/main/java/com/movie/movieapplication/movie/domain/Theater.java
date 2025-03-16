@@ -9,7 +9,7 @@ import java.util.List;
 
 @Getter
 @ToString
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 public class Theater {
 
     private Long id;

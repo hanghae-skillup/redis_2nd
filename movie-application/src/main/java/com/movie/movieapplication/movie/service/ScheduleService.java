@@ -35,8 +35,8 @@ public class ScheduleService {
 
         return groupedByScreen.entrySet().stream().map(entry -> {
             Long screenId = entry.getKey();
-            List<Schedule> screenSchedules = entry.getValue();
-            Schedule firstSchedule = screenSchedules.get(0);
+            List<Schedule> schedulesForScreen = entry.getValue();
+            Schedule firstSchedule = schedulesForScreen.get(0);
 
             Screen screen = screenRepository.findById(screenId)
                     .orElseThrow(() -> new ApplicationException(ErrorCode.CONTENT_NOT_FOUND));
@@ -47,15 +47,19 @@ public class ScheduleService {
             Movie movie = movieRepository.findById(firstSchedule.getMovieId())
                     .orElseThrow(() -> new ApplicationException(ErrorCode.CONTENT_NOT_FOUND));
 
-            List<TimeTableInfo.Get> timeTables = screenSchedules.stream()
-                    .map(schedule -> TimeTableInfo.Get.of(schedule.getStartTime(), schedule.getEndTime()))
+            List<TimeTableInfo.Get> timeTables = schedulesForScreen.stream()
+                    .map(schedule -> new TimeTableInfo.Get(schedule.getStartTime(), schedule.getEndTime()))
                     .toList();
 
-            return ScheduleInfo.Get.of(
+            return new ScheduleInfo.Get(
                     firstSchedule.getId(),
-                    TheaterInfo.Get.from(theater),
-                    ScreenInfo.Get.from(screen),
-                    MovieInfo.Get.from(movie),
+                    new TheaterInfo.Get(theater.getId(), theater.getName()),
+                    new ScreenInfo.Get(screen.getId(), screen.getTheaterId(), screen.getName()),
+                    new MovieInfo.Get(
+                            movie.getId(), movie.getTitle(),
+                            movie.getReleasedAt(), movie.getThumbnailUrl(),
+                            movie.getRunningTime(), movie.getRating(), movie.getGenre()
+                    ),
                     timeTables
             );
         }).toList();

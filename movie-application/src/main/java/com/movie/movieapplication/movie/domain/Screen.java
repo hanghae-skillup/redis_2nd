@@ -9,11 +9,11 @@ import java.util.Objects;
 
 @Getter
 @ToString
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 public class Screen {
 
     private Long id;
-    private String name;       // 스크린 넘버, ex) 1관, 2관...
+    private String name;
     private Long theaterId;
 
     public Screen(Long id, String name, Long theaterId) {

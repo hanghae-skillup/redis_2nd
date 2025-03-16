@@ -13,7 +13,6 @@ public class BaseEntity {
 
     private String createdBy;
     private String modifiedBy;
-
     private LocalDateTime createdAt;
     private LocalDateTime modifiedAt;
 

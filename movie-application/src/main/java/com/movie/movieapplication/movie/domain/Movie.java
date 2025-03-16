@@ -8,16 +8,14 @@ import java.time.LocalDateTime;
 
 @Getter
 @ToString
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 public class Movie {
 
     private Long id;
-
     private String title;
     private LocalDateTime releasedAt;
     private String thumbnailUrl;
     private String runningTime;
-
     private Rating rating;
     private Genre genre;
 

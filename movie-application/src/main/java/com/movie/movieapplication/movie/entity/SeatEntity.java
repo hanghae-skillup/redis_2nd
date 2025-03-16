@@ -9,7 +9,7 @@ import java.util.Objects;
 
 @Entity
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 @Table(name = "seat")
 public class SeatEntity extends BaseEntity {
 

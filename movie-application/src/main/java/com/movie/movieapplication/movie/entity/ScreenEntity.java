@@ -16,6 +16,7 @@ public class ScreenEntity extends BaseEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column
     private Long theaterId;
 
     @Column

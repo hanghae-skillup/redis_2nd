@@ -19,23 +19,20 @@ public class MovieEntity extends BaseEntity {
     private Long id;
 
     @Column
-    private String title;                       // 영화 제목
+    private String title;
 
     @Enumerated(EnumType.STRING)
     @Column
-    private Rating rating;              // 영상물 등급
-
+    private Rating rating;
     @Enumerated(EnumType.STRING)
     @Column
-    private Genre genre;                        // 장르
-
-    private LocalDateTime releasedAt;           // 개봉일
-
+    private Genre genre;
     @Column
-    private String thumbnailUrl;                // 썸네일 이미지 url
-
+    private LocalDateTime releasedAt;
     @Column
-    private String runningTime;                 // 러닝 타임
+    private String thumbnailUrl;
+    @Column
+    private String runningTime;
 
     @Override
     public boolean equals(Object o) {

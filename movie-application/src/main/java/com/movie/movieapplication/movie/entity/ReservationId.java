@@ -16,9 +16,9 @@ import java.util.Objects;
 @AllArgsConstructor
 public class ReservationId {
 
-    @Column(name = "schedule_id")
+    @Column
     private Long scheduleId;
-    @Column(name = "seat_id")
+    @Column
     private Long seatId;
 
     @Override

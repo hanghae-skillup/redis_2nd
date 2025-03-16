@@ -10,20 +10,22 @@ import java.util.Objects;
 
 @Entity
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 @Table(name = "schedule")
 public class ScheduleEntity extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    // 외래키를 사용하는 대신 ID로 직접 연결
+    @Column
     private Long theaterId;
+    @Column
     private Long screenId;
+    @Column
     private Long movieId;
-
+    @Column
     private LocalDateTime startTime;
+    @Column
     private LocalDateTime endTime;
 
     @Override

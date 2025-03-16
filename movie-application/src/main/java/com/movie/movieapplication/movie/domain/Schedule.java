@@ -10,11 +10,10 @@ import java.util.Objects;
 
 @Getter
 @ToString
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 public class Schedule {
 
     private Long id;
-
     private Long theaterId;
     private Long screenId;
     private Long movieId;
