@@ -21,6 +21,7 @@ public class MovieResponseDTO {
     private LocalDate releaseDate;
     private int runningTime;
     private String genre;
+    private String thumbnail;
     private List<ScheduleDTO> schedules;
     private List<String> screenNames;  // 화면 이름 리스트 추가
 }

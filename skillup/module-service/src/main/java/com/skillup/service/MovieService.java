@@ -27,6 +27,7 @@ public class MovieService {
             dto.setReleaseDate(movie.getRelease_date());
             dto.setRunningTime(movie.getRunningtime());
             dto.setGenre(movie.getGenre());
+            dto.setThumbnail(movie.getThumbnail());
 
             // 영화에 해당하는 모든 상영관 이름 리스트 가져오기
             System.out.print(movie.getScreens());

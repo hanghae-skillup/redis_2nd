@@ -18,7 +18,7 @@ public class Movie {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long no;
     private String name;
-    private String thumnail;
+    private String thumbnail;
     private int runningtime;
     private LocalDate release_date;
 
