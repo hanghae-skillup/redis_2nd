@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import project.redis.movie.entity.MovieEntity;
 
 @Repository
-public interface MovieRepository extends JpaRepository<MovieEntity, Integer> {
+public interface MovieRepository extends JpaRepository<MovieEntity, Long> {
     List<MovieEntity> findAll();
 }

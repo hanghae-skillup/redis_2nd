@@ -4,5 +4,5 @@ import project.redis.movie.Movie;
 import project.redis.movie.entity.MovieEntity;
 
 public interface MovieMapper {
-    Movie toDomain(MovieEntity entity);
+    Movie toDomain(MovieEntity movieEntity);
 }

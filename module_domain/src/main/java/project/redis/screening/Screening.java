@@ -16,4 +16,8 @@ public class Screening {
     public static Screening of(Movie movie, Cinema cinema, LocalDateTime startTime, LocalDateTime endTime) {
         return new Screening(movie, cinema, startTime, endTime);
     }
+
+    public String getCinemaName() {
+        return this.cinema.getCinemaName();
+    }
 }

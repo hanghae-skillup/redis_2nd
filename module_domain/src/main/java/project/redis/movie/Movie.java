@@ -3,9 +3,12 @@ package project.redis.movie;
 import java.time.LocalDateTime;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 
+@Getter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Movie {
+
     private String movieName;
     private MovieRate movieRate;
     private LocalDateTime movieReleaseDate;
@@ -25,4 +28,5 @@ public class Movie {
     public int compareReleaseDate(Movie movieToCompare) {
         return movieToCompare.movieReleaseDate.compareTo(this.movieReleaseDate);
     }
+
 }
