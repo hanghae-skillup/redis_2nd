@@ -1,0 +1,23 @@
+plugins {
+    id 'java'
+}
+
+group = 'com.app'
+version = '1.0.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    implementation 'org.springframework.boot:spring-boot-starter-web:3.4.3'
+    testImplementation 'org.mockito:mockito-core:4.10.0'
+    testImplementation 'org.mockito:mockito-junit-jupiter:4.10.0'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+}
+
+test {
+    useJUnitPlatform()
+}
