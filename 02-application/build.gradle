@@ -2,5 +2,7 @@ bootJar.enabled = true
 jar.enabled = false
 
 dependencies {
+    runtimeOnly 'com.mysql:mysql-connector-j'
+    runtimeOnly 'com.h2database:h2'
     implementation project(':01-domain')
 }
