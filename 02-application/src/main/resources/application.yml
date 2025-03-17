@@ -1,4 +1,6 @@
 spring:
+  profiles:
+    active: application
   application:
     name: cinema
   datasource:
