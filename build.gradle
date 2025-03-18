@@ -3,8 +3,8 @@ plugins {
     id 'org.springframework.boot' version "3.4.3"
 }
 
-group = 'org.example'
-version = '1.0-SNAPSHOT'
+group = 'com.app'
+version = '1.0.0'
 
 repositories {
     mavenCentral()
@@ -52,6 +52,6 @@ project(':movie-infrastructure-module') {
 project(':movie-api-module') {
     dependencies {
         implementation project(':movie-domain-module')
-        implementation project(':movie-infrastructure-module')
+        runtimeOnly project(':movie-infrastructure-module')
     }
 }
