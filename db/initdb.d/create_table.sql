@@ -40,6 +40,7 @@ CREATE TABLE movie
 CREATE TABLE seat
 (
     id         BIGINT AUTO_INCREMENT NOT NULL,
+    theater_id BIGINT NOT NULL,
     name       VARCHAR(255) NULL,
     created_by VARCHAR(255) NULL,
     created_at datetime NULL,
