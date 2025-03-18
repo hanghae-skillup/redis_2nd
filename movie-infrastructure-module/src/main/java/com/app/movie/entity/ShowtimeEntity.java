@@ -29,6 +29,7 @@ public class ShowtimeEntity {
     @JoinColumn(name = "movie_id")
     private MovieEntity movie;
     private LocalTime startTime;
+    private LocalTime endTime;
 
     private String createdBy;
     private LocalDateTime createdAt;

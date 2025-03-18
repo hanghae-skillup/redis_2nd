@@ -90,7 +90,7 @@ class MovieServiceTest {
         assertNotNull(dto);
         assertEquals(movie.getId(), dto.getId());
         assertEquals(movie.getTitle(), dto.getTitle());
-        assertEquals(movie.getRating().toString(), dto.getRating());
+        assertEquals(movie.getRating().getDescription(), dto.getRating());
         assertEquals(movie.getDuration(), dto.getRunningTime());
         assertEquals(genre.getName(), dto.getGenre());
 

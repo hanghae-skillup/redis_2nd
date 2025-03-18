@@ -20,7 +20,8 @@ public class ShowtimeMapper {
                 showtimeEntity.getId(),
                 theater,
                 movie,
-                showtimeEntity.getStartTime()
+                showtimeEntity.getStartTime(),
+                showtimeEntity.getEndTime()
         );
     }
 
@@ -37,6 +38,7 @@ public class ShowtimeMapper {
                 theaterEntity,
                 movieEntity,
                 showtime.getStartTime(),
+                showtime.getEndTime(),
                 adminName,
                 today,
                 adminName,

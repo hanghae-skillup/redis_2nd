@@ -54,6 +54,7 @@ CREATE TABLE showtime
     theater_id BIGINT NULL,
     movie_id   BIGINT NULL,
     start_time time NULL,
+    end_time   time NULL,
     created_by VARCHAR(255) NULL,
     created_at datetime NULL,
     updated_by VARCHAR(255) NULL,

@@ -17,5 +17,6 @@ public class Showtime {
     private Theater theater;
     private Movie movie;
     private LocalTime startTime;
+    private LocalTime endTime;
 
 }
