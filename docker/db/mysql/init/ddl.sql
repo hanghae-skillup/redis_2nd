@@ -6,7 +6,7 @@ drop table if exists screening;
 drop table if exists theater;
 
 CREATE TABLE movie (
-                       id BIGINT AUTO_INCREMENT PRIMARY KEY COMMENT '영화 id',
+                       id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY COMMENT '영화 id',
                        title VARCHAR(255) NOT NULL COMMENT '영화 제목',
                        grade VARCHAR(50) NOT NULL COMMENT '상영물 등급',
                        release_date DATE NOT NULL COMMENT '개봉일',
@@ -20,7 +20,7 @@ CREATE TABLE movie (
 );
 
 CREATE TABLE theater (
-                         id BIGINT AUTO_INCREMENT PRIMARY KEY COMMENT '상영관 id',
+                         id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY COMMENT '상영관 id',
                          name VARCHAR(255) NOT NULL COMMENT '상영관 이름',
                          created_date DATETIME NOT NULL COMMENT '생성일',
                          created_by VARCHAR(255) NOT NULL COMMENT '생성자',
@@ -29,9 +29,9 @@ CREATE TABLE theater (
 );
 
 CREATE TABLE screening  (
-                            id BIGINT AUTO_INCREMENT PRIMARY KEY COMMENT '상영 id',
-                            theater_id BIGINT NOT NULL COMMENT '상영관 id',
-                            movie_id BIGINT NOT NULL COMMENT '영화 id',
+                            id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY COMMENT '상영 id',
+                            theater_id INT UNSIGNED NOT NULL COMMENT '상영관 id',
+                            movie_id INT UNSIGNED NOT NULL COMMENT '영화 id',
                             screen_number SMALLINT NOT NULL COMMENT '상영 회차',
                             start_time DATETIME NOT NULL COMMENT '상영 시작 시간',
                             end_time DATETIME NOT NULL COMMENT '상영 종료 시간',
