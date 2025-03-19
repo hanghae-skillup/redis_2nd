@@ -26,27 +26,6 @@ services:
       - cinema_redis_data:/data
     networks:
       - cinema_network
-  zookeeper:
-    image: confluentinc/cp-zookeeper:latest
-    container_name: cinema_zookeeper
-    environment:
-      ZOOKEEPER_CLIENT_PORT: 2181
-      ZOOKEEPER_TICK_TIME: 2000
-    ports:
-      - "2181:2181"
-
-  kafka:
-    image: confluentinc/cp-kafka:latest
-    container_name: cinema_kafka
-    depends_on:
-      - cinema_zookeeper
-    ports:
-      - "9092:9092"
-    environment:
-      KAFKA_BROKER_ID: 1
-      KAFKA_ZOOKEEPER_CONNECT: cinema_zookeeper:2181
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://cinema_kafka:9092
-      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
 volumes:
   cinema_mysql_data:
   cinema_redis_data:
