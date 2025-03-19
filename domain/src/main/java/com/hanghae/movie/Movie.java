@@ -8,7 +8,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.util.Objects;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -58,11 +57,11 @@ public class Movie extends BaseEntity {
 
     public Movie(Long id, String title, MovieGrade grade, LocalDate releaseDate, UrlString thumbnailUrl, PositiveNumber runningTimeMin, MovieGenre genre) {
         this.id = id;
-        this.title = Objects.requireNonNull(title, "영화제목을 입력하세요");
-        this.grade = Objects.requireNonNull(grade, "영상물등급을 입력하세요");
-        this.releaseDate = Objects.requireNonNull(releaseDate, "개봉일을 입력하세요");
-        this.thumbnailUrl = Objects.requireNonNull(thumbnailUrl, "섬네일 이미지 url을 입력하세요");
-        this.runningTimeMin = Objects.requireNonNull(runningTimeMin, "러닝 타임을 입력하세요");
-        this.genre = Objects.requireNonNull(genre, "영화 장르를 입력하세요");
+        this.title = title;
+        this.grade = grade;
+        this.releaseDate = releaseDate;
+        this.thumbnailUrl = thumbnailUrl;
+        this.runningTimeMin = runningTimeMin;
+        this.genre = genre;
     }
 }

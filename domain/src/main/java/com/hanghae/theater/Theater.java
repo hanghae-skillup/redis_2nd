@@ -36,7 +36,7 @@ public class Theater extends BaseEntity {
 
     public Theater(Long id, String name) {
         this.id = id;
-        this.name = Objects.requireNonNull(name, "상영관 이름을 입력하세요");
+        this.name = name;
     }
 
     public void addScreening(Screening screening) {

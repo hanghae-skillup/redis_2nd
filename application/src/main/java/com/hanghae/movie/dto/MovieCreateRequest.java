@@ -3,16 +3,20 @@ package com.hanghae.movie.dto;
 import com.hanghae.movie.Movie;
 import com.hanghae.movie.MovieGenre;
 import com.hanghae.movie.MovieGrade;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 
 import java.time.LocalDate;
 
 public record MovieCreateRequest(
-        String title,
-        MovieGrade grade,
-        LocalDate releaseDate,
-        String thumbnailUrl,
-        int runningTime,
-        MovieGenre genre
+
+        @NotBlank String title,
+        @NotNull MovieGrade grade,
+        @NotNull LocalDate releaseDate,
+        @NotBlank String thumbnailUrl,
+        @Positive int runningTime,
+        @NotNull MovieGenre genre
 ) {
     public static Movie toMovie(MovieCreateRequest request) {
         return new Movie(

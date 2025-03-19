@@ -2,6 +2,7 @@ package com.hanghae.movie;
 
 import com.hanghae.movie.dto.MovieCreateRequest;
 import com.hanghae.movie.dto.MovieCreateResponse;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,7 +20,7 @@ public class MovieController {
     private final MovieService movieService;
 
     @PostMapping
-    public ResponseEntity<MovieCreateResponse> create(@RequestBody MovieCreateRequest request) {
+    public ResponseEntity<MovieCreateResponse> create(@Valid @RequestBody MovieCreateRequest request) {
         MovieCreateResponse response = movieService.save(request);
         return ResponseEntity.created(URI.create("/api/movies/" + response.id()))
                 .body(response);

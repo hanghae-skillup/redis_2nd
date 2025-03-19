@@ -1,12 +1,14 @@
 package com.hanghae.theater.dto;
 
 import com.hanghae.theater.Screening;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 import java.util.List;
 
 public record ScreeningsAddRequest(
-        Long theaterId,
-        List<ScreeningDto> screenings
+        @NotNull Long theaterId,
+        @NotEmpty List<ScreeningDto> screenings
 ) {
     public static List<Screening> toScreenings(ScreeningsAddRequest request) {
         return request.screenings().stream()

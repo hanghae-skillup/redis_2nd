@@ -46,20 +46,20 @@ public class Screening extends BaseEntity {
     }
 
     public Screening(Long id, Long movieId, PositiveNumber screenNumber, ScreeningTime screeningTime, int seatCount) {
+        validate(seatCount);
         this.id = id;
-        this.movieId = Objects.requireNonNull(movieId, "상영할 영화를 입력하세요");
-        this.screenNumber = Objects.requireNonNull(screenNumber, "상영 회차를 입력하세요");
+        this.movieId = movieId;
+        this.screenNumber = screenNumber;
         this.screeningTime = screeningTime;
         this.seatCount = seatCount;
-        validate();
     }
 
-    private void validate() {
-        if (this.seatCount > SEAT_ROW_SIZE * SEAT_COL_SIZE) {
+    private void validate(int seatCount) {
+        if (seatCount > SEAT_ROW_SIZE * SEAT_COL_SIZE) {
             throw new IllegalArgumentException("정해진 좌석 수를 초과했습니다");
         }
 
-        if (this.seatCount < 0) {
+        if (seatCount < 0) {
             throw new IllegalArgumentException("좌석 수는 음수일 수 없습니다");
         }
     }

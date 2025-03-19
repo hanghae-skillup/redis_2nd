@@ -3,6 +3,7 @@ package com.hanghae.theater;
 import com.hanghae.theater.dto.ScreeningsAddRequest;
 import com.hanghae.theater.dto.ScreeningsAddResponse;
 import com.hanghae.theater.dto.TheaterCreateResponse;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,7 +28,7 @@ public class TheaterController {
     }
 
     @PostMapping("/screenings")
-    public ResponseEntity<ScreeningsAddResponse> addScreenings(@RequestBody ScreeningsAddRequest request) {
+    public ResponseEntity<ScreeningsAddResponse> addScreenings(@Valid @RequestBody ScreeningsAddRequest request) {
         ScreeningsAddResponse response = theaterService.addScreenings(request);
         return ResponseEntity.ok(response);
     }
