@@ -1,7 +1,7 @@
 package com.hanghae.theater;
 
 import com.hanghae.common.vo.PositiveNumber;
-import com.hanghae.inmemory.InMemoryMovieRepository;
+import com.hanghae.fake.FakeMovieRepository;
 import com.hanghae.movie.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -23,7 +23,7 @@ class ScreeningsCreatorTest {
 
     @BeforeEach
     void setUp() {
-        this.movieRepository = new InMemoryMovieRepository();
+        this.movieRepository = new FakeMovieRepository();
         this.screeningsCreator = new ScreeningsCreator(movieRepository);
     }
 

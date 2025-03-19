@@ -1,4 +1,4 @@
-package com.hanghae.inmemory;
+package com.hanghae.fake;
 
 import com.hanghae.movie.Movie;
 import com.hanghae.movie.MovieRepository;
@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class InMemoryMovieRepository implements MovieRepository {
+public class FakeMovieRepository implements MovieRepository {
 
     private Map<Long, Movie> movies = new ConcurrentHashMap<Long, Movie>();
 
