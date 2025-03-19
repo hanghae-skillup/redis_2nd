@@ -2,6 +2,7 @@ package com.hanghae.movie;
 
 import com.hanghae.movie.dto.MovieScreeningDto;
 import com.hanghae.movie.query.MovieScreeningQueryService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,13 +10,11 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/movies")
-public class MovieScreeningQueryRestController {
-    private final MovieScreeningQueryService movieScreeningQueryService;
+@RequestMapping("/api/v1/movies")
+@RequiredArgsConstructor
+public class MovieScreeningQueryController {
 
-    public MovieScreeningQueryRestController(MovieScreeningQueryService movieScreeningQueryService) {
-        this.movieScreeningQueryService = movieScreeningQueryService;
-    }
+    private final MovieScreeningQueryService movieScreeningQueryService;
 
     @GetMapping("/now-showing")
     public List<MovieScreeningDto> findShowingMovies() {

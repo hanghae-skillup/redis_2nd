@@ -3,6 +3,7 @@ package com.hanghae.theater;
 import com.hanghae.theater.dto.ScreeningsAddRequest;
 import com.hanghae.theater.dto.ScreeningsAddResponse;
 import com.hanghae.theater.dto.TheaterCreateResponse;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,19 +13,16 @@ import org.springframework.web.bind.annotation.RestController;
 import java.net.URI;
 
 @RestController
-@RequestMapping("/api/theaters")
-public class TheaterRestController {
+@RequestMapping("/api/v1/theaters")
+@RequiredArgsConstructor
+public class TheaterController {
 
     private final TheaterService theaterService;
 
-    public TheaterRestController(TheaterService theaterService) {
-        this.theaterService = theaterService;
-    }
-
-    @PostMapping("/create")
+    @PostMapping
     public ResponseEntity<TheaterCreateResponse> create(@RequestBody String name) {
         TheaterCreateResponse response = theaterService.save(name);
-        return ResponseEntity.created(URI.create("/api/theaters/" + response.getId()))
+        return ResponseEntity.created(URI.create("/api/theaters/" + response.id()))
                 .body(response);
     }
 
