@@ -2,11 +2,16 @@ package com.hanghae.theater;
 
 import com.hanghae.common.entity.BaseEntity;
 import jakarta.persistence.*;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 public class Theater extends BaseEntity {
 
@@ -25,9 +30,6 @@ public class Theater extends BaseEntity {
     )
     private List<Screening> screenings = new ArrayList<>();
 
-    protected Theater() {
-    }
-
     public Theater(String name) {
         this(null, name);
     }
@@ -43,17 +45,5 @@ public class Theater extends BaseEntity {
 
     public void addScreenings(List<Screening> screenings) {
         screenings.forEach(this::addScreening);
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public List<Screening> getScreenings() {
-        return screenings;
     }
 }

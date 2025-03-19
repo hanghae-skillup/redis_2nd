@@ -3,9 +3,14 @@ package com.hanghae.theater;
 import com.hanghae.common.entity.BaseEntity;
 import com.hanghae.common.vo.PositiveNumber;
 import jakarta.persistence.*;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.Objects;
 
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 public class Screening extends BaseEntity {
     /*
@@ -36,9 +41,6 @@ public class Screening extends BaseEntity {
     @Column(nullable = false)
     private int seatCount;
 
-    protected Screening() {
-    }
-
     public Screening(Long movieId, int screenNumber, ScreeningTime screeningTime, int seatCount) {
         this(null, movieId, new PositiveNumber(screenNumber), screeningTime, seatCount);
     }
@@ -67,26 +69,6 @@ public class Screening extends BaseEntity {
             throw new IllegalStateException("남아있는 좌석의 수가 없습니다");
         }
         seatCount--;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public Long getMovieId() {
-        return movieId;
-    }
-
-    public PositiveNumber getScreenNumber() {
-        return screenNumber;
-    }
-
-    public ScreeningTime getScreeningTime() {
-        return screeningTime;
-    }
-
-    public int getSeatCount() {
-        return seatCount;
     }
 
     @Override

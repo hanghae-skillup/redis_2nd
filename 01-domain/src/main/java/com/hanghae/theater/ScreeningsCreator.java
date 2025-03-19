@@ -2,6 +2,7 @@ package com.hanghae.theater;
 
 import com.hanghae.movie.Movie;
 import com.hanghae.movie.MovieRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -15,13 +16,10 @@ import java.util.NoSuchElementException;
  * 2) 상영일은 영화의 개봉일보다 이전이면 안된다
  */
 @Component
+@RequiredArgsConstructor
 public class ScreeningsCreator {
 
     private final MovieRepository movieRepository;
-
-    public ScreeningsCreator(MovieRepository movieRepository) {
-        this.movieRepository = movieRepository;
-    }
 
     public List<Screening> create(List<Screening> screenings) {
         validateScreenings(screenings);

@@ -42,8 +42,8 @@ class TheaterServiceTest {
         TheaterCreateResponse response = theaterService.save("상영관1");
 
         assertAll(
-                () -> assertThat(response.getId()).isNotNull(),
-                () -> assertThat(response.getName()).isEqualTo("상영관1")
+                () -> assertThat(response.id()).isNotNull(),
+                () -> assertThat(response.name()).isEqualTo("상영관1")
         );
     }
 
@@ -67,8 +67,8 @@ class TheaterServiceTest {
         //when
         ScreeningsAddResponse response = theaterService.addScreenings(request);
         //then
-        assertThat(response.getTheaterId()).isEqualTo(theater.getId());
-        assertThat(response.getScreenings())
+        assertThat(response.theaterId()).isEqualTo(theater.getId());
+        assertThat(response.screenings())
                 .extracting(
                         Screening::getScreenNumber,
                         Screening::getScreeningTime,

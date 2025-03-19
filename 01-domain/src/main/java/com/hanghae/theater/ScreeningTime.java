@@ -1,18 +1,23 @@
 package com.hanghae.theater;
 
 import jakarta.persistence.Embeddable;
+import lombok.AccessLevel;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+@Getter
+@EqualsAndHashCode
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Embeddable
 public class ScreeningTime {
 
     private LocalDateTime startTime;
     private LocalDateTime endTime;
-
-    protected ScreeningTime() {}
 
     public ScreeningTime(LocalDateTime startTime, LocalDateTime endTime) {
         validate(startTime, endTime);
@@ -31,26 +36,5 @@ public class ScreeningTime {
     public boolean isBefore(LocalDate otherDate) {
         LocalDate endDate = endTime.toLocalDate();
         return otherDate.isAfter(endDate) || otherDate.isEqual(endDate);
-    }
-
-    public LocalDateTime getStartTime() {
-        return startTime;
-    }
-
-    public LocalDateTime getEndTime() {
-        return endTime;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ScreeningTime that = (ScreeningTime) o;
-        return Objects.equals(startTime, that.startTime) && Objects.equals(endTime, that.endTime);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(startTime, endTime);
     }
 }

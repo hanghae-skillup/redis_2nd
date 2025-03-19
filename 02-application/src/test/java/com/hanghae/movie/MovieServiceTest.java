@@ -36,13 +36,13 @@ class MovieServiceTest {
         MovieCreateResponse response = movieService.save(request);
 
         assertAll(
-                () -> assertThat(response.getId()).isNotNull(),
-                () -> assertThat(response.getTitle()).isEqualTo("범죄도시5"),
-                () -> assertThat(response.getGrade()).isEqualTo(MovieGrade.TEEN_15),
-                () -> assertThat(response.getReleaseDate()).isEqualTo(LocalDate.of(2025, 3, 14)),
-                () -> assertThat(response.getThumbnailUrl()).isEqualTo(new UrlString("https://test.com/image.png")),
-                () -> assertThat(response.getRunningTime()).isEqualTo(new PositiveNumber(120)),
-                () -> assertThat(response.getGenre()).isEqualTo(MovieGenre.ACTION)
+                () -> assertThat(response.id()).isNotNull(),
+                () -> assertThat(response.title()).isEqualTo("범죄도시5"),
+                () -> assertThat(response.grade()).isEqualTo(MovieGrade.TEEN_15),
+                () -> assertThat(response.releaseDate()).isEqualTo(LocalDate.of(2025, 3, 14)),
+                () -> assertThat(response.thumbnailUrl()).isEqualTo(new UrlString("https://test.com/image.png")),
+                () -> assertThat(response.runningTime()).isEqualTo(new PositiveNumber(120)),
+                () -> assertThat(response.genre()).isEqualTo(MovieGenre.ACTION)
         );
     }
 }

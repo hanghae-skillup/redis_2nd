@@ -3,10 +3,15 @@ package com.hanghae.movie;
 import com.hanghae.common.entity.BaseEntity;
 import com.hanghae.common.vo.PositiveNumber;
 import jakarta.persistence.*;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.util.Objects;
 
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Table(name = "movie")
 public class Movie extends BaseEntity {
@@ -37,58 +42,27 @@ public class Movie extends BaseEntity {
             @AttributeOverride(name = "value", column = @Column(name = "running_time"))
     )
     @Column(nullable = false)
-    private PositiveNumber runningTime;
+    private PositiveNumber runningTimeMin;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private MovieGenre genre;
 
-    protected Movie() {
+    public Movie(String title, MovieGrade grade, LocalDate releaseDate, String thumbnailUrl, int runningTimeMin, MovieGenre genre) {
+        this(null, title, grade, releaseDate, new UrlString(thumbnailUrl), new PositiveNumber(runningTimeMin), genre);
     }
 
-    public Movie(String title, MovieGrade grade, LocalDate releaseDate, String thumbnailUrl, int runningTime, MovieGenre genre) {
-        this(null, title, grade, releaseDate, new UrlString(thumbnailUrl), new PositiveNumber(runningTime), genre);
+    public Movie(String title, MovieGrade grade, LocalDate releaseDate, UrlString thumbnailUrl, PositiveNumber runningTimeMin, MovieGenre genre) {
+        this(null, title, grade, releaseDate, thumbnailUrl, runningTimeMin, genre);
     }
 
-    public Movie(String title, MovieGrade grade, LocalDate releaseDate, UrlString thumbnailUrl, PositiveNumber runningTime, MovieGenre genre) {
-        this(null, title, grade, releaseDate, thumbnailUrl, runningTime, genre);
-    }
-
-    public Movie(Long id, String title, MovieGrade grade, LocalDate releaseDate, UrlString thumbnailUrl, PositiveNumber runningTime, MovieGenre genre) {
+    public Movie(Long id, String title, MovieGrade grade, LocalDate releaseDate, UrlString thumbnailUrl, PositiveNumber runningTimeMin, MovieGenre genre) {
         this.id = id;
         this.title = Objects.requireNonNull(title, "영화제목을 입력하세요");
         this.grade = Objects.requireNonNull(grade, "영상물등급을 입력하세요");
         this.releaseDate = Objects.requireNonNull(releaseDate, "개봉일을 입력하세요");
         this.thumbnailUrl = Objects.requireNonNull(thumbnailUrl, "섬네일 이미지 url을 입력하세요");
-        this.runningTime = Objects.requireNonNull(runningTime, "러닝 타임을 입력하세요");
+        this.runningTimeMin = Objects.requireNonNull(runningTimeMin, "러닝 타임을 입력하세요");
         this.genre = Objects.requireNonNull(genre, "영화 장르를 입력하세요");
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public MovieGrade getGrade() {
-        return grade;
-    }
-
-    public LocalDate getReleaseDate() {
-        return releaseDate;
-    }
-
-    public UrlString getThumbnailUrl() {
-        return thumbnailUrl;
-    }
-
-    public PositiveNumber getRunningTime() {
-        return runningTime;
-    }
-
-    public MovieGenre getGenre() {
-        return genre;
     }
 }
