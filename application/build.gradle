@@ -1,8 +1,11 @@
 bootJar.enabled = true
 jar.enabled = false
 
+group = 'com.hanghae.application'
+version = '1.0-SNAPSHOT'
+
 dependencies {
     runtimeOnly 'com.mysql:mysql-connector-j'
     runtimeOnly 'com.h2database:h2'
-    implementation project(':01-domain')
+    implementation project(':domain')
 }
