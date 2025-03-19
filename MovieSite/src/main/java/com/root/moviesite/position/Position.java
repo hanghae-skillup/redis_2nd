@@ -14,12 +14,12 @@ public class Position{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @ManyToOne(optional = false)
-    @JoinTable(name = "movie_position",
-            joinColumns = @JoinColumn(name = "seat_number"),
-            inverseJoinColumns = @JoinColumn(name = "positions")
-    )
-    private Movie movie;
+//    @ManyToOne(optional = false)
+//    @JoinTable(name = "movie_position",
+//            joinColumns = @JoinColumn(name = "seat_number"),
+//            inverseJoinColumns = @JoinColumn(name = "positions")
+//    )
+//    private Movie movie;
 
     @Column(name = "seat_number")
     private String seatNumber;

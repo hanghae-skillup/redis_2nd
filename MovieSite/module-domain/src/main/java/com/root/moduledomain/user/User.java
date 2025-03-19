@@ -1,6 +1,6 @@
-package com.root.moviesite.user;
+package com.root.moduledomain.user;
 
-import com.root.moviesite.movie.Movie;
+import com.root.moduledomain.movie.Movie;
 import jakarta.persistence.*;
 import lombok.Getter;
 
@@ -11,11 +11,11 @@ import java.util.List;
 @Getter
 public class User{
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-//    @OneToMany
-//    private List<Movie> movies= new ArrayList<>();
+    @OneToMany
+    private List<Movie> movies= new ArrayList<>();
 
     @Column(name = "positions")
     private String positions;
@@ -32,5 +32,6 @@ public class User{
     @Column(name = "guessted")
     private Boolean guessed = false;
 }
+
 
 

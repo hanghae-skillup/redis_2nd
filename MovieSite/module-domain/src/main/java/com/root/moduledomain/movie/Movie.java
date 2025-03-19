@@ -1,8 +1,8 @@
-package com.root.moviesite.movie;
+package com.root.moduledomain.movie;
 
-import com.root.moviesite.Timestamped;
-import com.root.moviesite.position.Position;
-import com.root.moviesite.user.User;
+import com.root.moduledomain.common.Timestamped;
+import com.root.moduledomain.position.Position;
+import com.root.moduledomain.user.User;
 import jakarta.persistence.*;
 import lombok.Getter;
 
@@ -14,19 +14,19 @@ import java.util.List;
 @Getter
 public class Movie extends Timestamped {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 //    UnsignedLong
     private long id;
 
-//    @OneToMany
-//    private List<Position> positions = new ArrayList<>();
+    @OneToMany
+    private List<Position> positions = new ArrayList<>();
 
-//    @ManyToOne(optional = false)
-//    @JoinTable(name = "movies_userId",
-//            joinColumns = @JoinColumn(name = "user_id"),
-//            inverseJoinColumns = @JoinColumn(name = "movies")
-//    )
-//    private User user;
+    @ManyToOne(optional = false)
+    @JoinTable(name = "movies_userId",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "movie_id")
+    )
+    private User user;
 
     @Column(name = "title")
     private String title;
@@ -46,3 +46,4 @@ public class Movie extends Timestamped {
     @Column(name = "position")
     private String position;
 }
+
