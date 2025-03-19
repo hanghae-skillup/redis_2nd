@@ -1,7 +1,7 @@
 # Redis_project  
 
 커머스의 핵심 프로세스인 상품 조회 및 주문 과정에서 발생할 수 있는 동시성 이슈 해결 및 성능 개선을 경험하고, 안정성을 높이기 위한 방법을 배웁니다.
-
+```
 ## Project 구성
 # Layered Architecture 를 채택하여 
 Application
@@ -130,3 +130,5 @@ Build file '/Users/khy/redis-practice/redis-2nd/domain/build.gradle' line: 5
 - 각 모듈의 정의를 얼마나 세밀하게 나누는게 좋은지 아직은 잘 모르겠습니다. Service 와 Domain 을 나눠서 가져가는 것에 대한 이점은 프로젝트가 커지면(MSA?) 분명 좋을 것 같은데
   그렇다면 얼마나 프로젝트가 커졌을 때 효과가 있을 것인가를 모르겠습니다.
 - 모듈을 직접 설계하는것이 처음이라 어떻게 각 모듈을 관리를 하고 서버를 올려야 하는 것인지 모르겠습니다.
+
+```
