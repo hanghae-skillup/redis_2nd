@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: domain
+
+  server:
+    port: 8081
+    servlet:
+      encoding:
+        charset: UTF-8
+        force: true
+        force-response: true
+
+  datasource:
+    url: jdbc:mysql://210.109.52.105:3306/kiac_dev?useSSL=false&serverTimezone=Asia/Seoul&characterEncoding=UTF-8&allowPublicKeyRetrieval=true
+    username: kiac_dev
+    password: kiac_dev+1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        format_sql: true
+
+
+#210.109.52.105
+#kiac_dev
+#kiac_dev
+#jdbc:mysql://210.109.52.105:3306/kiac_dev
