@@ -1,0 +1,12 @@
+dependencies {
+    implementation project(":movie-common")
+    api('org.springframework.boot:spring-boot-starter-data-jpa')
+}
+
+
+bootJar.enabled = false
+jar.enabled = true
+
+test {
+    useJUnitPlatform()
+}

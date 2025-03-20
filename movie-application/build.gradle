@@ -1,0 +1,22 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.4.3'
+    id 'io.spring.dependency-management' version '1.1.0'
+    id 'java-library'
+}
+
+dependencies {
+    implementation project(":movie-api")
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    annotationProcessor "jakarta.persistence:jakarta.persistence-api"
+}
+
+
+bootJar {
+    mainClass = 'com.example.movie.application.MovieApiApplication'
+
+}
+
+test {
+    useJUnitPlatform()
+}

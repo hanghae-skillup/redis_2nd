@@ -1,3 +1,26 @@
-# Redis_project  
+### Multi Module Design
 
-커머스의 핵심 프로세스인 상품 조회 및 주문 과정에서 발생할 수 있는 동시성 이슈 해결 및 성능 개선을 경험하고, 안정성을 높이기 위한 방법을 배웁니다.
+**Multi-Module 아키텍처**를 적용하여, **각 모듈의 역할과 책임을 명확하게 분리**하고, **유지보수성과 확장성을 고려한 구조**를 설계하였습니다.
+
+---
+
+### Table Design
+
+![image.png](attachment:4cbc7b96-8ed9-4949-9a8f-81d9e62806ad:image.png)
+
+- movie 테이블 - schedule 테이블은 1:N 관계입니다
+- schedule 테이블 - theater 테이블은 N:1 관계입니다.
+- theater 테이블 - seat 테이블은 1:N 관계입니다.
+- seat 테이블 - reservation 테이블은 1:1 관계입니다.
+    - 편의를 위해 영화관 내 상영관은 하나만 있다고 가정하였습니다.
+- reservation 테이블 - user 테이블은 N:1 관계입니다.
+
+---
+
+### Architecture
+
+Layer Architecture를 고려하여 다음과 같은 Layer 기준으로 설계하였습니다.
+
+- api → 외부 요청을 처리하는 레이어
+- domain → 도메인 로직 및 서비스 레이어
+- infra → DB, 외부 API 연동 레이어
