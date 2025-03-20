@@ -1,0 +1,24 @@
+plugins {
+    id 'org.springframework.boot'
+}
+
+bootJar {
+    enabled = true
+    mainClass = 'com.hanghae.cinema.CinemaApplication'
+}
+
+jar {
+    enabled = false
+}
+
+dependencies {
+    // 다른 모듈 의존성
+    implementation project(':module-core')
+    implementation project(':module-domain')
+    implementation project(':module-persistence')
+    implementation project(':module-common')
+
+    // API 관련 의존성
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+}
