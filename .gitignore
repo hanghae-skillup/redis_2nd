@@ -42,4 +42,4 @@ docker/db/mysql/data/
 ### !docker/db/mysql/init/init.sql
 
 ### domain-module
-domain/src/main/generated
+module-domain/src/main/generated

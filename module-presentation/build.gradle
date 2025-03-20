@@ -5,6 +5,6 @@ group = 'com.hanghae.presentation'
 version = '1.0-SNAPSHOT'
 
 dependencies {
-    implementation project(':application')
+    implementation project(':module-application')
     implementation "org.springframework.boot:spring-boot-starter-web"
 }
