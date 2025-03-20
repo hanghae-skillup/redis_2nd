@@ -1,30 +1,43 @@
 package com.hanghae.movie.query;
 
-import com.hanghae.movie.dto.MovieScreeningDto;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
+import com.hanghae.movie.QMovie;
+import com.hanghae.theater.QScreening;
+import com.hanghae.theater.QTheater;
+import com.querydsl.core.types.Projections;
+import com.querydsl.jpa.impl.JPAQueryFactory;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
+@RequiredArgsConstructor
 public class MovieScreeningQueryRepository {
 
-    @PersistenceContext
-    private EntityManager em;
+    private final JPAQueryFactory queryFactory;
 
     public List<MovieScreeningDto> findShowingMovies() {
-        return em.createQuery(
-                        "SELECT new com.hanghae.movie.dto.MovieScreeningDto( " +
-                                "t.name, " +
-                                "m.title, m.grade, m.releaseDate, m.thumbnailUrl.url, m.runningTime.value, m.genre, " +
-                                "s.screeningTime.startTime, s.screeningTime.endTime" +
-                                ") " +
-                                "FROM Theater t " +
-                                "JOIN t.screenings s " +
-                                "JOIN Movie m on m.id = s.movieId " +
-                                "ORDER BY m.releaseDate ASC, m.id ASC, s.screeningTime.startTime ASC",
-                        MovieScreeningDto.class)
-                .getResultList();
+
+        QTheater qTheater = QTheater.theater;
+        QScreening qScreening = QScreening.screening;
+        QMovie qMovie = QMovie.movie;
+
+        return queryFactory.select(Projections.constructor(
+                        MovieScreeningDto.class,
+                        qTheater.name,
+                        qMovie.title,
+                        qMovie.grade,
+                        qMovie.releaseDate,
+                        qMovie.thumbnailUrl.url,
+                        qMovie.runningTimeMin.value,
+                        qMovie.genre,
+                        qScreening.screeningTime.startTime,
+                        qScreening.screeningTime.endTime
+                ))
+                .from(qTheater)
+                .join(qTheater.screenings, qScreening)
+                .join(qMovie).on(qScreening.movieId.eq(qMovie.id))
+                .orderBy(qMovie.releaseDate.asc(), qMovie.id.asc(), qScreening.screeningTime.startTime.asc())
+                .fetch();
     }
 }

@@ -1,6 +1,6 @@
 package com.hanghae.movie;
 
-import com.hanghae.movie.dto.MovieScreeningDto;
+import com.hanghae.movie.query.MovieScreeningDto;
 import com.hanghae.movie.query.MovieScreeningQueryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
