@@ -1,0 +1,40 @@
+spring:
+  profiles:
+    active: local
+    group:
+      local:
+        - common
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: common
+
+logging:
+  level:
+    com.movie.movieinfrastructures: debug
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: local
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    # Docker 컨테이너에서 실행되는 MySQL에 맞게 설정
+    url: jdbc:mysql://127.0.0.1:3307/my_database?useSSL=false&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true
+    username: my_user
+    password: my_password
+  jpa:
+    open-in-view: false
+    defer-datasource-initialization: true
+    hibernate:
+      ddl-auto: update  # 테이블이 이미 존재하므로 'update'로 설정
+    show-sql: true
+    properties:
+      hibernate.format_sql: true
+      hibernate.default_batch_fetch_size: 1000
+  sql.init.mode: always  # data.sql 실행
