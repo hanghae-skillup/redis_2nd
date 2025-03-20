@@ -42,8 +42,3 @@ CREATE TABLE screening  (
                             last_modified_date DATETIME NULL COMMENT '수정일',
                             last_modified_by VARCHAR(255) NULL COMMENT '수정자'
 );
-
-alter table screening
-    add constraint fk_screening_to_theater
-        foreign key (theater_id)
-            references theater (id);
