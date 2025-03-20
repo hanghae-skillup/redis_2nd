@@ -72,6 +72,7 @@ class ScreeningsCreatorTest {
                 id,
                 "unknown",
                 MovieGrade.ALL,
+                MovieStatus.SHOWING,
                 releaseDate,
                 new UrlString("https://test.com/image.png"),
                 new PositiveNumber(120),

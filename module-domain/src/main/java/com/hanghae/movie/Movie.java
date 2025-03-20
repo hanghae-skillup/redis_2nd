@@ -27,6 +27,10 @@ public class Movie extends BaseEntity {
     private MovieGrade grade;
 
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private MovieStatus status;
+
+    @Column(nullable = false)
     private LocalDate releaseDate;
 
     @Embedded
@@ -47,18 +51,19 @@ public class Movie extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private MovieGenre genre;
 
-    public Movie(String title, MovieGrade grade, LocalDate releaseDate, String thumbnailUrl, int runningTimeMin, MovieGenre genre) {
-        this(null, title, grade, releaseDate, new UrlString(thumbnailUrl), new PositiveNumber(runningTimeMin), genre);
+    public Movie(String title, MovieGrade grade, MovieStatus status, LocalDate releaseDate, String thumbnailUrl, int runningTimeMin, MovieGenre genre) {
+        this(null, title, grade, status, releaseDate, new UrlString(thumbnailUrl), new PositiveNumber(runningTimeMin), genre);
     }
 
-    public Movie(String title, MovieGrade grade, LocalDate releaseDate, UrlString thumbnailUrl, PositiveNumber runningTimeMin, MovieGenre genre) {
-        this(null, title, grade, releaseDate, thumbnailUrl, runningTimeMin, genre);
+    public Movie(String title, MovieGrade grade, MovieStatus status, LocalDate releaseDate, UrlString thumbnailUrl, PositiveNumber runningTimeMin, MovieGenre genre) {
+        this(null, title, grade, status, releaseDate, thumbnailUrl, runningTimeMin, genre);
     }
 
-    public Movie(Long id, String title, MovieGrade grade, LocalDate releaseDate, UrlString thumbnailUrl, PositiveNumber runningTimeMin, MovieGenre genre) {
+    public Movie(Long id, String title, MovieGrade grade, MovieStatus status, LocalDate releaseDate, UrlString thumbnailUrl, PositiveNumber runningTimeMin, MovieGenre genre) {
         this.id = id;
         this.title = title;
         this.grade = grade;
+        this.status = status;
         this.releaseDate = releaseDate;
         this.thumbnailUrl = thumbnailUrl;
         this.runningTimeMin = runningTimeMin;

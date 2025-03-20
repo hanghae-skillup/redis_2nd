@@ -1,13 +1,13 @@
 use cinema;
 
 # movie
-insert into movie(title, grade, release_date, thumbnail_url, running_time, genre, created_date, created_by, last_modified_date, last_modified_by)
+insert into movie(title, grade, status, release_date, thumbnail_url, running_time, genre, created_date, created_by, last_modified_date, last_modified_by)
 values
-('반지의 제왕', 'TEEN_15', '2025-03-20', 'https://test.com/image1.png', 130, 'FANTASY', now(), 'master', now(), 'master'),
-('타이타닉', 'ALL', '2025-03-21', 'https://test.com/image2.png', 120, 'ROMANCE', now(), 'master', now(), 'master'),
-('해리포터', 'TEEN_12', '2025-03-22', 'https://test.com/image3.png', 120, 'FANTASY', now(), 'master', now(), 'master'),
-('범죄도시', 'TEEN_15', '2025-03-21', 'https://test.com/image4.png', 120, 'ACTION', now(), 'master', now(), 'master'),
-('극한직업', 'TEEN_12', '2025-03-22', 'https://test.com/image5.png', 120, 'ACTION', now(), 'master', now(), 'master');
+('반지의 제왕', 'TEEN_15', 'NONE', '2025-03-20', 'https://test.com/image1.png', 130, 'FANTASY', now(), 'master', now(), 'master'),
+('타이타닉', 'ALL', 'SHOWING', '2025-03-21', 'https://test.com/image2.png', 120, 'ROMANCE', now(), 'master', now(), 'master'),
+('해리포터', 'TEEN_12', 'SHOWING', '2025-03-22', 'https://test.com/image3.png', 120, 'FANTASY', now(), 'master', now(), 'master'),
+('범죄도시', 'TEEN_15', 'SHOWING', '2025-03-21', 'https://test.com/image4.png', 120, 'ACTION', now(), 'master', now(), 'master'),
+('극한직업', 'TEEN_12', 'COMING_SOON', '2025-03-22', 'https://test.com/image5.png', 120, 'ACTION', now(), 'master', now(), 'master');
 
 # theater
 insert into theater(name, created_date, created_by, last_modified_date, last_modified_by)

@@ -13,6 +13,7 @@ CREATE TABLE movie (
                        thumbnail_url VARCHAR(255) NOT NULL COMMENT '섬네일이미지 URL',
                        running_time INT NOT NULL COMMENT '러닝타임(분)',
                        genre VARCHAR(50) NOT NULL COMMENT '장르',
+                       status VARCHAR(50) NOT NULL COMMENT '상영 상태(상영안함/상영중/개봉예정)',
                        created_date DATETIME NOT NULL COMMENT '생성일',
                        created_by VARCHAR(255) NOT NULL COMMENT '생성자',
                        last_modified_date DATETIME NULL COMMENT '수정일',

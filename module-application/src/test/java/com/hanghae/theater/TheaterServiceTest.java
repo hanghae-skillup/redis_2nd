@@ -1,10 +1,7 @@
 package com.hanghae.theater;
 
 import com.hanghae.common.vo.PositiveNumber;
-import com.hanghae.movie.Movie;
-import com.hanghae.movie.MovieGenre;
-import com.hanghae.movie.MovieGrade;
-import com.hanghae.movie.MovieRepository;
+import com.hanghae.movie.*;
 import com.hanghae.theater.dto.ScreeningDto;
 import com.hanghae.theater.dto.ScreeningsAddRequest;
 import com.hanghae.theater.dto.ScreeningsAddResponse;
@@ -87,6 +84,7 @@ class TheaterServiceTest {
         return new Movie(
                 "unknown",
                 MovieGrade.ALL,
+                MovieStatus.SHOWING,
                 releaseDate,
                 "https://test.com/image.png",
                 120,
