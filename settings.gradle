@@ -1,0 +1,5 @@
+rootProject.name = 'cinema'
+include 'module-domain'
+include 'module-application'
+include 'module-presentation'
+
