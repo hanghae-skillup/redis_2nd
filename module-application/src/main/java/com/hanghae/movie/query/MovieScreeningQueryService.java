@@ -13,7 +13,7 @@ public class MovieScreeningQueryService {
 
     private final MovieScreeningQueryRepository movieScreeningQueryRepository;
 
-    public List<MovieScreeningDto> findShowingMovies() {
-        return movieScreeningQueryRepository.findShowingMovies();
+    public List<MovieScreeningDto> findShowingMovies(MovieScreeningSearchCondition condition) {
+        return movieScreeningQueryRepository.findShowingMovies(condition);
     }
 }
