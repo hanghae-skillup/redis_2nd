@@ -1,0 +1,5 @@
+rootProject.name = 'movie-multi-module'
+include 'movie-domain-module'
+include 'movie-infrastructure-module'
+include 'movie-api-module'
+

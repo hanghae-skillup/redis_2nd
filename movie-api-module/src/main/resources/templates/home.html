@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <title>영화 리스트 페이지</title>
+    <!-- CSS 파일 연결 -->
+    <link rel="stylesheet" href="css/home.css" />
+</head>
+<body>
+<header>
+    <!-- 카테고리 메뉴 -->
+    <nav>
+        <ul>
+            <li>액션</li>
+            <li>로맨스</li>
+            <li>호러</li>
+            <li>SF</li>
+        </ul>
+    </nav>
+    <!-- 검색 영역 -->
+    <div class="search-bar">
+        <label for="search">제목 검색</label>
+        <input type="text" id="search" placeholder="영화 제목을 입력하세요" />
+        <button>검색</button>
+    </div>
+</header>
+
+<main>
+    <!-- 영화 리스트 섹션 -->
+    <section class="movie-list">
+        <!-- 첫 번째 줄(3개) -->
+        <div class="movie-row">
+
+        </div>
+
+    </section>
+</main>
+<Script>
+
+    /**
+     * 새로운 영화 카드를 movie-list에 추가하는 함수.
+     * 현재 마지막 movie-row에 카드가 3개 미만이면 왼쪽 정렬,
+     * 3개가 가득 차면 새 movie-row를 생성하고 추가합니다.
+     *
+     * @param {string|HTMLElement} movieCardContent - 영화 카드의 HTML 문자열 또는 DOM 요소
+     */
+    function addMovieCard(movieCardContent) {
+        const movieList = document.querySelector('.movie-list');
+        let rows = movieList.querySelectorAll('.movie-row');
+        let lastRow;
+
+        // movie-row가 없다면 새로 생성
+        if (rows.length === 0) {
+            lastRow = document.createElement('div');
+            lastRow.className = 'movie-row';
+            movieList.appendChild(lastRow);
+        } else {
+            lastRow = rows[rows.length - 1];
+        }
+
+        // 마지막 movie-row에 카드가 3개 이상이면 새 row 생성
+        const currentCards = lastRow.querySelectorAll('.movie-card');
+        if (currentCards.length >= 3) {
+            lastRow = document.createElement('div');
+            lastRow.className = 'movie-row';
+            movieList.appendChild(lastRow);
+        }
+
+        // 문자열이면 DOM 요소로 변환
+        let newCard;
+        if (typeof movieCardContent === 'string') {
+            const template = document.createElement('template');
+            template.innerHTML = movieCardContent.trim();
+            newCard = template.content.firstChild;
+        } else {
+            newCard = movieCardContent;
+        }
+
+        // 영화 카드 추가
+        lastRow.appendChild(newCard);
+
+        // 현재 row의 영화 카드 개수를 확인 후 정렬 조정
+        const cardCount = lastRow.querySelectorAll('.movie-card').length;
+        if (cardCount < 3) {
+            lastRow.style.justifyContent = "flex-start"; // 카드가 3개 미만이면 왼쪽 정렬
+        } else {
+            lastRow.style.justifyContent = "space-between"; // 카드가 3개이면 좌우 균등 배치
+        }
+    }
+
+    function makeMovieCard(datas) {
+        datas.forEach((data) => {
+            console.log(data);
+            let sampleMovieCard = `
+              <div class="movie-card">
+                <h3>${data.title}</h3>
+                <div class="movie-thumbnail">
+                    <img src="${data.thumbnail}"/>
+                </div>
+                <ul class="movie-info">
+                  <li>영상물 등급: ${data.rating}</li>
+                  <li>개봉일: ${data.releaseDate}</li>
+                  <li>러닝 타임(분): ${data.runningTime}</li>
+                  <li>영화 장르: ${data.genre}</li>
+                </ul>
+            `;
+
+            data.theaterShowtimes.forEach((theater) => {
+                const movieTheater = `
+                    <ul class="movie-info">
+                      <li>상영관 이름: ${theater.theaterName}</li>
+                    </ul>
+                    <div class="showtimes">
+                        ${theater.startTime.map(time => `<span>${time}</span>`).join('')}
+                    </div>`;
+                sampleMovieCard += movieTheater;
+            })
+
+            sampleMovieCard += '</div>';
+
+            addMovieCard(sampleMovieCard);
+        });
+    }
+
+
+
+    function sendRequest(url, method, data = null) {
+        var xhr = new XMLHttpRequest();
+        xhr.open(method, url, true);
+        xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    try {
+                        var responseJson = JSON.parse(xhr.responseText);
+                        console.log("응답 JSON:", responseJson);
+                        makeMovieCard(responseJson);
+                    } catch (e) {
+                        console.error("JSON 파싱 오류:", e);
+                    }
+                } else {
+                    console.error("요청 실패. 상태 코드:", xhr.status);
+                }
+            }
+        };
+        xhr.send(data ? JSON.stringify(data) : null);
+    }
+
+    sendRequest("/movie", "GET");
+
+</Script>
+</body>
+</html>
