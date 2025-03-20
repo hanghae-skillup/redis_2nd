@@ -1,0 +1,12 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        mavenCentral()  // ✅ 반드시 추가
+    }
+}
+
+rootProject.name = 'redis_2nd'
+
+include 'movie-api'
+include 'movie-domain'
+include 'movie-storage'
