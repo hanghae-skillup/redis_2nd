@@ -6,7 +6,6 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -32,7 +31,4 @@ public class Screening extends BaseEntity {
 
   @Column(nullable = false)
   private LocalDateTime endTime;
-
-  @Column(nullable = false)
-  private LocalDate screeningDate;
 }

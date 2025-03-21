@@ -18,8 +18,4 @@ public class Theater extends BaseEntity {
 
   @Column(nullable = false)
   private String name;
-
-  private int rowCount = 5;
-
-  private int columnCount = 5;
 }

@@ -32,7 +32,6 @@ public class MovieDTO {
         .theaterName(screening.getTheater().getName())
         .startTime(screening.getStartTime())
         .endTime(screening.getEndTime())
-        .screeningDate(screening.getScreeningDate())
         .build())
       .collect(Collectors.toList());
 

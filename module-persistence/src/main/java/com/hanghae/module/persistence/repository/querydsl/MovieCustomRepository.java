@@ -9,7 +9,7 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Component
@@ -26,7 +26,7 @@ public class MovieCustomRepository {
     QScreening screening = QScreening.screening;
     QTheater theater = QTheater.theater;
 
-    LocalDate today = LocalDate.now();
+    LocalDateTime now = LocalDateTime.now();
 
     return queryFactory
       .selectFrom(movie)
@@ -35,7 +35,7 @@ public class MovieCustomRepository {
       .join(screening.theater, theater).fetchJoin()
       .where(
         theater.id.eq(theaterId),
-        screening.screeningDate.goe(today)
+        screening.startTime.goe(now)
       )
       .orderBy(movie.releaseDate.desc())
       .fetch();
@@ -49,7 +49,7 @@ public class MovieCustomRepository {
     QScreening screening = QScreening.screening;
     QTheater theater = QTheater.theater;
 
-    LocalDate today = LocalDate.now();
+    LocalDateTime now = LocalDateTime.now();
 
     return queryFactory
       .selectFrom(movie)
@@ -58,7 +58,7 @@ public class MovieCustomRepository {
       .join(screening.theater, theater).fetchJoin()
       .where(
         theater.id.eq(theaterId),
-        screening.screeningDate.goe(today),
+        screening.startTime.goe(now),
         movie.genre.eq(genre)
       )
       .orderBy(movie.releaseDate.desc())
@@ -68,7 +68,7 @@ public class MovieCustomRepository {
   /**
    * 특정 기간에 상영되는 영화 조회
    */
-  public List<Movie> findMoviesByScreeningDateRange(Long theaterId, LocalDate startDate, LocalDate endDate) {
+  public List<Movie> findMoviesByScreeningDateRange(Long theaterId, LocalDateTime startDateTime, LocalDateTime endDateTime) {
     QMovie movie = QMovie.movie;
     QScreening screening = QScreening.screening;
     QTheater theater = QTheater.theater;
@@ -80,7 +80,7 @@ public class MovieCustomRepository {
       .join(screening.theater, theater).fetchJoin()
       .where(
         theater.id.eq(theaterId),
-        screening.screeningDate.between(startDate, endDate)
+        screening.startTime.between(startDateTime, endDateTime)
       )
       .orderBy(movie.releaseDate.desc())
       .fetch();

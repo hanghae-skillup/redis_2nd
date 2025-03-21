@@ -21,7 +21,4 @@ public class Seat extends BaseEntity {
 
     @Column(nullable = false)
     private String seatNumber;
-
-    @Column(nullable = false)
-    private Boolean isAvailable;
 }
