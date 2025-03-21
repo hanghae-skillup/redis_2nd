@@ -59,6 +59,11 @@ docker compose -p cinema up -d
 - dto가 위치한다
   - 도메인 모델을 dto로 변환하는 로직을 dto가 담당한다
 
+### module-infra
+- 외부 의존성을 갖는 라이브러리가 위치한다
+- 어플리케이션 모듈은 인터페이스 통해서 인프라 모듈 참조해야 한다
+- ex) redis, caffeine
+
 #### module-presentation
 - application 모듈의 service를 호출하여 dto를 리턴하는 역할만을 담당한다
 - @Controller 역할을 하는 파일이 위치한다

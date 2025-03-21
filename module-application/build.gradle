@@ -6,6 +6,7 @@ version = '1.0-SNAPSHOT'
 
 dependencies {
     implementation project(':module-domain')
+    implementation project(':module-infra')
     runtimeOnly 'com.mysql:mysql-connector-j'
     runtimeOnly 'com.h2database:h2'
 }
