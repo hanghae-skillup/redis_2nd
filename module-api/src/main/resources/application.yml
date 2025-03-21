@@ -12,9 +12,11 @@ spring:
   jpa:
     show-sql: true
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
     properties:
       hibernate:
         format_sql: true  # SQL 로깅 시 포맷팅
         use_sql_comments: true  # SQL 주석 표시
+        jdbc:
+          time_zone: Asia/Seoul  # Hibernate가 사용하는 타임존 설정
     defer-datasource-initialization: true  # JPA 초기화 후 SQL 실행
