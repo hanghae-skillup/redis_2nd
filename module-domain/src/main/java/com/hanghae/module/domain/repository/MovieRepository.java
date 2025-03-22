@@ -1,10 +1,10 @@
 package com.hanghae.module.domain.repository;
 
-import com.hanghae.module.domain.entity.Movie;
+import com.hanghae.module.common.dto.MovieDTO;
 
 import java.util.List;
 
 public interface MovieRepository {
-  List<Movie> findAllNowPlayingMovies(Long theaterId);
+  List<MovieDTO> findAllNowPlayingMovies(Long theaterId);
 }
 

@@ -1,8 +1,8 @@
 package com.hanghae.module.api.dto.response;
 
-import com.hanghae.module.core.dto.MovieDTO;
-import com.hanghae.module.core.dto.ScreeningDTO;
-import com.hanghae.module.domain.enums.Genre;
+import com.hanghae.module.common.dto.MovieDTO;
+import com.hanghae.module.common.dto.ScreeningDTO;
+import com.hanghae.module.common.enums.Genre;
 import lombok.Builder;
 import lombok.Getter;
 

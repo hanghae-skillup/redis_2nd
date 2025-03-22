@@ -1,6 +1,6 @@
 package com.hanghae.module.persistence.repository.impl;
 
-import com.hanghae.module.domain.entity.Movie;
+import com.hanghae.module.common.dto.MovieDTO;
 import com.hanghae.module.domain.repository.MovieRepository;
 import com.hanghae.module.persistence.repository.querydsl.MovieCustomRepository;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +14,7 @@ public class MovieRepositoryImpl implements MovieRepository {
   private final MovieCustomRepository movieCustomRepository;
 
   @Override
-  public List<Movie> findAllNowPlayingMovies(Long theaterId) {
+  public List<MovieDTO> findAllNowPlayingMovies(Long theaterId) {
     return movieCustomRepository.findAllNowPlayingMovies(theaterId);
   }
 }

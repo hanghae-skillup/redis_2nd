@@ -1,4 +1,4 @@
-package com.hanghae.module.domain.enums;
+package com.hanghae.module.common.enums;
 
 public enum Genre {
   ACTION("액션"),

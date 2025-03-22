@@ -1,7 +1,7 @@
 package com.hanghae.module.api.controller;
 
 import com.hanghae.module.api.dto.response.MovieResponse;
-import com.hanghae.module.core.dto.MovieDTO;
+import com.hanghae.module.common.dto.MovieDTO;
 import com.hanghae.module.core.service.MovieService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

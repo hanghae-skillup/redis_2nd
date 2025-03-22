@@ -1,6 +1,7 @@
 package com.hanghae.module.core.service;
 
-import com.hanghae.module.core.dto.MovieDTO;
+
+import com.hanghae.module.common.dto.MovieDTO;
 
 import java.util.List;
 
