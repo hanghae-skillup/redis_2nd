@@ -42,3 +42,21 @@ CREATE TABLE screening  (
                             last_modified_date DATETIME NULL COMMENT '수정일',
                             last_modified_by VARCHAR(255) NULL COMMENT '수정자'
 );
+
+-- index 추가
+-- 1. screening 테이블--------------------
+-- 1) join 대상 컬럼 인덱스 추가
+create index idx_screening_theater_id
+    ON screening (theater_id);
+-- join 대상 및 기본 정렬 대상 컬럼 인덱스 추가
+create index idx_screening_movie_id_start_time
+    ON screening (movie_id, start_time);
+
+-- 2. movie 테이블--------------------
+-- 1) 영화 제목 검색 index
+create index idx_title ON movie (title);
+-- 2) 영화 장르 검색 index
+create index idx_genre ON movie (genre);
+-- 3) 영화 장르, 제목 둘 다 검색 시 적용 index
+-- 제목에서 우선 필터링하고 장르 검색하기 원해서 title, genre 순서로 인덱스 생성
+create index idx_movie_title_genre ON movie (title, genre);
