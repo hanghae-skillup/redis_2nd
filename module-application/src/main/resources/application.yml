@@ -15,6 +15,11 @@ spring:
         format_sql: true
         dialect: org.hibernate.dialect.MySQL8Dialect
     show-sql: true
+  data:
+    redis:
+      host: 127.0.0.1
+      port: 6379
+
 logging:
   level:
     org:
@@ -23,3 +28,11 @@ logging:
           descriptor:
             sql:
               BasicBinder: TRACE
+    root: trace
+
+cache:
+  local:
+    max-size: 1000 # 캐시 최대 1000개까지 저장 가능
+    expire-after-write: PT10M  # 캐시 만료 기본 시간 (10분)
+  global:
+    expire-after-write: PT10M
