@@ -2,6 +2,7 @@ package com.hanghae.module.persistence.repository.querydsl;
 
 import com.hanghae.module.common.dto.MovieDTO;
 import com.hanghae.module.common.dto.ScreeningDTO;
+import com.hanghae.module.common.enums.Genre;
 import com.hanghae.module.persistence.entity.QMovieEntity;
 import com.hanghae.module.persistence.entity.QScreeningEntity;
 import com.hanghae.module.persistence.entity.QTheaterEntity;
@@ -11,6 +12,7 @@ import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import java.time.LocalDateTime;
 import java.util.Comparator;
@@ -26,7 +28,7 @@ public class MovieCustomRepository {
   /**
    * 상영 중인 영화를 개봉일 기준으로 정렬하여 조회
    */
-  public List<MovieDTO> findAllNowPlayingMovies(Long theaterId) {
+  public List<MovieDTO> findAllNowPlayingMovies(Long theaterId, String title, Genre genre) {
     QMovieEntity movie = QMovieEntity.movieEntity;
     QScreeningEntity screening = QScreeningEntity.screeningEntity;
     QTheaterEntity theater = QTheaterEntity.theaterEntity;
@@ -41,7 +43,9 @@ public class MovieCustomRepository {
       .where(
         // 현재 상영 중인 영화 조건
         screening.startTime.after(now),
-        eqTheaterId(screening, theaterId)
+        eqTheaterId(screening, theaterId),
+        eqTitle(movie, title),
+        eqGenre(movie, genre)
       )
       .transform(GroupBy.groupBy(movie.id)
         .list(Projections.constructor(MovieDTO.class,
@@ -89,5 +93,20 @@ public class MovieCustomRepository {
    */
   private BooleanExpression eqTheaterId(QScreeningEntity screening, Long theaterId) {
     return theaterId != null ? screening.theater.eq(theaterId) : null;
+  }
+
+  /**
+   * 영화 제목 조건을 동적으로 처리하는 메소드
+   * 요구사항에 맞게 동등 연산자(=)를 사용
+   */
+  private BooleanExpression eqTitle(QMovieEntity movie, String title) {
+    return StringUtils.hasText(title) ? movie.title.eq(title) : null;
+  }
+
+  /**
+   * 장르 조건을 동적으로 처리하는 메소드
+   */
+  private BooleanExpression eqGenre(QMovieEntity movie, Genre genre) {
+    return genre != null ? movie.genre.eq(genre) : null;
   }
 }

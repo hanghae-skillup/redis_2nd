@@ -1,6 +1,7 @@
 package com.hanghae.module.core.service.impl;
 
 import com.hanghae.module.common.dto.MovieDTO;
+import com.hanghae.module.common.enums.Genre;
 import com.hanghae.module.core.service.MovieService;
 import com.hanghae.module.domain.repository.MovieRepository;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +18,8 @@ public class MovieServiceImpl implements MovieService {
   private final MovieRepository movieRepository;
 
   @Override
-  public List<MovieDTO> findAllNowPlayingMovies(Long theaterId) {
-    return movieRepository.findAllNowPlayingMovies(theaterId);
+  public List<MovieDTO> findAllNowPlayingMovies(Long theaterId, String title,
+                                                Genre genre) {
+    return movieRepository.findAllNowPlayingMovies(theaterId, title, genre);
   }
 }
