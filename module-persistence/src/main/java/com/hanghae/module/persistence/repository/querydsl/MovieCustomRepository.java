@@ -47,6 +47,7 @@ public class MovieCustomRepository {
         eqTitle(movie, title),
         eqGenre(movie, genre)
       )
+      .orderBy(movie.releaseDate.desc())
       .transform(GroupBy.groupBy(movie.id)
         .list(Projections.constructor(MovieDTO.class,
           movie.id,
@@ -84,7 +85,7 @@ public class MovieCustomRepository {
           .screenings(sortedScreenings)
           .build();
       })
-      .sorted(Comparator.comparing(MovieDTO::getReleaseDate).reversed()) // 개봉일 기준 내림차순 정렬
+//      .sorted(Comparator.comparing(MovieDTO::getReleaseDate).reversed()) // 개봉일 기준 내림차순 정렬
       .collect(Collectors.toList());
   }
 
