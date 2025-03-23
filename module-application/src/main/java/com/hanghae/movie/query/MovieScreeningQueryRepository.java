@@ -10,6 +10,7 @@ import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
@@ -17,6 +18,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+@Slf4j
 @Repository
 @RequiredArgsConstructor
 public class MovieScreeningQueryRepository {
@@ -24,10 +26,11 @@ public class MovieScreeningQueryRepository {
     private final JPAQueryFactory queryFactory;
 
     public List<MovieScreeningDto> findAllMovies() {
-        return findShowingMovies(null);
+                return findShowingMovies(null);
     }
 
     public List<MovieScreeningDto> findShowingMovies(MovieScreeningSearchCondition condition) {
+        log.trace("----------------------영화관 메인화면 조회 쿼리 실행 start----------------------");
 
         QTheater qTheater = QTheater.theater;
         QScreening qScreening = QScreening.screening;
@@ -36,6 +39,7 @@ public class MovieScreeningQueryRepository {
         BooleanBuilder whereCondition = createMovieCondition(condition, qMovie);
         OrderSpecifier<LocalDate> releaseDateOrder = createReleaseDateOrder(condition, qMovie);
 
+        log.trace("----------------------영화관 메인화면 조회 쿼리 실행 전----------------------");
         return queryFactory.select(Projections.constructor(
                         MovieScreeningDto.class,
                         qTheater.name,

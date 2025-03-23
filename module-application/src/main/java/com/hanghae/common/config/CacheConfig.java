@@ -1,5 +1,7 @@
 package com.hanghae.common.config;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.hanghae.cache.CacheManager;
 import com.hanghae.cache.LocalCacheManager;
 import com.hanghae.cache.RedisCacheManager;
@@ -13,6 +15,7 @@ import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 import java.time.Duration;
@@ -39,6 +42,7 @@ public class CacheConfig {
     //endregion
 
     //region [로컬캐시]
+    @Primary
     @Bean
     public CacheManager<String, Object> localCache() {
         return new LocalCacheManager<>(localCacheMaxSize, localCacheDefaultExpireAfterWrite);
@@ -57,13 +61,21 @@ public class CacheConfig {
     @Bean
     public RedisTemplate<String, Object> redisTemplate() {
         RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
+        objectMapper.findAndRegisterModules();
+
+        Jackson2JsonRedisSerializer<Object> serializer = new Jackson2JsonRedisSerializer<>(objectMapper, Object.class);
+
         redisTemplate.setKeySerializer(new StringRedisSerializer());
-        redisTemplate.setValueSerializer(new StringRedisSerializer());
+        redisTemplate.setValueSerializer(serializer);
         redisTemplate.setConnectionFactory(redisConnectionFactory());
+
         return redisTemplate;
     }
 
-    @Primary
+    //@Primary
     @Bean
     public CacheManager<String, Object> globalCache() {
         return new RedisCacheManager<>(redisTemplate());
