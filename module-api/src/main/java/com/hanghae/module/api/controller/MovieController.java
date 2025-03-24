@@ -23,7 +23,7 @@ public class MovieController {
 
   @GetMapping("/now-playing")
   public ResponseEntity<List<MovieResponse>> getNowPlayingMovies(
-    @RequestParam(required = true) Long theaterId,
+    @RequestParam(required = false) Long theaterId,
     @Size(max = 255, message = "영화 제목은 255자를 초과할 수 없습니다.")
     @RequestParam(required = false) String title,
     @RequestParam(required = false) Genre genre
