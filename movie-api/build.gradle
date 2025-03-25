@@ -1,0 +1,15 @@
+// movie-infra 모듈은 JPA, Redis 등 인프라스트럭처 기술과 관련된 구현 담당
+plugins {
+	id 'java-library'
+}
+
+dependencies {
+	// 도메인 계층 의존성 (비즈니스 로직 사용)
+	implementation project(':movie-domain')
+
+	// 인프라 계층 의존성 (DB 연동, Redis 등)
+	implementation project(':movie-infra')
+
+	// Spring MVC 웹 애플리케이션
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+}
