@@ -1,0 +1,11 @@
+version: '3.8'
+services:
+  mysql:
+    image: redis  # dockerFile로 만들었던 이미지가 있어서 사용..-> 도커 desktop 열어서 사용해보기..
+    environment:
+      MYSQL_ROOT_PASSWORD: dlsxpffl8080@  # 루트 계정 비밀번호
+      MYSQL_DATABASE: redisstudy   # 생성할 기본 데이터베이스
+      MYSQL_USER: root  # 사용자 계정 (선택)
+      MYSQL_PASSWORD: dlsxpffl8080@  # 사용자 비밀번호 (선택)
+    ports:
+      - "3305:3306"  # 호스트의 3306 포트를 컨테이너의 3306 포트와 연결
