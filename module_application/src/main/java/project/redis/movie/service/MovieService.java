@@ -1,9 +1,11 @@
 package project.redis.movie.service;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -12,6 +14,7 @@ import project.redis.movie.adapter.MovieAdapter;
 import project.redis.movie.dto.NowPlayMovieDto;
 import project.redis.screening.Screening;
 import project.redis.screening.adapter.ScreeningAdapter;
+import project.redis.screening.dto.ScreeningTimeDto;
 
 @Service
 @RequiredArgsConstructor
@@ -24,16 +27,11 @@ public class MovieService {
         List<Movie> movies = movieAdapter.findMovies();
         List<Movie> nowPlayingMovies = findNowPlayingMovies(movies);
 
-        // Movie에는 id가 없고 MovieEntity에는 id가 있으니 Movie -> MovieEntity로 할 수 없음
-        // 이렇게 도메인 객체에 id가 없는 것이 맞는가?
-        // id가 없으니 관련된 Screening을 찾으려고 할 때 이름을 또 추출하고 그 이름으로 찾고 해야 함
-
-        List<NowPlayMovieDto> nowPlayMovieDtos = makeNowPlayingMoviesInfo(nowPlayingMovies);
-        return nowPlayMovieDtos;
+        return makeNowPlayingMoviesInfo(nowPlayingMovies);
     }
 
-    public List<Movie> findNowPlayingMovies(List<Movie> movies) {
-        LocalDateTime today = LocalDateTime.now();
+    private List<Movie> findNowPlayingMovies(List<Movie> movies) {
+        LocalDate today = LocalDate.now();
 
         return movies.stream()
                 .filter(movie -> movie.isReleasedBefore(today))
@@ -41,37 +39,46 @@ public class MovieService {
                 .collect(Collectors.toList());
     }
 
-    public List<NowPlayMovieDto> makeNowPlayingMoviesInfo(List<Movie> movies) {
+    private List<NowPlayMovieDto> makeNowPlayingMoviesInfo(List<Movie> movies) {
         List<NowPlayMovieDto> nowPlayMovieDtos = new ArrayList<>();
         for (Movie movie : movies) {
-            // 영화 이름이 같을 수도 있지 않나...?
-            List<Screening> movieAllScreening = screeningAdapter.findScreeningsByMovieName(movie.getMovieName());
+            List<Screening> movieAllScreening = screeningAdapter.findScreeningsByMovie(movie);
 
-            Map<String, List<Screening>> cinemaNameScreening = movieAllScreening.stream()
-                    .collect(Collectors.groupingBy(Screening::getCinemaName));
+            Map<String, List<Screening>> cinemaNameScreening = mapByCinemaName(movieAllScreening);
 
-            for (Map.Entry<String, List<Screening>> entry : cinemaNameScreening.entrySet()) {
-                String cinemaName = entry.getKey();
-                List<Screening> screenings = entry.getValue();
-                NowPlayMovieDto nowPlayMovieDto = makeNowPlayMovieDto(movie, cinemaName, screenings);
-                nowPlayMovieDtos.add(nowPlayMovieDto);
-            }
+            createNowPlayMovieDtoByMap(movie, cinemaNameScreening, nowPlayMovieDtos);
         }
+        nowPlayMovieDtos.sort(Comparator.comparing(NowPlayMovieDto::getMovieReleaseDate).reversed());
         return nowPlayMovieDtos;
     }
 
+    private Map<String, List<Screening>> mapByCinemaName(List<Screening> movieAllScreening) {
+        return movieAllScreening.stream()
+                .collect(Collectors.groupingBy(Screening::fetchTheaterAndCinemaName));
+    }
 
-    public NowPlayMovieDto makeNowPlayMovieDto(Movie movie, String cinemaName, List<Screening> screenings) {
-        return NowPlayMovieDto.builder()
-                .movieName(movie.getMovieName())
-                .movieRate(movie.getMovieRate().getMovieRateDescription())
-                .movieReleaseDate(movie.getMovieReleaseDate())
-                .movieThumbnailImage(movie.getMovieThumbnailImage())
-                .movieRunningTime(movie.getMovieRunningTime())
-                .movieGenre(movie.getMovieGenre().getMovieGenreDescription())
-                .cinemaName(cinemaName)
-                .screenings(screenings)
-                .build();
+    private void createNowPlayMovieDtoByMap(Movie movie, Map<String, List<Screening>> cinemaNameScreening,
+                                            List<NowPlayMovieDto> nowPlayMovieDtos) {
+        for (Map.Entry<String, List<Screening>> entry : cinemaNameScreening.entrySet()) {
+            NowPlayMovieDto nowPlayMovieDto = createNowPlayMovieDtoByEntry(movie, entry);
+            nowPlayMovieDtos.add(nowPlayMovieDto);
+        }
+    }
+
+    private NowPlayMovieDto createNowPlayMovieDtoByEntry(Movie movie, Entry<String, List<Screening>> entry) {
+        String theaterAndCinemaName = entry.getKey();
+        List<Screening> screenings = entry.getValue();
+
+        List<ScreeningTimeDto> screeningTimeDtos = makeScreeningTimeDtos(screenings);
+
+        return NowPlayMovieDto.of(movie, theaterAndCinemaName, screeningTimeDtos);
+    }
+
+    private List<ScreeningTimeDto> makeScreeningTimeDtos(List<Screening> screenings) {
+        List<ScreeningTimeDto> screeningTimeDtos
+                = new ArrayList<>(screenings.stream().map(ScreeningTimeDto::of).toList());
+        screeningTimeDtos.sort(Comparator.comparing(ScreeningTimeDto::getStartTime));
+        return screeningTimeDtos;
     }
 
 }

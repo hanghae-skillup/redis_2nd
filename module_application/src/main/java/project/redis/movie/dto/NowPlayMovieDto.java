@@ -1,27 +1,60 @@
 package project.redis.movie.dto;
 
-import java.time.LocalDateTime;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import java.time.LocalDate;
 import java.util.List;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import project.redis.screening.Screening;
+import project.redis.movie.Movie;
+import project.redis.screening.dto.ScreeningResponseDto;
+import project.redis.screening.dto.ScreeningTimeDto;
 
 @Getter
-@Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-@Builder
 public class NowPlayMovieDto {
     private String movieName;
     private String movieRate;
-    private LocalDateTime movieReleaseDate;
+    private LocalDate movieReleaseDate;
     private String movieThumbnailImage;
     private Integer movieRunningTime;
     private String movieGenre;
-    private String cinemaName;
-    private List<Screening> screenings;
+    private String theaterAndCinemaName;
+    private List<ScreeningTimeDto> screenings;
+
+    public static NowPlayMovieDto of(Movie movie, String theaterAndCinemaName, List<ScreeningTimeDto> screenings) {
+        return NowPlayMovieDto.builder()
+                .movieName(movie.getTitle())
+                .movieRate(movie.getRating().getMovieRateDescription())
+                .movieReleaseDate(movie.getReleasedAt())
+                .movieThumbnailImage(movie.getThumbnail())
+                .movieRunningTime(movie.getDuration())
+                .movieGenre(movie.getGenre().getMovieGenreDescription())
+                .theaterAndCinemaName(theaterAndCinemaName)
+                .screenings(screenings)
+                .build();
+    }
+
+    public static NowPlayMovieDto createByQueryDto(ScreeningResponseDto screeningResponseDto,
+                                                   List<ScreeningTimeDto> screenings) {
+        return NowPlayMovieDto.builder()
+                .movieName(screeningResponseDto.getMovieTitle())
+                .movieRate(screeningResponseDto.getRating().getMovieRateDescription())
+                .movieReleaseDate(screeningResponseDto.getReleasedAt())
+                .movieThumbnailImage(screeningResponseDto.getThumbnail())
+                .movieRunningTime(screeningResponseDto.getDuration())
+                .movieGenre(screeningResponseDto.getGenre().getMovieGenreDescription())
+                .theaterAndCinemaName(screeningResponseDto.getCinemaAndTheaterName())
+                .screenings(screenings)
+                .build();
+    }
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    public LocalDate getMovieReleaseDate() {
+        return movieReleaseDate;
+    }
 }

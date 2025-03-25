@@ -14,8 +14,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import project.redis.cinema.entity.CinemaEntity;
+import project.redis.common.entity.BaseEntity;
 import project.redis.movie.entity.MovieEntity;
+import project.redis.theater.entity.TheaterEntity;
 
 @Entity
 @Table(name = "screening")
@@ -23,23 +24,23 @@ import project.redis.movie.entity.MovieEntity;
 @Builder
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class ScreeningEntity {
+public class ScreeningEntity extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long screeningId;
 
     @Column(nullable = false)
-    private LocalDateTime screeningStartTime;
+    private LocalDateTime startedAt;
 
     @Column(nullable = false)
-    private LocalDateTime screeningEndTime;
+    private LocalDateTime endedAt;
 
     @ManyToOne
     @JoinColumn(name = "movie_id", nullable = false)  // 영화와의 관계 설정
     private MovieEntity movie;
 
     @ManyToOne
-    @JoinColumn(name = "cinema_id", nullable = false)  // 영화관과의 관계 설정
-    private CinemaEntity cinema;
+    @JoinColumn(name = "theater_id", nullable = false)  // 영화관과의 관계 설정
+    private TheaterEntity theater;
 }

@@ -13,7 +13,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import project.redis.cinema.entity.CinemaEntity;
+import project.redis.common.entity.BaseEntity;
+import project.redis.theater.entity.TheaterEntity;
 
 @Entity
 @Table(name = "seat")
@@ -21,7 +22,7 @@ import project.redis.cinema.entity.CinemaEntity;
 @Builder
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class SeatEntity {
+public class SeatEntity extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,6 +38,6 @@ public class SeatEntity {
     private Integer seatColumn;
 
     @ManyToOne
-    @JoinColumn(name = "cinema_id")  // 외래 키 설정
-    private CinemaEntity cinema;
+    @JoinColumn(name = "theater_id")
+    private TheaterEntity theater;
 }

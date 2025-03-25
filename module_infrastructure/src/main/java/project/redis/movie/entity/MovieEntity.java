@@ -9,13 +9,14 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import project.redis.common.entity.BaseEntity;
+import project.redis.movie.Movie;
 import project.redis.movie.MovieGenre;
 import project.redis.movie.MovieRate;
 
@@ -32,22 +33,35 @@ public class MovieEntity extends BaseEntity {
     private Long movieId;
 
     @Column(nullable = false)
-    private String movieName;
+    private String title;
 
     @Enumerated(value = STRING)
     @Column(nullable = false)
-    private MovieRate movieRate;
+    private MovieRate rating;
 
     @Column(nullable = false)
-    private LocalDateTime movieReleaseDate;
+    private LocalDate releasedAt;
 
-    private String movieThumbnailImage;
+    @Column(length = 500)
+    private String thumbnail;
 
     @Column(nullable = false)
-    private Integer movieRunningTime;
+    private Integer duration;
 
     @Enumerated(value = STRING)
     @Column(nullable = false)
-    private MovieGenre movieGenre;
+    private MovieGenre genre;
+
+    public static MovieEntity of(Movie movie) {
+        return MovieEntity.builder()
+                .movieId(movie.getMovieId())
+                .title(movie.getTitle())
+                .rating(movie.getRating())
+                .releasedAt(movie.getReleasedAt())
+                .thumbnail(movie.getThumbnail())
+                .duration(movie.getDuration())
+                .genre(movie.getGenre())
+                .build();
+    }
 
 }
