@@ -10,10 +10,19 @@ services:
       MYSQL_USER: cinema
       MYSQL_PASSWORD: cinema
     ports:
-      - "3306:3306"
+      - "3307:3306"
     volumes:
       - ./docker/mysql/init:/docker-entrypoint-initdb.d
       - mysql-data:/var/lib/mysql
 
+  redis:
+    image: redis:7-alpine
+    container_name: cinema-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+
 volumes:
-  mysql-data: 
+  mysql-data:
+  redis-data:

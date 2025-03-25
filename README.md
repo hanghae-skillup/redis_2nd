@@ -191,12 +191,17 @@ GET /api/movies/now-playing
 
 ## 프로젝트 실행 방법
 
-1. 애플리케이션 실행:
+1. 데이터베이스 실행:
 ```bash
-./gradlew :cinema-api:bootRun --args='--spring.profiles.active=test'
+docker-compose up -d
 ```
 
-2. API 테스트:
+2. 애플리케이션 실행:
+```bash
+./gradlew :cinema-api:bootRun --args='--spring.profiles.active=dev'
+```
+
+3. API 테스트:
    - Swagger UI를 사용하여 API 테스트: `http://localhost:8080/swagger-ui.html`
    - 또는 브라우저에서 `http://localhost:8080/api/movies` 접속
 
@@ -204,25 +209,61 @@ GET /api/movies/now-playing
 - Kotlin
 - Spring Boot 3.x
 - Spring Data JPA
-- PostgreSQL (with TestContainers)
+- MySQL
 - Docker
 - Swagger/OpenAPI
 
+## 2주차 성능 최적화 가이드
+
+2주차에서는 영화 조회 API의 성능을 최적화하고, 검색 기능을 추가했습니다. 자세한 내용은 다음 문서를 참조하세요:
+
+- [영화 검색 및 성능 최적화 가이드](docs/week2/performance-optimization.md)
+- [성능 테스트 수행 가이드](docs/week2/performance-testing-guide.md)
+- [성능 테스트 보고서](docs/week2/performance-test-report.md)
+
+성능 최적화는 다음 단계로 진행했습니다:
+1. 영화 제목, 장르 검색 기능 추가
+2. 적절한 인덱스 추가를 통한 쿼리 성능 개선
+3. Caffeine 로컬 캐시 적용
+4. Redis 분산 캐시 적용
+
+각 단계마다 K6를 사용한 성능 테스트를 실시하여 개선 효과를 정량적으로 측정했습니다.
+
+### 캐시 전략
+
+**캐시 대상 데이터**:
+- 상영 중인 영화 목록 조회 결과 (MovieResponseDto 리스트)
+- 검색 파라미터(title, genre)별로 별도 캐싱
+
+**캐시 키 전략**:
+- `title` + `genre` 조합으로 캐시 키 생성
+- 파라미터가 없을 경우 'all'로 표시
+
+**캐시 정책**:
+- 캐시 유효 시간: 10분
+- 최대 캐시 항목 수: 500
+- Cache-Aside 패턴 적용 (Cache Miss 시 DB 조회)
+
+**환경별 캐시 전략**:
+- 개발 환경: 인메모리 캐시 (Caffeine)
+- 프로덕션 환경: 분산 캐시 (Redis)
+
+성능 테스트 결과, 로컬 캐시 적용 시 응답 시간이 원본 대비 82.7% 감소하는 등 가장 큰 성능 향상을 보였습니다.
+
 ## 데이터베이스 설정
 
-이 프로젝트는 TestContainers를 사용하여 PostgreSQL 데이터베이스를 자동으로 실행합니다. 
-별도의 데이터베이스 설치나 Docker Compose 설정이 필요하지 않습니다.
+이 프로젝트는 MySQL 데이터베이스를 사용합니다. Docker Compose를 통해 MySQL과 Redis 서비스를 실행할 수 있습니다.
 
-테스트 프로필(`test`)로 애플리케이션을 실행하면 다음과 같은 작업이 자동으로 수행됩니다:
-1. TestContainers가 PostgreSQL Docker 컨테이너를 시작
-2. 스키마가 자동으로 생성됨 (JPA의 `hibernate.ddl-auto=create-drop` 설정 사용)
-3. `DataInitializer` 클래스에 의해 초기 데이터가 자동으로 삽입됨
+```bash
+# MySQL + Redis 실행
+docker-compose up -d
+```
 
 ## 초기 데이터
 
 애플리케이션 시작 시 다음과 같은 초기 데이터가 자동으로 생성됩니다:
 - 장르: 액션, 코미디, 드라마, SF
-- 영화: 어벤져스: 엔드게임, 기생충, 인터스텔라
+- 영화: 어벤져스: 엔드게임, 기생충, 인터스텔라, 아바타, 매트릭스, 터미네이터
 - 상영관: 1관, 2관, 3관
 
 이 데이터는 `DataInitializer` 클래스에서 관리되며, 필요에 따라 수정할 수 있습니다.
