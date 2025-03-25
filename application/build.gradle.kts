@@ -6,13 +6,19 @@ plugins {
 }
 
 dependencies {
-	implementation(project(":adapter"))
-	implementation(project(":application"))
-	implementation(project(":domain"))
-	implementation(project(":infrastructure"))
-
 	implementation("org.springframework.boot:spring-boot-starter")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
-	implementation("net.datafaker:datafaker:2.0.2")
+	testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
+	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+
+	implementation(project(":domain"))
+}
+
+tasks.bootJar {
+	enabled = false
+}
+
+tasks.jar {
+	enabled = true
 }
