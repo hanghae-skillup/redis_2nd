@@ -6,7 +6,7 @@
 
 ### Table Design
 
-![image.png](attachment:4cbc7b96-8ed9-4949-9a8f-81d9e62806ad:image.png)
+![image](https://github.com/user-attachments/assets/ec35368e-b680-4a6a-985f-649aadf7aefa)
 
 - movie 테이블 - schedule 테이블은 1:N 관계입니다
 - schedule 테이블 - theater 테이블은 N:1 관계입니다.
