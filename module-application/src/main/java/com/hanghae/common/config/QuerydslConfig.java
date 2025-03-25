@@ -1,4 +1,4 @@
-package com.hanghae.config;
+package com.hanghae.common.config;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;

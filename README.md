@@ -48,16 +48,22 @@ docker compose -p cinema up -d
   - 바로 윗단계의 모듈만 참조 가능
   - ex) presentation 에서 domain 모듈이 참조 불가하다
 
-#### 1. domain
+#### module-domain
 - 도메인에 대한 핵심 비즈니스 로직을 처리한다
 - 도메인 엔티티와 도메인 서비스가 위치한다
+- 외부 의존성 없는 순수 도메인 비즈니스를 구현한다
 
-#### 2. application
+#### module-application
 - 도메인 엔티티와 도메인 서비스를 이용하여 요구사항을 충족하는 흐름을 제어한다
 - @Service 역할을 하는 파일이 위치한다
 - dto가 위치한다
   - 도메인 모델을 dto로 변환하는 로직을 dto가 담당한다
 
-#### 3. presentation
+### module-infra
+- 외부 의존성을 갖는 라이브러리가 위치한다
+- 어플리케이션 모듈은 인터페이스 통해서 인프라 모듈 참조해야 한다
+- ex) redis, caffeine
+
+#### module-presentation
 - application 모듈의 service를 호출하여 dto를 리턴하는 역할만을 담당한다
 - @Controller 역할을 하는 파일이 위치한다
