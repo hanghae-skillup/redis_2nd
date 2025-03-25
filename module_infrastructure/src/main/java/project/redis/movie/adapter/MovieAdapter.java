@@ -1,22 +1,30 @@
 package project.redis.movie.adapter;
 
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
+import project.redis.common.mapper.BaseMapper;
+import project.redis.domain.movie.Movie;
+import project.redis.domain.movie.MovieGenre;
+import project.redis.movie.dto.CurrentPlayingMovieProjection;
+import project.redis.movie.entity.MovieEntity;
+import project.redis.movie.repository.MovieQueryRepository;
+import project.redis.movie.repository.MovieRepository;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import org.springframework.stereotype.Component;
-import project.redis.movie.Movie;
-import project.redis.movie.mapper.MovieMapper;
-import project.redis.movie.repository.MovieRepository;
-
 @Component
+@Slf4j
 public class MovieAdapter {
 
     private final MovieRepository movieRepository;
-    private final MovieMapper movieMapper;
+    private final MovieQueryRepository movieQueryRepository;
+    private final BaseMapper<Movie, MovieEntity> movieMapper;
 
-    public MovieAdapter(MovieRepository movieRepository, MovieMapper movieMapper) {
+    public MovieAdapter(MovieRepository movieRepository, MovieQueryRepository movieQueryRepository, BaseMapper<Movie, MovieEntity> movieMapper) {
         this.movieRepository = movieRepository;
+        this.movieQueryRepository = movieQueryRepository;
         this.movieMapper = movieMapper;
     }
 
@@ -32,10 +40,11 @@ public class MovieAdapter {
                 .toList();
     }
 
-    public List<Movie> getCurrentPlayingMoviesWithSchedules() {
-        return movieRepository.findNowPlayingMoviesWithSchedules(LocalDate.now(), LocalDateTime.now()).stream()
-                .map(movieMapper::toDomain)
-                .toList();
+    public List<CurrentPlayingMovieProjection> getCurrentPlayingMoviesWithSchedules(
+            String title,
+            MovieGenre genre
+    ) {
+        return movieQueryRepository.findNowPlayingMoviesWithSchedules(title, genre);
     }
 
 }

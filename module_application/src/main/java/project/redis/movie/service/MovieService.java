@@ -3,26 +3,36 @@ package project.redis.movie.service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import project.redis.movie.Movie;
+import project.redis.domain.movie.Movie;
 import project.redis.movie.adapter.MovieAdapter;
-import project.redis.movie.dto.CurrentPlayingMovieDto;
-import project.redis.schedule.Schedule;
+import project.redis.movie.dto.CurrentPlayingMovieProjection;
+import project.redis.movie.model.CurrentPlayingMovieResult;
+import project.redis.movie.model.MovieSearchCondition;
 import project.redis.schedule.adapter.ScheduleAdapter;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class MovieService {
 
     private final MovieAdapter movieAdapter;
     private final ScheduleAdapter screeningAdapter;
 
-    public List<CurrentPlayingMovieDto> getCurrentPlayingMovies() {
-        return movieAdapter.getCurrentPlayingMoviesWithSchedules().stream()
-                .map(CurrentPlayingMovieDto::of)
+    public List<CurrentPlayingMovieResult> getCurrentPlayingMovies(
+            MovieSearchCondition movieSearchCondition
+    ) {
+        // 제목과 장르로 필터링
+        List<CurrentPlayingMovieProjection> currentPlayingMoviesWithSchedules = movieAdapter.getCurrentPlayingMoviesWithSchedules(movieSearchCondition.title(), movieSearchCondition.genre());
+
+        // 개봉일 순서로 정렬
+
+        // Schedule 시작 시간 정렬
+        return currentPlayingMoviesWithSchedules.stream()
+                .map(CurrentPlayingMovieResult::of)
                 .collect(Collectors.toList());
     }
 
@@ -37,10 +47,10 @@ public class MovieService {
                 .collect(Collectors.toList());
     }
 
-    public List<CurrentPlayingMovieDto> makeNowPlayingMoviesInfo(
+    public List<CurrentPlayingMovieResult> makeNowPlayingMoviesInfo(
             List<Movie> movies
     ) {
-        List<CurrentPlayingMovieDto> currentPlayingMovieDtos = new ArrayList<>();
+        List<CurrentPlayingMovieResult> currentPlayingMovieResults = new ArrayList<>();
 //        for (Movie movie : movies) {
 //            // 영화 이름이 같을 수도 있지 않나...?
 //            movieAdapter.findMovies()
@@ -56,6 +66,6 @@ public class MovieService {
 //                currentPlayingMovieDtos.add(currentPlayingMovieDto);
 //            }
 //        }
-        return currentPlayingMovieDtos;
+        return currentPlayingMovieResults;
     }
 }
