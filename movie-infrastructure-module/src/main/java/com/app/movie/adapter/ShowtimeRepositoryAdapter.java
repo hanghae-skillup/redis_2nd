@@ -16,6 +16,7 @@ import org.springframework.stereotype.Repository;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 @Repository
 public class ShowtimeRepositoryAdapter implements ShowtimeRepository {
@@ -28,8 +29,12 @@ public class ShowtimeRepositoryAdapter implements ShowtimeRepository {
 
 
     @Override
-    public List<Showtime> findByReleaseDateLessThanEqual(LocalDate localDate) {
-        List<ShowtimeEntity> showtimeEntities = showtimeJpaRepository.findShowtime(localDate);
+    public List<Showtime> findShowtimesByDateAndTitleAndGenre(LocalDate localDate, String title, Set<String> genres) {
+        List<ShowtimeEntity> showtimeEntities = showtimeJpaRepository
+                .findShowtimesByDateAndTitleAndGenre(
+                        localDate,
+                        title,
+                        genres);
         List<Showtime> showtimes = showtimeEntities.stream().map(ShowtimeMapper::convertToDomain).toList();
         return showtimes;
     }

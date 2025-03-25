@@ -13,7 +13,7 @@
 - Application Layer에서 JPA를 사용한 Infrastructure Layer를 의존하지 않도록 하기 위해 
 Domain 모듈에 정의해 놓은 Repository 인터페이스로 Adapter 를 구현하였습니다.  
 ## 2. Table Design
-![img.png](img.png)
+![readme-img/img.png](readme-img/img.png)
 - 좌석은 모든 상영관이 똑같다고 가정합니다.
 - 영화장르나 좌석은 추후에 변경 및 추가될 수 있다고 가정하고 테이블을 생성했습니다.
 - 영상물 등급은 잘 변하지 않는 값인 것으로 보여, 테이블을 따로 생성하지 않았습니다.
@@ -22,4 +22,7 @@ Domain 모듈에 정의해 놓은 Repository 인터페이스로 Adapter 를 구�
 - 영화 상영 목록 조회 : [GET] /movie  
 
 ## 4. 예시 페이지
-![img_1.png](img_1.png)
+![readme-img/img_1.png](readme-img/img_1.png)
+
+## 5. 부하 테스트 
+[부하테스트](./부하테스트.md)
