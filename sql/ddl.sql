@@ -1,7 +1,7 @@
 -- 영화 테이블
 CREATE TABLE movies
 (
-    id              BIGINT       NOT NULL AUTO_INCREMENT COMMENT '영화 ID',
+    id              BIGINT UNSIGNED       NOT NULL AUTO_INCREMENT COMMENT '영화 ID',
     title           VARCHAR(255) NOT NULL COMMENT '영화 제목',
     release_date    TIMESTAMP    NOT NULL COMMENT '영화 개봉일',
     running_time    INTEGER      NOT NULL COMMENT '영화 상영 시간',
@@ -15,11 +15,13 @@ CREATE TABLE movies
     PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+CREATE INDEX idx_title_genre ON movies (title, genre);
+
 
 -- 극장 테이블
 CREATE TABLE theaters
 (
-    id            BIGINT       NOT NULL AUTO_INCREMENT COMMENT '극장 ID',
+    id            BIGINT UNSIGNED      NOT NULL AUTO_INCREMENT COMMENT '극장 ID',
     name          VARCHAR(255) NOT NULL COMMENT '극장 이름',
     created_at    TIMESTAMP DEFAULT NOW() COMMENT '생성 일시',
     created_by    VARCHAR(255) COMMENT '생성자',
@@ -32,9 +34,9 @@ CREATE TABLE theaters
 -- 상영 테이블
 CREATE TABLE screenings
 (
-    id           BIGINT       NOT NULL AUTO_INCREMENT COMMENT '상영 ID',
-    movie_id     BIGINT       NOT NULL COMMENT '영화 ID',
-    theater_id   BIGINT       NOT NULL COMMENT '상영관 ID',
+    id           BIGINT UNSIGNED       NOT NULL AUTO_INCREMENT COMMENT '상영 ID',
+    movie_id     BIGINT UNSIGNED       NOT NULL COMMENT '영화 ID',
+    theater_id   BIGINT UNSIGNED       NOT NULL COMMENT '상영관 ID',
     theater_name VARCHAR(100) NOT NULL COMMENT '상영관 이름',
     start_time   TIME(6)      NOT NULL COMMENT '상영 시작 시간',
     end_time     TIME(6)      NOT NULL COMMENT '상영 종료 시간',
@@ -47,13 +49,15 @@ CREATE TABLE screenings
     FOREIGN KEY (theater_id) REFERENCES theaters (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+CREATE INDEX idx_start_time ON screenings (start_time);
+
 
 -- 좌석 테이블
 CREATE TABLE seats
 (
-    id         BIGINT       NOT NULL AUTO_INCREMENT COMMENT '좌석 ID',
+    id         BIGINT UNSIGNED       NOT NULL AUTO_INCREMENT COMMENT '좌석 ID',
     seat_code  VARCHAR(255) NOT NULL COMMENT '좌석 코드',
-    theater_id BIGINT       NOT NULL COMMENT '극장 ID',
+    theater_id BIGINT UNSIGNED       NOT NULL COMMENT '극장 ID',
     created_at TIMESTAMP DEFAULT NOW() COMMENT '생성 일시',
     created_by VARCHAR(255) COMMENT '생성자',
     updated_at TIMESTAMP DEFAULT NOW() COMMENT '수정 일시',
@@ -66,9 +70,9 @@ CREATE TABLE seats
 -- 예약 테이블
 CREATE TABLE reservations
 (
-    id           BIGINT NOT NULL AUTO_INCREMENT COMMENT '예약 ID',
-    screening_id BIGINT NOT NULL COMMENT '상영 ID (foreign key)',
-    seat_id      BIGINT NOT NULL COMMENT '좌석 ID (foreign key)',
+    id           BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '예약 ID',
+    screening_id BIGINT UNSIGNED NOT NULL COMMENT '상영 ID (foreign key)',
+    seat_id      BIGINT UNSIGNED NOT NULL COMMENT '좌석 ID (foreign key)',
     created_at   TIMESTAMP DEFAULT NOW() COMMENT '생성 일시',
     created_by   VARCHAR(255) COMMENT '생성자',
     updated_at   TIMESTAMP DEFAULT NOW() COMMENT '수정 일시',
