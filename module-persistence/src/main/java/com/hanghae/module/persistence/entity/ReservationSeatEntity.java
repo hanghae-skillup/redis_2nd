@@ -29,27 +29,4 @@ public class ReservationSeatEntity extends BaseEntity {
 
   @Column(nullable = false)
   private BigDecimal amount;
-
-  public ReservationSeat toDomain() {
-    return ReservationSeat.builder()
-      .id(this.id)
-      .reservation(this.reservation)
-      .seat(this.seat)
-      .amount(this.amount)
-      .reservedAt(this.getCreatedAt())
-      .build();
-  }
-
-  public static ReservationSeatEntity from(ReservationSeat domain) {
-    if (domain == null) {
-      return null;
-    }
-
-    return ReservationSeatEntity.builder()
-      .id(domain.id())
-      .reservation(domain.reservation())
-      .seat(domain.seat())
-      .amount(domain.amount())
-      .build();
-  }
 }

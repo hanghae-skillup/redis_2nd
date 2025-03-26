@@ -29,33 +29,4 @@ public class ReservationEntity extends BaseEntity {
   @Enumerated(EnumType.STRING)
   @Column(nullable = false)
   private ReservationStatus status;
-
-  /**
-   * 예약 엔티티를 도메인 모델로 변환
-   */
-  public Reservation toDomain() {
-    return Reservation.builder()
-      .id(this.id)
-      .user(this.user)
-      .screening(this.screening)
-      .status(this.status)
-      .createdAt(this.getCreatedAt())
-      .build();
-  }
-
-  /**
-   * 예약 도메인 모델을 엔티티로 변환
-   */
-  public static ReservationEntity from(Reservation domain) {
-    if (domain == null) {
-      return null;
-    }
-
-    return ReservationEntity.builder()
-      .id(domain.id())
-      .user(domain.user())
-      .screening(domain.screening())
-      .status(domain.status())
-      .build();
-  }
 }

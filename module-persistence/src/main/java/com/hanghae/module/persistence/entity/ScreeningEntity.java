@@ -35,28 +35,4 @@ public class ScreeningEntity extends BaseEntity {
 
   @Column(nullable = false)
   private LocalDateTime endTime;
-
-  public Screening toDomain() {
-    return Screening.builder()
-      .id(this.id)
-      .movie(this.movie)
-      .theater(this.theater)
-      .startTime(this.startTime)
-      .endTime(this.endTime)
-      .build();
-  }
-
-  public static ScreeningEntity from(Screening domain) {
-    if (domain == null) {
-      return null;
-    }
-
-    return ScreeningEntity.builder()
-      .id(domain.id())
-      .movie(domain.movie())
-      .theater(domain.theater())
-      .startTime(domain.startTime())
-      .endTime(domain.endTime())
-      .build();
-  }
 }
