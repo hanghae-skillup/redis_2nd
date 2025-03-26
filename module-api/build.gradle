@@ -22,3 +22,11 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
 }
+
+// core 모듈의 리소스를 api 모듈로 복사
+processResources {
+    from(project(':module-core').sourceSets.main.resources) {
+        include 'application.yml'
+        rename 'application.yml', 'core-application.yml'
+    }
+}

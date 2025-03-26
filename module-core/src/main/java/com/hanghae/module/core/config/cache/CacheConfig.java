@@ -1,35 +1,18 @@
-package com.hanghae.module.core.config;
+package com.hanghae.module.core.config.cache;
 
-import com.github.benmanes.caffeine.cache.Caffeine;
 import com.hanghae.module.common.enums.Genre;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
-import org.springframework.cache.caffeine.CaffeineCacheManager;
 import org.springframework.cache.interceptor.KeyGenerator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.lang.reflect.Method;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 @Configuration
 @EnableCaching
 public class CacheConfig {
-
-  @Bean
-  public CacheManager cacheManager() {
-    CaffeineCacheManager cacheManager = new CaffeineCacheManager();
-    cacheManager.setCacheNames(List.of("movies"));
-    cacheManager.setCaffeine(Caffeine.newBuilder()
-      .expireAfterWrite(10, TimeUnit.MINUTES)
-      .maximumSize(500)
-      .recordStats());
-    return cacheManager;
-  }
-
   @Bean("movieCacheKeyGenerator")
   public KeyGenerator loggingKeyGenerator() {
     return new LoggingKeyGenerator();
