@@ -1,3 +1,36 @@
+-- 영화 제목 인덱스
+SELECT COUNT(1) INTO @index_exists FROM information_schema.statistics
+WHERE table_schema = DATABASE() AND table_name = 'movie' AND index_name = 'idx_movie_title';
+SET @create_index = IF(@index_exists = 0, 'CREATE INDEX idx_movie_title ON movie(title)', 'SELECT 1');
+PREPARE stmt FROM @create_index;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
+
+-- 영화 장르 인덱스
+SELECT COUNT(1) INTO @index_exists FROM information_schema.statistics
+WHERE table_schema = DATABASE() AND table_name = 'movie' AND index_name = 'idx_movie_genre';
+SET @create_index = IF(@index_exists = 0, 'CREATE INDEX idx_movie_genre ON movie(genre)', 'SELECT 1');
+PREPARE stmt FROM @create_index;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
+
+-- 영화 개봉일 인덱스 (내림차순)
+SELECT COUNT(1) INTO @index_exists FROM information_schema.statistics
+WHERE table_schema = DATABASE() AND table_name = 'movie' AND index_name = 'idx_movie_release_date';
+SET @create_index = IF(@index_exists = 0, 'CREATE INDEX idx_movie_release_date ON movie(release_date DESC)', 'SELECT 1');
+PREPARE stmt FROM @create_index;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
+
+-- 상영 극장 인덱스
+SELECT COUNT(1) INTO @index_exists FROM information_schema.statistics
+WHERE table_schema = DATABASE() AND table_name = 'screening' AND index_name = 'idx_screening_theater';
+SET @create_index = IF(@index_exists = 0, 'CREATE INDEX idx_screening_theater ON screening(theater_id)', 'SELECT 1');
+PREPARE stmt FROM @create_index;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
+
+
 -- Movie 데이터 삽입 (6개)
 INSERT INTO movie (title, genre, rating, release_date, running_time, thumbnail_url, created_at, modified_at, created_by,
                    modified_by)
