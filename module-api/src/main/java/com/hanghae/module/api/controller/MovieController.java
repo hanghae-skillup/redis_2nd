@@ -1,5 +1,6 @@
 package com.hanghae.module.api.controller;
 
+import com.hanghae.module.api.dto.request.MovieRequest;
 import com.hanghae.module.api.dto.response.MovieResponse;
 import com.hanghae.module.common.dto.MovieDTO;
 import com.hanghae.module.common.enums.Genre;
@@ -23,12 +24,10 @@ public class MovieController {
 
   @GetMapping("/now-playing")
   public ResponseEntity<List<MovieResponse>> getNowPlayingMovies(
-    @RequestParam(required = false) Long theaterId,
-    @Size(max = 255, message = "영화 제목은 255자를 초과할 수 없습니다.")
-    @RequestParam(required = false) String title,
-    @RequestParam(required = false) Genre genre
+    MovieRequest request
     ) {
-    List<MovieDTO> movies = movieService.findAllNowPlayingMovies(theaterId, title, genre);
+    List<MovieDTO> movies = movieService.findAllNowPlayingMovies(request.getTheaterId(), request.getTitle(),
+      request.getGenre());
 
     List<MovieResponse> response = movies.stream()
       .map(MovieResponse::from)
