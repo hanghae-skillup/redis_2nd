@@ -4,6 +4,7 @@ plugins {
 
 dependencies {
     implementation project(':module-domain')
+    implementation project(':module-common')
 
     // JPA 및 데이터베이스 접근 의존성
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
