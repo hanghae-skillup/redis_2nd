@@ -587,3 +587,9 @@ values
 (5, 'D', 3, now(), 'master', now(), 'master'), (5, 'E', 3, now(), 'master', now(), 'master'),
 (5, 'D', 4, now(), 'master', now(), 'master'), (5, 'E', 4, now(), 'master', now(), 'master'),
 (5, 'D', 5, now(), 'master', now(), 'master'), (5, 'E', 5, now(), 'master', now(), 'master');
+
+-- member
+insert into member(user_id, password, name, created_date, created_by, last_modified_date, last_modified_by)
+values
+('sklee', '1q2w3e4r', '이슬기', now(), 'sklee', now(), 'sklee'),
+('master', '1q2w3e4r', '관리자', now(), 'master', now(), 'master');
