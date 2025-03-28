@@ -4,6 +4,7 @@ USE cinema;
 drop table if exists movie;
 drop table if exists screening;
 drop table if exists theater;
+drop table if exists seat;
 
 CREATE TABLE movie (
                        id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY COMMENT '영화 id',
@@ -43,6 +44,17 @@ CREATE TABLE screening  (
                             last_modified_by VARCHAR(255) NULL COMMENT '수정자'
 );
 
+create table seat (
+                      id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY COMMENT '좌석 id',
+                      screening_id INT UNSIGNED NOT NULL COMMENT '상영 id',
+                      row_code CHAR(1) NOT NULL COMMENT '좌석의 행(a,b,c,d,e)',
+                      col INT NOT NULL COMMENT '좌석의 열',
+                      created_date DATETIME NOT NULL COMMENT '생성일',
+                      created_by VARCHAR(255) NOT NULL COMMENT '생성자',
+                      last_modified_date DATETIME NULL COMMENT '수정일',
+                      last_modified_by VARCHAR(255) NULL COMMENT '수정자'
+);
+
 -- index 추가
 -- 1. screening 테이블--------------------
 -- 1) join 대상 컬럼 인덱스 추가
@@ -60,3 +72,7 @@ create index idx_genre ON movie (genre);
 -- 3) 영화 장르, 제목 둘 다 검색 시 적용 index
 -- 제목에서 우선 필터링하고 장르 검색하기 원해서 title, genre 순서로 인덱스 생성
 create index idx_movie_title_genre ON movie (title, genre);
+
+-- 3. seat 테이블 index 추가
+-- join 대상 index 추가
+create index idx_screening_id ON seat (screening_id);
