@@ -15,6 +15,9 @@ import java.util.Objects;
 @Entity
 public class Theater extends BaseEntity {
 
+    private static final int DEFAULT_SEAT_ROW_SIZE = 5;
+    private static final int DEFAULT_SEAT_COL_SIZE = 5;
+    
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long id;
@@ -40,6 +43,8 @@ public class Theater extends BaseEntity {
     }
 
     public void addScreening(Screening screening) {
+        Seats seats = Seats.create(DEFAULT_SEAT_ROW_SIZE, DEFAULT_SEAT_COL_SIZE);
+        screening.createSeats(seats);
         screenings.add(screening);
     }
 

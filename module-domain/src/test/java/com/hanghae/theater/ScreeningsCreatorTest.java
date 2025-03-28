@@ -37,8 +37,7 @@ class ScreeningsCreatorTest {
                 new ScreeningTime(
                         LocalDateTime.of(2025, 3, 16, 8, 0),
                         LocalDateTime.of(2025, 3, 16, 10, 0)
-                ),
-                25
+                )
         );
 
         assertThatThrownBy(() -> screeningsCreator.create(List.of(screening)))
@@ -55,8 +54,7 @@ class ScreeningsCreatorTest {
                 new ScreeningTime(
                         LocalDateTime.of(2025, 3, 15, 8, 0),
                         LocalDateTime.of(2025, 3, 15, 10, 0)
-                ),
-                25
+                )
         );
 
         assertThatIllegalArgumentException()

@@ -2,45 +2,51 @@ package com.hanghae.theater;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import java.time.LocalDateTime;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalStateException;
 
 class ScreeningTest {
 
-    @DisplayName("상영은 좌석 수가 음수면 예외 발생한다")
-    @ValueSource(ints = {-1})
-    @ParameterizedTest
-    void create(int seatCount) {
-        assertThatIllegalArgumentException()
-                .isThrownBy(() ->
-                        new Screening(
-                                1L,
-                                1,
-                                new ScreeningTime(
-                                        LocalDateTime.of(2025, 3, 14, 8, 0),
-                                        LocalDateTime.of(2025, 3, 14, 10, 0)
-                                ),
-                                seatCount
-                        ));
-    }
-
-    @DisplayName("좌석의 수를 감소한다")
+    @DisplayName("상영에 좌석을 생성한다")
     @Test
-    void decreaseSeatCount() {
+    void createSeats(){
         Screening screening = new Screening(
                 1L,
                 1,
                 new ScreeningTime(
                         LocalDateTime.of(2025, 3, 14, 8, 0),
                         LocalDateTime.of(2025, 3, 14, 10, 0)
-                ),
-                25
+                )
         );
 
+        int rowSize = 5;
+        int colSize = 5;
+        screening.createSeats(Seats.create(rowSize,colSize));
+
+        assertThat(screening.getSeatCount()).isEqualTo(25);
+        assertThat(screening.getSeats().count()).isEqualTo(25);
+    }
+    
+    @DisplayName("좌석의 수를 감소한다")
+    @Test
+    void decreaseSeatCount() {
+        //given
+        Screening screening = new Screening(
+                1L,
+                1,
+                new ScreeningTime(
+                        LocalDateTime.of(2025, 3, 14, 8, 0),
+                        LocalDateTime.of(2025, 3, 14, 10, 0)
+                )
+        );
+        int rowSize = 5;
+        int colSize = 5;
+        screening.createSeats(Seats.create(rowSize,colSize));
+
+        //when
         screening.decreaseSeatCount();
 
         assertThat(screening.getSeatCount()).isEqualTo(24);
@@ -55,8 +61,7 @@ class ScreeningTest {
                 new ScreeningTime(
                         LocalDateTime.of(2025, 3, 14, 8, 0),
                         LocalDateTime.of(2025, 3, 14, 10, 0)
-                ),
-                0
+                )
         );
 
         assertThatIllegalStateException()

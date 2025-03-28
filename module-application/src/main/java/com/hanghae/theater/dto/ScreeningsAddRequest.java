@@ -12,7 +12,7 @@ public record ScreeningsAddRequest(
 ) {
     public static List<Screening> toScreenings(ScreeningsAddRequest request) {
         return request.screenings().stream()
-                .map(item -> new Screening(item.movieId(), item.screenNumber(), item.screeningTime(), item.seatCount()))
+                .map(item -> new Screening(item.movieId(), item.screenNumber(), item.screeningTime()))
                 .toList();
     }
 }

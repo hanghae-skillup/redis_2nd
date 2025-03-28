@@ -17,7 +17,7 @@ public record ScreeningDto(
 
     public static List<Screening> toScreenings(List<ScreeningDto> screenings) {
         return screenings.stream()
-                .map(screening -> new Screening(screening.movieId(), screening.screenNumber(), screening.screeningTime(), screening.seatCount()))
+                .map(screening -> new Screening(screening.movieId(), screening.screenNumber(), screening.screeningTime()))
                 .toList();
     }
 }
