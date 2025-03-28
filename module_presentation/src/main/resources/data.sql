@@ -1310,3 +1310,11 @@ values
     (0, 'A', 1, 98, null, null, null, null),
     (0, 'A', 1, 99, null, null, null, null),
     (0, 'A', 1, 100, null, null, null, null);
+
+insert into user (username, created_by, created_at, updated_by, updated_at)
+values
+    ('kim', null, null, null, null),
+    ('lee', null, null, null, null),
+    ('park', null, null, null, null),
+    ('choi', null, null, null, null),
+    ('kang', null, null, null, null);
