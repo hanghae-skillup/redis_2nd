@@ -9,7 +9,7 @@ class TheaterScheduleEntity (
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "schedule_id")
-    val id: Long = 0,
+    var id: Long = 0,
 
     val screeningDate: LocalDate,
 
@@ -17,11 +17,12 @@ class TheaterScheduleEntity (
 
     val endTime: LocalTime,
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "movie_id", nullable = false, foreignKey = ForeignKey(ConstraintMode.NO_CONSTRAINT))
-    val movie: MovieEntity,
+    val movieId: Long,
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "theater_id", nullable = false, foreignKey = ForeignKey(ConstraintMode.NO_CONSTRAINT))
-    val theater: TheaterEntity
-): BaseEntity()
+    val theaterId: Long,
+): BaseEntity() {
+
+    constructor(screeningDate: LocalDate, startTime: LocalTime ,endTime: LocalTime, movieId: Long ,theaterId: Long):
+            this(0, screeningDate, startTime, endTime, movieId, theaterId)
+
+}
