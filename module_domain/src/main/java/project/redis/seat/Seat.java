@@ -8,15 +8,18 @@ import lombok.Getter;
 public class Seat {
 
     private Long seatId;
-    private Boolean isReserved;
 
     @Getter
     private String seatRow;
     @Getter
     private Integer seatColumn;
 
-    public static Seat of(Long seatId, Boolean isReserved, String seatRow, Integer seatColumn) {
-        return new Seat(seatId, isReserved, seatRow, seatColumn);
+    public static Seat of(Long seatId, String seatRow, Integer seatColumn) {
+        return new Seat(seatId, seatRow, seatColumn);
+    }
+
+    public static Seat of(String seatRow, Integer seatColumn) {
+        return new Seat(null, seatRow, seatColumn);
     }
 
     public int compareRow(Seat otherSeat) {
@@ -25,6 +28,10 @@ public class Seat {
 
     public int compareCol(Seat otherSeat) {
         return Integer.compare(this.seatColumn, otherSeat.seatColumn);
+    }
+
+    public Boolean isThisSeat(String seatRow, Integer seatColumn) {
+        return this.seatRow.equals(seatRow) && this.seatColumn.equals(seatColumn);
     }
 
 }

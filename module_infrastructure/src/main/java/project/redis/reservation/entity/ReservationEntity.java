@@ -40,4 +40,12 @@ public class ReservationEntity extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private UserEntity user;
+
+    public static ReservationEntity of(ScreeningEntity screening, SeatEntity seat, UserEntity user) {
+        return ReservationEntity.builder()
+                .screening(screening)
+                .seat(seat)
+                .user(user)
+                .build();
+    }
 }

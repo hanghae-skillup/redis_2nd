@@ -30,6 +30,12 @@ public class TheaterMapperImpl implements TheaterMapper {
         return Theater.of(theaterEntity.getTheaterId(), theaterEntity.getTheaterName(), cinema, seats);
     }
 
+    @Override
+    public TheaterEntity toEntity(Theater theater) {
+        // TODO : TheaterEntity 수정 후 entity 변환 로직 구현 예정
+        return null;
+    }
+
     public List<Seat> convertSeatEntitiesToSeats(List<SeatEntity> seatEntities) {
         return seatEntities.stream()
                 .map(seatMapper::toDomain)

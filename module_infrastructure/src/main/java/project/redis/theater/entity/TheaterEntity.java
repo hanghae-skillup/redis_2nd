@@ -39,6 +39,7 @@ public class TheaterEntity extends BaseEntity {
     @JoinColumn(name = "cinema_id", nullable = false)
     private CinemaEntity cinema;
 
+    // TODO : Theater 도메인에 List<Seat> 제거 후 제거 예정
     @OneToMany(mappedBy = "theater", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<SeatEntity> seats;
 }

@@ -23,4 +23,10 @@ public class ScreeningMapperImpl implements ScreeningMapper {
         return Screening.of(screeningEntity.getScreeningId(), movie, theater,
                 screeningEntity.getStartedAt(), screeningEntity.getEndedAt());
     }
+
+    @Override
+    public ScreeningEntity toEntity(Screening screening) {
+        // TODO : entity 변환 로직 구현 필요, theaterMapper 문제 해결 후
+        return null;
+    }
 }

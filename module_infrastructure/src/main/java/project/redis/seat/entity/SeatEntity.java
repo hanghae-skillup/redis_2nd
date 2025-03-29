@@ -37,6 +37,7 @@ public class SeatEntity extends BaseEntity {
     @Column(nullable = false)
     private Integer seatColumn;
 
+    // TODO : Theater에 좌석 필요 없다는 것을 깨달아서 차근차근 삭제할 것
     @ManyToOne
     @JoinColumn(name = "theater_id")
     private TheaterEntity theater;

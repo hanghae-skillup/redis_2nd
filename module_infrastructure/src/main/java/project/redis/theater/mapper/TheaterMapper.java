@@ -5,4 +5,6 @@ import project.redis.theater.entity.TheaterEntity;
 
 public interface TheaterMapper {
     Theater toDomain(TheaterEntity theaterEntity);
+
+    TheaterEntity toEntity(Theater theater);
 }

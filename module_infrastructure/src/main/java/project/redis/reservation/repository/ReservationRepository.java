@@ -1,0 +1,9 @@
+package project.redis.reservation.repository;
+
+import java.util.List;
+import org.springframework.data.jpa.repository.JpaRepository;
+import project.redis.reservation.entity.ReservationEntity;
+
+public interface ReservationRepository extends JpaRepository<ReservationEntity, Long> {
+    List<ReservationEntity> findAllByScreening_ScreeningId(Long screeningId);
+}

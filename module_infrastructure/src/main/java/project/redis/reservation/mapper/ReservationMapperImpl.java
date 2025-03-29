@@ -26,4 +26,13 @@ public class ReservationMapperImpl implements ReservationMapper {
         User user = userMapper.toDomain(reservationEntity.getUser());
         return Reservation.create(reservationEntity.getReservationId(), seat, screening, user);
     }
+
+    @Override
+    public ReservationEntity toEntity(Reservation reservation) {
+
+        // TODO : entity 변환 로직 필요, seatMapper들의 문제 해결 후 구현
+
+        return ReservationEntity.builder()
+                .build();
+    }
 }

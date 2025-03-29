@@ -9,5 +9,5 @@ public class ReservationSeatsRequestDto {
     private Long userId;
     private Long screeningId;
     private List<String> seatRows = new ArrayList<>();
-    private List<String> seatColumns = new ArrayList<>();
+    private List<Integer> seatColumns = new ArrayList<>();
 }
