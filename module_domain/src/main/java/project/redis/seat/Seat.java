@@ -16,6 +16,8 @@ public class Seat {
     private Integer seatColumn;
 
     public static Seat of(Long seatId, String seatRow, Integer seatColumn) {
+        isRightRangeRow(seatRow);
+        isRightRangeCol(seatColumn);
         return new Seat(seatId, seatRow, seatColumn);
     }
 
@@ -35,13 +37,13 @@ public class Seat {
         return this.seatRow.equals(seatRow) && this.seatColumn.equals(seatColumn);
     }
 
-    private void isRightRangeRow(String seatRow) {
+    private static void isRightRangeRow(String seatRow) {
         if (seatRow.charAt(0) - 'A' >= ROWS) {
             throw new IllegalArgumentException("행의 범위를 넘어선 좌석입니다.");
         }
     }
 
-    private void isRightRangeCol(Integer seatColumn) {
+    private static void isRightRangeCol(Integer seatColumn) {
         if (seatColumn > COLUMNS) {
             throw new IllegalArgumentException("열의 범위를 넘어선 좌석입니다.");
         }
