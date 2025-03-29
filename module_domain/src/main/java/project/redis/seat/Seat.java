@@ -22,6 +22,8 @@ public class Seat {
     }
 
     public static Seat of(String seatRow, Integer seatColumn) {
+        isRightRangeRow(seatRow);
+        isRightRangeCol(seatColumn);
         return new Seat(null, seatRow, seatColumn);
     }
 
