@@ -26,9 +26,6 @@ public class SeatEntity extends BaseEntity {
     private Long seatId;
 
     @Column(nullable = false)
-    private Boolean isReserved;
-
-    @Column(nullable = false)
     private String seatRow;
 
     @Column(nullable = false)

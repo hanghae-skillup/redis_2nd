@@ -27,8 +27,6 @@ public class QSeatEntity extends EntityPathBase<SeatEntity> {
     //inherited
     public final NumberPath<Long> createdBy = _super.createdBy;
 
-    public final BooleanPath isReserved = createBoolean("isReserved");
-
     public final NumberPath<Integer> seatColumn = createNumber("seatColumn", Integer.class);
 
     public final NumberPath<Long> seatId = createNumber("seatId", Long.class);
