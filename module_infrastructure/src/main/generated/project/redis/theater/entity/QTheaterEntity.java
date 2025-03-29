@@ -32,8 +32,6 @@ public class QTheaterEntity extends EntityPathBase<TheaterEntity> {
     //inherited
     public final NumberPath<Long> createdBy = _super.createdBy;
 
-    public final ListPath<project.redis.seat.entity.SeatEntity, project.redis.seat.entity.QSeatEntity> seats = this.<project.redis.seat.entity.SeatEntity, project.redis.seat.entity.QSeatEntity>createList("seats", project.redis.seat.entity.SeatEntity.class, project.redis.seat.entity.QSeatEntity.class, PathInits.DIRECT2);
-
     public final NumberPath<Long> theaterId = createNumber("theaterId", Long.class);
 
     public final StringPath theaterName = createString("theaterName");
