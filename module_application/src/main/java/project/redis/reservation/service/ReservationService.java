@@ -25,11 +25,6 @@ public class ReservationService {
     private final MessageService messageService;
 
     public ReservationSeatsResponseDto reservationSeats(ReservationSeatsRequestDto reservationSeatsRequestDto) {
-        /* TODO: dto의 입력 값 검증
-            1. seatRows와 seatColumns의 개수가 같은지
-            2. seatRows가 여러 개라면 같은 문자만 들어 있는지
-            3. seatColumns가 여러 개라면 같은 숫자는 없는지
-         */
 
         User user = userAdapter.findUserById(reservationSeatsRequestDto.getUserId());
         // TODO : user null일 때 예외 처리 (잘못된 userId)
@@ -63,5 +58,29 @@ public class ReservationService {
         }
 
         return ReservationSeatsResponseDto.of(user.getUserId(), reservationsId);
+    }
+
+    private void validReservationSeatsRequestDto(ReservationSeatsRequestDto requestDto) {
+        List<String> seatRows = requestDto.getSeatRows();
+        List<Integer> seatColumns = requestDto.getSeatColumns();
+
+        if (seatRows.isEmpty() || seatColumns.isEmpty()) {
+            throw new IllegalArgumentException("seatRows 또는 seatColumns가 비어 있습니다.");
+        }
+
+        if (seatRows.size() != seatColumns.size()) {
+            throw new IllegalArgumentException("seatRows와 seatColumns의 개수가 같지 않습니다.");
+        }
+
+        long seatRowCount = seatRows.stream().distinct().count();
+        if (seatRowCount > 1) {
+            throw new IllegalArgumentException("예약하려는 좌석들의 행이 이어 붙어 있는 형태가 아닙니다.");
+        }
+
+        long seatColumnCount = seatColumns.stream().distinct().count();
+        if (seatColumnCount != seatColumns.size()) {
+            throw new IllegalArgumentException("예약하려는 좌석의 열이 중복됩니다.");
+        }
+
     }
 }
