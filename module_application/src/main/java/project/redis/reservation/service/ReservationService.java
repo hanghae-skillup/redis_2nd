@@ -52,7 +52,7 @@ public class ReservationService {
 
             Seat reservedSeat = Seat.of(seatRow, seatColumn);
             Reservation reservation = Reservation.create(reservedSeat, screening, user);
-
+            Long savedReservationId = reservationAdapter.saveReservation(reservation);
         }
 
         return null;

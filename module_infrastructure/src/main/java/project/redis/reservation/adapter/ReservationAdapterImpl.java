@@ -27,8 +27,9 @@ public class ReservationAdapterImpl implements ReservationAdapter {
 
     @Override
     public Long saveReservation(Reservation reservation) {
-        // TODO : reservation 엔티티로 변환 후 저장 로직 필요
-        return null;
+        ReservationEntity reservationEntity = reservationMapper.toEntity(reservation);
+        ReservationEntity savedReservation = reservationRepository.save(reservationEntity);
+        return savedReservation.getReservationId();
     }
 
 }
