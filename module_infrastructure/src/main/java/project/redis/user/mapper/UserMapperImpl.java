@@ -12,4 +12,9 @@ public class UserMapperImpl implements UserMapper {
     public User toDomain(UserEntity userEntity) {
         return User.of(userEntity.getUserId(), userEntity.getUsername());
     }
+
+    @Override
+    public UserEntity toEntity(User user) {
+        return null;
+    }
 }

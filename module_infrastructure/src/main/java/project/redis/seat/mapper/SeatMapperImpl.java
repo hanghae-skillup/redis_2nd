@@ -14,8 +14,6 @@ public class SeatMapperImpl implements SeatMapper {
 
     @Override
     public SeatEntity toEntity(Seat seat) {
-
-        // TODO : SeatEntity에 theater 필드 삭제 후 entity 변환 로직 구현
-        return null;
+        return SeatEntity.of(seat);
     }
 }

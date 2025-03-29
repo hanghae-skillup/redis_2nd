@@ -13,4 +13,9 @@ public class CinemaMapperImpl implements CinemaMapper {
     public Cinema toDomain(CinemaEntity cinemaEntity) {
         return Cinema.of(cinemaEntity.getCinemaId(), cinemaEntity.getCinemaName());
     }
+
+    @Override
+    public CinemaEntity toEntity(Cinema cinema) {
+        return CinemaEntity.of(cinema);
+    }
 }

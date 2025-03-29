@@ -12,6 +12,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import project.redis.common.entity.BaseEntity;
+import project.redis.seat.Seat;
 
 @Entity
 @Table(name = "seat")
@@ -30,4 +31,12 @@ public class SeatEntity extends BaseEntity {
 
     @Column(nullable = false)
     private Integer seatColumn;
+
+    public static SeatEntity of(Seat seat) {
+        return SeatEntity.builder()
+                .seatId(seat.getSeatId())
+                .seatRow(seat.getSeatRow())
+                .seatColumn(seat.getSeatColumn())
+                .build();
+    }
 }

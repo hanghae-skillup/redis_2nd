@@ -5,10 +5,13 @@ import org.springframework.stereotype.Component;
 import project.redis.reservation.Reservation;
 import project.redis.reservation.entity.ReservationEntity;
 import project.redis.screening.Screening;
+import project.redis.screening.entity.ScreeningEntity;
 import project.redis.screening.mapper.ScreeningMapper;
 import project.redis.seat.Seat;
+import project.redis.seat.entity.SeatEntity;
 import project.redis.seat.mapper.SeatMapper;
 import project.redis.user.User;
+import project.redis.user.entity.UserEntity;
 import project.redis.user.mapper.UserMapper;
 
 @Component
@@ -29,10 +32,10 @@ public class ReservationMapperImpl implements ReservationMapper {
 
     @Override
     public ReservationEntity toEntity(Reservation reservation) {
+        ScreeningEntity screeningEntity = screeningMapper.toEntity(reservation.getScreening());
+        SeatEntity seatEntity = seatMapper.toEntity(reservation.getSeat());
+        UserEntity userEntity = userMapper.toEntity(reservation.getUser());
 
-        // TODO : entity 변환 로직 필요, seatMapper들의 문제 해결 후 구현
-
-        return ReservationEntity.builder()
-                .build();
+        return ReservationEntity.of(screeningEntity, seatEntity, userEntity);
     }
 }

@@ -7,15 +7,13 @@ import project.redis.screening.Screening;
 import project.redis.seat.Seat;
 import project.redis.user.User;
 
+@Getter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Reservation {
 
     private Long reservationId;
-    @Getter
     private Screening screening;
-    @Getter
     private Seat seat;
-    @Getter
     private User user;
 
     public static Reservation create(Long reservationId, Seat seat, Screening screening, User user) {

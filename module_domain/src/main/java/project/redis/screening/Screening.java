@@ -7,16 +7,14 @@ import lombok.Getter;
 import project.redis.movie.Movie;
 import project.redis.theater.Theater;
 
+@Getter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Screening {
 
     private Long screeningId;
     private Movie movie;
     private Theater theater;
-
-    @Getter
     private LocalDateTime startedAt;
-    @Getter
     private LocalDateTime endedAt;
 
     public static Screening of(Long screeningId, Movie movie, Theater theater, LocalDateTime startedAt,

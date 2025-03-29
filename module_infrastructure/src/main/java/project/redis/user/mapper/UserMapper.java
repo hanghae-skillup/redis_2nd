@@ -5,4 +5,6 @@ import project.redis.user.entity.UserEntity;
 
 public interface UserMapper {
     User toDomain(UserEntity userEntity);
+
+    UserEntity toEntity(User user);
 }

@@ -4,14 +4,12 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+@Getter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Seat {
 
     private Long seatId;
-
-    @Getter
     private String seatRow;
-    @Getter
     private Integer seatColumn;
 
     public static Seat of(Long seatId, String seatRow, Integer seatColumn) {

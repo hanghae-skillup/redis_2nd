@@ -5,10 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import project.redis.cinema.Cinema;
 
+@Getter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Theater {
     private Long theaterId;
-    @Getter
     private String theaterName;
     private Cinema cinema;
 

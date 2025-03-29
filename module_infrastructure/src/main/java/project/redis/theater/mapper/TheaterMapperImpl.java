@@ -5,7 +5,6 @@ import org.springframework.stereotype.Component;
 import project.redis.cinema.Cinema;
 import project.redis.cinema.entity.CinemaEntity;
 import project.redis.cinema.mapper.CinemaMapper;
-import project.redis.seat.mapper.SeatMapper;
 import project.redis.theater.Theater;
 import project.redis.theater.entity.TheaterEntity;
 
@@ -13,7 +12,6 @@ import project.redis.theater.entity.TheaterEntity;
 @RequiredArgsConstructor
 public class TheaterMapperImpl implements TheaterMapper {
 
-    private final SeatMapper seatMapper;
     private final CinemaMapper cinemaMapper;
 
     @Override
@@ -26,7 +24,7 @@ public class TheaterMapperImpl implements TheaterMapper {
 
     @Override
     public TheaterEntity toEntity(Theater theater) {
-        // TODO : TheaterEntity 수정 후 entity 변환 로직 구현 예정
-        return null;
+        CinemaEntity cinemaEntity = cinemaMapper.toEntity(theater.getCinema());
+        return TheaterEntity.of(theater, cinemaEntity);
     }
 }

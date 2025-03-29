@@ -12,6 +12,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import project.redis.common.entity.BaseEntity;
+import project.redis.user.User;
 
 @Entity
 @Table(name = "user")
@@ -26,4 +27,11 @@ public class UserEntity extends BaseEntity {
 
     @Column(nullable = false)
     private String username;
+
+    public static UserEntity of(User user) {
+        return UserEntity.builder()
+                .userId(user.getUserId())
+                .username(user.getUsername())
+                .build();
+    }
 }

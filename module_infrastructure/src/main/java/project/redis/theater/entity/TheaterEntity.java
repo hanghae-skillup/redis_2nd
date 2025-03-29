@@ -15,6 +15,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import project.redis.cinema.entity.CinemaEntity;
 import project.redis.common.entity.BaseEntity;
+import project.redis.theater.Theater;
 
 @Entity
 @Table(name = "theater")
@@ -34,4 +35,12 @@ public class TheaterEntity extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "cinema_id", nullable = false)
     private CinemaEntity cinema;
+
+    public static TheaterEntity of(Theater theater, CinemaEntity cinema) {
+        return TheaterEntity.builder()
+                .theaterId(theater.getTheaterId())
+                .theaterName(theater.getTheaterName())
+                .cinema(cinema)
+                .build();
+    }
 }
