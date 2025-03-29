@@ -7,8 +7,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class MessageLogService implements MessageService {
     @Override
-    public void send() throws InterruptedException {
-        Thread.sleep(500);
-        log.info("reservation success");
+    public void send() {
+        try {
+            Thread.sleep(500);
+            log.info("reservation success");
+        } catch (InterruptedException e) {
+            throw new RuntimeException("message send failed");
+        }
     }
 }

@@ -24,8 +24,7 @@ public class ReservationService {
     private final ReservationAdapter reservationAdapter;
     private final MessageService messageService;
 
-    public ReservationSeatsResponseDto reservationSeats(ReservationSeatsRequestDto reservationSeatsRequestDto)
-            throws InterruptedException {
+    public ReservationSeatsResponseDto reservationSeats(ReservationSeatsRequestDto reservationSeatsRequestDto) {
         /* TODO: dto의 입력 값 검증
             1. seatRows와 seatColumns의 개수가 같은지
             2. seatRows가 여러 개라면 같은 문자만 들어 있는지
