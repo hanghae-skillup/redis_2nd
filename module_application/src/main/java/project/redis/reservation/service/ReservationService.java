@@ -24,17 +24,25 @@ public class ReservationService {
     private final ReservationAdapter reservationAdapter;
     private final MessageService messageService;
 
+    // TODO : 리팩토링 필요 (메서드 분리 등)
     public ReservationSeatsResponseDto reservationSeats(ReservationSeatsRequestDto reservationSeatsRequestDto) {
+        validReservationSeatsRequestDto(reservationSeatsRequestDto);
 
         User user = userAdapter.findUserById(reservationSeatsRequestDto.getUserId());
-        // TODO : user null일 때 예외 처리 (잘못된 userId)
+        if (user == null) {
+            throw new IllegalArgumentException("존재하지 않는 유저 id 입니다.");
+        }
+
         Screening screening = screeningAdapter.findScreeningById(reservationSeatsRequestDto.getScreeningId());
-        // TODO : screening null일 때 예외 처리 (잘못된 screeningId)
+        if (screening == null) {
+            throw new IllegalArgumentException("존재하지 않는 상영 id 입니다.");
+        }
+
+        // TODO : user의 reservation 개수에 대한 검증 필요
 
         List<String> seatRows = reservationSeatsRequestDto.getSeatRows();
         List<Integer> seatColumns = reservationSeatsRequestDto.getSeatColumns();
 
-        // 상영관에 해당하는 reservation들 가져와서 Seat들 확인하기
         List<Reservation> reservations
                 = reservationAdapter.findAllReservationByScreeningId(reservationSeatsRequestDto.getScreeningId());
 
@@ -47,7 +55,7 @@ public class ReservationService {
                     .anyMatch(reservation -> reservation.isSeatReserved(seatRow, seatColumn));
 
             if (isAlreadyReserved) {
-                // TODO : 상영관의 모든 예약들의 seat 중에 예약하려는 seat이 존재하니 예외 처리 (예약된 좌석 예약 시도)
+                throw new IllegalArgumentException("현재 예약된 좌석은 예약할 수 없습니다.");
             }
 
             Seat reservedSeat = Seat.of(seatRow, seatColumn);
