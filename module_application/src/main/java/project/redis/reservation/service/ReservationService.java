@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import project.redis.message.MessageService;
 import project.redis.reservation.Reservation;
 import project.redis.reservation.adapter.ReservationAdapter;
 import project.redis.reservation.dto.ReservationSeatsRequestDto;
@@ -21,8 +22,10 @@ public class ReservationService {
     private final UserAdapter userAdapter;
     private final ScreeningAdapter screeningAdapter;
     private final ReservationAdapter reservationAdapter;
+    private final MessageService messageService;
 
-    public ReservationSeatsResponseDto reservationSeats(ReservationSeatsRequestDto reservationSeatsRequestDto) {
+    public ReservationSeatsResponseDto reservationSeats(ReservationSeatsRequestDto reservationSeatsRequestDto)
+            throws InterruptedException {
         /* TODO: dto의 입력 값 검증
             1. seatRows와 seatColumns의 개수가 같은지
             2. seatRows가 여러 개라면 같은 문자만 들어 있는지
@@ -56,6 +59,7 @@ public class ReservationService {
             Seat reservedSeat = Seat.of(seatRow, seatColumn);
             Reservation reservation = Reservation.create(reservedSeat, screening, user);
             Long savedReservationId = reservationAdapter.saveReservation(reservation);
+            messageService.send();
             reservationsId.add(savedReservationId);
         }
 
