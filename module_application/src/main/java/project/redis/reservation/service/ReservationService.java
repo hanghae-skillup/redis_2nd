@@ -1,5 +1,6 @@
 package project.redis.reservation.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -40,6 +41,8 @@ public class ReservationService {
         List<Reservation> reservations
                 = reservationAdapter.findAllReservationByScreeningId(reservationSeatsRequestDto.getScreeningId());
 
+        List<Long> reservationsId = new ArrayList<>();
+
         for (int index = 0; index < seatRows.size(); index++) {
             String seatRow = seatRows.get(index);
             Integer seatColumn = seatColumns.get(index);
@@ -53,8 +56,9 @@ public class ReservationService {
             Seat reservedSeat = Seat.of(seatRow, seatColumn);
             Reservation reservation = Reservation.create(reservedSeat, screening, user);
             Long savedReservationId = reservationAdapter.saveReservation(reservation);
+            reservationsId.add(savedReservationId);
         }
 
-        return null;
+        return ReservationSeatsResponseDto.of(user.getUserId(), reservationsId);
     }
 }
