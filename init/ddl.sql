@@ -41,15 +41,12 @@ CREATE TABLE IF NOT EXISTS screening (
 -- Seat 테이블 생성
 CREATE TABLE IF NOT EXISTS seat (
     seat_id BIGINT AUTO_INCREMENT PRIMARY KEY,  -- 좌석 ID
-    is_reserved BOOLEAN NOT NULL,  -- 예약 여부
     seat_row VARCHAR(10) NOT NULL,  -- 좌석 행 (예: A, B, C 등)
     seat_column INT NOT NULL,  -- 좌석 열 (예: 1, 2, 3 등)
-    theater_id BIGINT NOT NULL,  -- 극장 ID (Foreign Key)
     created_by BIGINT NULL,            -- BaseEntity 필드
     created_at DATETIME NULL,          -- BaseEntity 필드
     updated_by BIGINT NULL,            -- BaseEntity 필드
     updated_at DATETIME NULL,          -- BaseEntity 필드
-    FOREIGN KEY (theater_id) REFERENCES theater(theater_id) ON DELETE CASCADE  -- 극장 외래키
 );
 
 -- Theater 테이블 생성
