@@ -7,10 +7,8 @@ import org.springframework.data.jpa.repository.Lock;
 import project.redis.reservation.entity.ReservationEntity;
 
 public interface ReservationRepository extends JpaRepository<ReservationEntity, Long> {
+    @Lock(LockModeType.PESSIMISTIC_WRITE)
     List<ReservationEntity> findAllByScreening_ScreeningId(Long screeningId);
 
     List<ReservationEntity> findAllByUser_UserId(Long userId);
-
-    @Lock(LockModeType.PESSIMISTIC_WRITE)
-    ReservationEntity save(ReservationEntity reservationEntity);
 }
