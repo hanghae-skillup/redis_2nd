@@ -4,6 +4,7 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import project.redis.lock.DistributedLock;
 import project.redis.reservation.Reservation;
 import project.redis.reservation.entity.ReservationEntity;
 import project.redis.reservation.mapper.ReservationMapper;
@@ -19,6 +20,7 @@ public class ReservationAdapterImpl implements ReservationAdapter {
 
     @Override
     @Transactional
+    @DistributedLock(key = "seat-lock:#screeningId")
     public List<Reservation> findAllReservationByScreeningId(Long screeningId) {
         List<ReservationEntity> reservationEntities
                 = reservationRepository.findAllByScreening_ScreeningId(screeningId);

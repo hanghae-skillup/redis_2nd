@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import project.redis.lock.DistributedLock;
 import project.redis.message.MessageService;
 import project.redis.reservation.Reservation;
 import project.redis.reservation.adapter.ReservationAdapter;
@@ -33,6 +34,7 @@ public class ReservationService {
     private final MessageService messageService;
 
     @Transactional
+    @DistributedLock(key = "seat-lock:#reservationSeatsRequestDto.userId")
     public ReservationSeatsResponseDto reservationSeats(ReservationSeatsRequestDto reservationSeatsRequestDto) {
         validReservationSeatsRequestDto(reservationSeatsRequestDto);
 
