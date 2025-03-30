@@ -53,7 +53,7 @@ class BookingServiceConcurrencyTest {
             executorService.execute(() -> {
                 try {
                     Thread.sleep(1000);
-                    bookingService.bookScreening(request);
+                    bookingService.bookScreeningByLock(request);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 } finally {
