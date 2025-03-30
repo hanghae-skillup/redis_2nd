@@ -25,54 +25,19 @@ public class ReservationService {
     private final ScreeningAdapter screeningAdapter;
     private final ReservationAdapter reservationAdapter;
     private final MessageService messageService;
-
-    // TODO : 리팩토링 필요 (메서드 분리 등)
+    
     public ReservationSeatsResponseDto reservationSeats(ReservationSeatsRequestDto reservationSeatsRequestDto) {
         validReservationSeatsRequestDto(reservationSeatsRequestDto);
 
-        User user = userAdapter.findUserById(reservationSeatsRequestDto.getUserId());
-        if (user == null) {
-            throw new IllegalArgumentException("존재하지 않는 유저 id 입니다.");
-        }
+        User user = findUserByUserId(reservationSeatsRequestDto);
+        Screening screening = findScreeningByScreeningId(reservationSeatsRequestDto);
 
-        Screening screening = screeningAdapter.findScreeningById(reservationSeatsRequestDto.getScreeningId());
-        if (screening == null) {
-            throw new IllegalArgumentException("존재하지 않는 상영 id 입니다.");
-        }
-
-        List<String> seatRows = reservationSeatsRequestDto.getSeatRows();
-        List<Integer> seatColumns = reservationSeatsRequestDto.getSeatColumns();
-
-        int reservationCount = seatRows.size();
-
-        // TODO : user의 reservation 개수에 대한 검증 필요
-        List<Reservation> userReservations
-                = reservationAdapter.findAllReservationByUserId(reservationSeatsRequestDto.getUserId());
-        if (userReservations.size() + reservationCount > MAX_USER_RESERVATION_COUNT) {
-            throw new IllegalArgumentException("유저당 예약은 " + MAX_USER_RESERVATION_COUNT + " 개까지 가능합니다.");
-        }
+        checkUserReservationCount(reservationSeatsRequestDto, getReservationsSize(reservationSeatsRequestDto));
 
         List<Reservation> reservations
                 = reservationAdapter.findAllReservationByScreeningId(reservationSeatsRequestDto.getScreeningId());
 
-        List<Long> reservationsId = new ArrayList<>();
-
-        for (int index = 0; index < reservationCount; index++) {
-            String seatRow = seatRows.get(index);
-            Integer seatColumn = seatColumns.get(index);
-            boolean isAlreadyReserved = reservations.stream()
-                    .anyMatch(reservation -> reservation.isSeatReserved(seatRow, seatColumn));
-
-            if (isAlreadyReserved) {
-                throw new IllegalArgumentException("현재 예약된 좌석은 예약할 수 없습니다.");
-            }
-
-            Seat reservedSeat = Seat.of(seatRow, seatColumn);
-            Reservation reservation = Reservation.create(reservedSeat, screening, user);
-            Long savedReservationId = reservationAdapter.saveReservation(reservation);
-            messageService.send();
-            reservationsId.add(savedReservationId);
-        }
+        List<Long> reservationsId = createReservations(reservationSeatsRequestDto, reservations, screening, user);
 
         return ReservationSeatsResponseDto.of(user.getUserId(), reservationsId);
     }
@@ -98,6 +63,70 @@ public class ReservationService {
         if (seatColumnCount != seatColumns.size()) {
             throw new IllegalArgumentException("예약하려는 좌석의 열이 중복됩니다.");
         }
-
     }
+
+    private User findUserByUserId(ReservationSeatsRequestDto reservationSeatsRequestDto) {
+        User user = userAdapter.findUserById(reservationSeatsRequestDto.getUserId());
+        if (user == null) {
+            throw new IllegalArgumentException("존재하지 않는 유저 id 입니다.");
+        }
+        return user;
+    }
+
+    private Screening findScreeningByScreeningId(ReservationSeatsRequestDto reservationSeatsRequestDto) {
+        Screening screening = screeningAdapter.findScreeningById(reservationSeatsRequestDto.getScreeningId());
+        if (screening == null) {
+            throw new IllegalArgumentException("존재하지 않는 상영 id 입니다.");
+        }
+        return screening;
+    }
+
+    private void checkUserReservationCount(ReservationSeatsRequestDto reservationSeatsRequestDto,
+                                           int reservationCount) {
+        List<Reservation> userReservations
+                = reservationAdapter.findAllReservationByUserId(reservationSeatsRequestDto.getUserId());
+        if (userReservations.size() + reservationCount > MAX_USER_RESERVATION_COUNT) {
+            throw new IllegalArgumentException("유저당 예약은 " + MAX_USER_RESERVATION_COUNT + " 개까지 가능합니다.");
+        }
+    }
+
+    private List<Long> createReservations(ReservationSeatsRequestDto reservationSeatsRequestDto,
+                                          List<Reservation> reservations, Screening screening, User user) {
+        int reservationCount = getReservationsSize(reservationSeatsRequestDto);
+
+        List<Long> reservationsId = new ArrayList<>();
+
+        for (int index = 0; index < reservationCount; index++) {
+            String seatRow = reservationSeatsRequestDto.getSeatRows().get(index);
+            Integer seatColumn = reservationSeatsRequestDto.getSeatColumns().get(index);
+
+            checkReservedSeat(reservations, seatRow, seatColumn);
+
+            Long savedReservationId = createReservation(seatRow, seatColumn, screening, user);
+            reservationsId.add(savedReservationId);
+        }
+        return reservationsId;
+    }
+
+    private int getReservationsSize(ReservationSeatsRequestDto reservationSeatsRequestDto) {
+        return reservationSeatsRequestDto.getSeatRows().size();
+    }
+
+    private void checkReservedSeat(List<Reservation> reservations, String seatRow, Integer seatColumn) {
+        boolean isAlreadyReserved = reservations.stream()
+                .anyMatch(reservation -> reservation.isSeatReserved(seatRow, seatColumn));
+
+        if (isAlreadyReserved) {
+            throw new IllegalArgumentException("현재 예약된 좌석은 예약할 수 없습니다.");
+        }
+    }
+
+    private Long createReservation(String seatRow, Integer seatColumn, Screening screening, User user) {
+        Seat reservedSeat = Seat.of(seatRow, seatColumn);
+        Reservation reservation = Reservation.create(reservedSeat, screening, user);
+        Long savedReservationId = reservationAdapter.saveReservation(reservation);
+        messageService.send();
+        return savedReservationId;
+    }
+
 }
