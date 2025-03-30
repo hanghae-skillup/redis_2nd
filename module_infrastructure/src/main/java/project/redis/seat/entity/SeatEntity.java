@@ -34,7 +34,6 @@ public class SeatEntity extends BaseEntity {
 
     public static SeatEntity of(Seat seat) {
         return SeatEntity.builder()
-                .seatId(seat.getSeatId())
                 .seatRow(seat.getSeatRow())
                 .seatColumn(seat.getSeatColumn())
                 .build();

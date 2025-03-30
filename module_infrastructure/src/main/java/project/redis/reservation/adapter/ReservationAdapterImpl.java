@@ -7,6 +7,7 @@ import project.redis.reservation.Reservation;
 import project.redis.reservation.entity.ReservationEntity;
 import project.redis.reservation.mapper.ReservationMapper;
 import project.redis.reservation.repository.ReservationRepository;
+import project.redis.seat.entity.SeatEntity;
 
 @Component
 @RequiredArgsConstructor
@@ -35,8 +36,8 @@ public class ReservationAdapterImpl implements ReservationAdapter {
     }
 
     @Override
-    public Long saveReservation(Reservation reservation) {
-        ReservationEntity reservationEntity = reservationMapper.toEntity(reservation);
+    public Long saveReservation(Reservation reservation, SeatEntity seatEntity) {
+        ReservationEntity reservationEntity = reservationMapper.toEntity(reservation, seatEntity);
         ReservationEntity savedReservation = reservationRepository.save(reservationEntity);
         return savedReservation.getReservationId();
     }

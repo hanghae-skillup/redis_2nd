@@ -3,6 +3,7 @@ package project.redis.reservation.service;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import project.redis.message.MessageService;
 import project.redis.reservation.Reservation;
@@ -12,9 +13,12 @@ import project.redis.reservation.dto.ReservationSeatsResponseDto;
 import project.redis.screening.Screening;
 import project.redis.screening.adapter.ScreeningAdapter;
 import project.redis.seat.Seat;
+import project.redis.seat.adapter.SeatAdapter;
+import project.redis.seat.entity.SeatEntity;
 import project.redis.user.User;
 import project.redis.user.adapter.UserAdapter;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class ReservationService {
@@ -24,8 +28,9 @@ public class ReservationService {
     private final UserAdapter userAdapter;
     private final ScreeningAdapter screeningAdapter;
     private final ReservationAdapter reservationAdapter;
+    private final SeatAdapter seatAdapter;
     private final MessageService messageService;
-    
+
     public ReservationSeatsResponseDto reservationSeats(ReservationSeatsRequestDto reservationSeatsRequestDto) {
         validReservationSeatsRequestDto(reservationSeatsRequestDto);
 
@@ -123,8 +128,10 @@ public class ReservationService {
 
     private Long createReservation(String seatRow, Integer seatColumn, Screening screening, User user) {
         Seat reservedSeat = Seat.of(seatRow, seatColumn);
+        SeatEntity seatEntity = seatAdapter.saveSeat(reservedSeat);
+
         Reservation reservation = Reservation.create(reservedSeat, screening, user);
-        Long savedReservationId = reservationAdapter.saveReservation(reservation);
+        Long savedReservationId = reservationAdapter.saveReservation(reservation, seatEntity);
         messageService.send();
         return savedReservationId;
     }

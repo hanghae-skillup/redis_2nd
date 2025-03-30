@@ -31,9 +31,8 @@ public class ReservationMapperImpl implements ReservationMapper {
     }
 
     @Override
-    public ReservationEntity toEntity(Reservation reservation) {
+    public ReservationEntity toEntity(Reservation reservation, SeatEntity seatEntity) {
         ScreeningEntity screeningEntity = screeningMapper.toEntity(reservation.getScreening());
-        SeatEntity seatEntity = seatMapper.toEntity(reservation.getSeat());
         UserEntity userEntity = userMapper.toEntity(reservation.getUser());
 
         return ReservationEntity.of(screeningEntity, seatEntity, userEntity);

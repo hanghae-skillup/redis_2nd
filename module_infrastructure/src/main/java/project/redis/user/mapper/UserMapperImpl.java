@@ -15,6 +15,6 @@ public class UserMapperImpl implements UserMapper {
 
     @Override
     public UserEntity toEntity(User user) {
-        return null;
+        return UserEntity.of(user);
     }
 }
