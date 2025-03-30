@@ -24,7 +24,7 @@ public class BookingService {
         this.bookingRepository = bookingRepository;
     }
 
-    @DistributedLock(name = "bookingMovie")
+    @DistributedLock(name = "bookingScreening")
     public BookScreeningResponse bookScreening(BookScreeningRequest request) {
         this.bookingPolicy.checkBooking(request.getScreeningId(), request.getMemberId(), request.toSeats());
 
