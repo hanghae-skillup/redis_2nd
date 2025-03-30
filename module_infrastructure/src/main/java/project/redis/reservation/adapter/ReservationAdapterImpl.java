@@ -3,6 +3,7 @@ package project.redis.reservation.adapter;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import project.redis.reservation.Reservation;
 import project.redis.reservation.entity.ReservationEntity;
 import project.redis.reservation.mapper.ReservationMapper;
@@ -17,6 +18,7 @@ public class ReservationAdapterImpl implements ReservationAdapter {
     private final ReservationMapper reservationMapper;
 
     @Override
+    @Transactional
     public List<Reservation> findAllReservationByScreeningId(Long screeningId) {
         List<ReservationEntity> reservationEntities
                 = reservationRepository.findAllByScreening_ScreeningId(screeningId);
