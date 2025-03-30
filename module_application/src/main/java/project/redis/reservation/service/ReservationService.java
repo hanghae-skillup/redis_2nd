@@ -5,6 +5,7 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import project.redis.message.MessageService;
 import project.redis.reservation.Reservation;
 import project.redis.reservation.adapter.ReservationAdapter;
@@ -31,6 +32,7 @@ public class ReservationService {
     private final SeatAdapter seatAdapter;
     private final MessageService messageService;
 
+    @Transactional
     public ReservationSeatsResponseDto reservationSeats(ReservationSeatsRequestDto reservationSeatsRequestDto) {
         validReservationSeatsRequestDto(reservationSeatsRequestDto);
 
