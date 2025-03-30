@@ -68,6 +68,12 @@ public class ReservationService {
         if (seatColumnCount != seatColumns.size()) {
             throw new IllegalArgumentException("예약하려는 좌석의 열이 중복됩니다.");
         }
+
+        for (int index = 1; index < seatColumns.size(); index++) {
+            if (seatColumns.get(index) != seatColumns.get(index - 1) + 1) {
+                throw new IllegalArgumentException("예약하려는 좌석의 열이 연속되는 형태가 아닙니다.");
+            }
+        }
     }
 
     private User findUserByUserId(ReservationSeatsRequestDto reservationSeatsRequestDto) {
