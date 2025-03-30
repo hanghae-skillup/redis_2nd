@@ -10,6 +10,16 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class ApiControllerAdvice {
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ApiResponse<Object> illegalArgumentException(IllegalArgumentException e) {
+        return ApiResponse.of(
+                HttpStatus.BAD_REQUEST,
+                e.getMessage(),
+                null
+        );
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(BindException.class)
     public ApiResponse<Object> bindException(BindException e) {
         return ApiResponse.of(
