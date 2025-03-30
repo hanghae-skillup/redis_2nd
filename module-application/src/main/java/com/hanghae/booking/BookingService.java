@@ -2,6 +2,7 @@ package com.hanghae.booking;
 
 import com.hanghae.booking.dto.BookScreeningRequest;
 import com.hanghae.booking.dto.BookScreeningResponse;
+import com.hanghae.lock.DistributedLock;
 import com.hanghae.theater.Screening;
 import com.hanghae.theater.ScreeningRepository;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,7 @@ public class BookingService {
         this.bookingRepository = bookingRepository;
     }
 
+    @DistributedLock(name = "bookingMovie")
     public BookScreeningResponse bookScreening(BookScreeningRequest request) {
         this.bookingPolicy.checkBooking(request.getScreeningId(), request.getMemberId(), request.toSeats());
 

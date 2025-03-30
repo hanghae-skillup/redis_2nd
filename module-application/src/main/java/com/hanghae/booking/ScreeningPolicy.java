@@ -24,7 +24,7 @@ public class ScreeningPolicy {
     private final ScreeningRepository screeningRepository;
 
     public void validate(Long screeningId, int seatCount) {
-        Screening screening = screeningRepository.findByIdWithOptimisticLock(screeningId)
+        Screening screening = screeningRepository.findById(screeningId)
                 .orElseThrow(() -> new NoSuchElementException("상영이 존재하지 않습니다"));
 
         if (screening.isBookingImpossible(seatCount)) {
