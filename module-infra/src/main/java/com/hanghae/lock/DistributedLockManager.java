@@ -15,7 +15,7 @@ import java.util.function.Supplier;
 public class DistributedLockManager {
 
     private static final long DEFAULT_WAIT_TIME = 5L;
-    private static final long DEFAULT_LEASE_TIME = 5L;
+    private static final long DEFAULT_LEASE_TIME = 30L;
 
     private final RedissonClient redissonClient;
 
