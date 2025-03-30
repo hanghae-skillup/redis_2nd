@@ -1,0 +1,16 @@
+### 좌석 예약 요청 테스트
+POST http://localhost:8080/api/v1/reservation/seats
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "screeningId": 10,
+  "seatRows": [
+    "A",
+    "A"
+  ],
+  "seatColumns": [
+    1,
+    2
+  ]
+}
