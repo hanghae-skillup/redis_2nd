@@ -6,6 +6,8 @@ drop table if exists screening;
 drop table if exists theater;
 drop table if exists seat;
 drop table if exists member;
+drop table if exists booking;
+drop table if exists booking_seat;
 
 CREATE TABLE movie
 (
@@ -72,6 +74,31 @@ CREATE TABLE member
     last_modified_by   VARCHAR(255) NULL COMMENT '수정자'
 );
 
+-- 예약
+CREATE TABLE booking
+(
+    id                 INT UNSIGNED AUTO_INCREMENT PRIMARY KEY COMMENT '예약 pk',
+    member_id          INT UNSIGNED NOT NULL COMMENT '멤버 id',
+    screening_id       INT UNSIGNED NOT NULL COMMENT '상영 id',
+    created_date       DATETIME     NOT NULL COMMENT '생성일',
+    created_by         VARCHAR(255) NOT NULL COMMENT '생성자',
+    last_modified_date DATETIME NULL COMMENT '수정일',
+    last_modified_by   VARCHAR(255) NULL COMMENT '수정자'
+);
+
+-- 예약 좌석 정보
+create table booking_seat
+(
+    id                 INT UNSIGNED AUTO_INCREMENT PRIMARY KEY COMMENT '예약 pk',
+    booking_id         INT UNSIGNED NOT NULL COMMENT '예약 id',
+    seat_id            INT UNSIGNED NOT NULL COMMENT '좌석 id',
+    created_date       DATETIME     NOT NULL COMMENT '생성일',
+    created_by         VARCHAR(255) NOT NULL COMMENT '생성자',
+    last_modified_date DATETIME NULL COMMENT '수정일',
+    last_modified_by   VARCHAR(255) NULL COMMENT '수정자',
+    UNIQUE KEY uk_booking_seat (booking_id, seat_id)
+);
+
 -- index 추가
 -- 1. screening 테이블--------------------
 -- 1) join 대상 컬럼 인덱스 추가
@@ -93,3 +120,6 @@ create index idx_movie_title_genre ON movie (title, genre);
 -- 3. seat 테이블 index 추가
 -- join 대상 index 추가
 create index idx_screening_id ON seat (screening_id);
+
+-- 4. booking 테이블 index 추가
+create index idx_screening_id_member_id ON booking(screening_id, member_id);
