@@ -69,6 +69,16 @@ public class Screening extends BaseEntity {
         seatCount--;
     }
 
+    public void decreaseSeatCount(int count){
+        for (int i = 0; i < count; i++) {
+            decreaseSeatCount();
+        }
+    }
+
+    public boolean isBookingImpossible(int seatCount){
+        return this.seatCount < seatCount;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -37,7 +37,24 @@ public class Seats {
         this.seats = seats;
     }
 
-    public int count(){
+    public boolean isSameRow() {
+        return seats.stream()
+                .map(Seat::getRow)
+                .distinct()
+                .count() == 1;
+    }
+
+    public boolean isDifferentRow() {
+        return !isSameRow();
+    }
+
+    public List<Long> toIds(){
+        return seats.stream()
+                .map(Seat::getId)
+                .toList();
+    }
+
+    public int count() {
         return seats.size();
     }
 }

@@ -2,7 +2,9 @@ package com.hanghae.theater;
 
 import com.hanghae.common.entity.BaseEntity;
 import jakarta.persistence.*;
+import lombok.Getter;
 
+@Getter
 @Entity
 public class Seat extends BaseEntity {
 
@@ -19,11 +21,16 @@ public class Seat extends BaseEntity {
     protected Seat() {
     }
 
-    public Seat(int row, int col) {
-        this(new SeatRow(row), new SeatCol(col));
+    public Seat(char row, int col) {
+        this(null, new SeatRow(row), new SeatCol(col));
     }
 
-    public Seat(SeatRow row, SeatCol col) {
+    public Seat(int row, int col) {
+        this(null, new SeatRow(row), new SeatCol(col));
+    }
+
+    public Seat(Long id, SeatRow row, SeatCol col) {
+        this.id = id;
         this.row = row;
         this.col = col;
     }

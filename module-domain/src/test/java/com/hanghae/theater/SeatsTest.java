@@ -21,4 +21,33 @@ class SeatsTest {
         assertThat(seats.count()).isEqualTo(3);
     }
 
+    @DisplayName("좌석들이 다른 행이 있는지 확인한다")
+    @Test
+    void isDifferentRow(){
+        Seats seats = new Seats(
+                List.of(
+                        new Seat('A', 1),
+                        new Seat('B', 1)
+                )
+        );
+
+        boolean result = seats.isDifferentRow();
+
+        assertThat(result).isTrue();
+    }
+
+    @DisplayName("모든 좌석들이 같은 행인지 확인한다")
+    @Test
+    void isSameRow(){
+        Seats seats = new Seats(
+                List.of(
+                        new Seat('A', 1),
+                        new Seat('A', 2)
+                )
+        );
+
+        boolean result = seats.isSameRow();
+
+        assertThat(result).isTrue();
+    }
 }
