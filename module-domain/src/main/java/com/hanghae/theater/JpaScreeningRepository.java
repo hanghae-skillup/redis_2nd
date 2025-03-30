@@ -13,4 +13,9 @@ public interface JpaScreeningRepository extends ScreeningRepository, JpaReposito
     @Query("SELECT s FROM Screening s WHERE s.id = :screeningId")
     @Override
     Optional<Screening> findByIdWithPessimisticLock(@Param("screeningId") Long screeningId);
+
+    @Lock(LockModeType.OPTIMISTIC)
+    @Query("SELECT s FROM Screening s WHERE s.id = :screeningId")
+    @Override
+    Optional<Screening> findByIdWithOptimisticLock(@Param("screeningId") Long screeningId);
 }

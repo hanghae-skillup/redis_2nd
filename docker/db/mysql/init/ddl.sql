@@ -44,6 +44,7 @@ CREATE TABLE screening
     start_time         DATETIME     NOT NULL COMMENT '상영 시작 시간',
     end_time           DATETIME     NOT NULL COMMENT '상영 종료 시간',
     seat_count         INT          NOT NULL COMMENT '좌석 수',
+    version            INT UNSIGNED DEFAULT 0         COMMENT '버전',
     created_date       DATETIME     NOT NULL COMMENT '생성일',
     created_by         VARCHAR(255) NOT NULL COMMENT '생성자',
     last_modified_date DATETIME NULL COMMENT '수정일',

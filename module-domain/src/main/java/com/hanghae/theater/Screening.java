@@ -37,11 +37,14 @@ public class Screening extends BaseEntity {
     @Embedded
     private Seats seats;
 
+    @Version
+    private int version;
+
     public Screening(Long movieId, int screenNumber, ScreeningTime screeningTime) {
-        this(null, movieId, new PositiveNumber(screenNumber), screeningTime, 0, null);
+        this(null, movieId, new PositiveNumber(screenNumber), screeningTime, 0, null, 0);
     }
 
-    public Screening(Long id, Long movieId, PositiveNumber screenNumber, ScreeningTime screeningTime, int seatCount, Seats seats) {
+    public Screening(Long id, Long movieId, PositiveNumber screenNumber, ScreeningTime screeningTime, int seatCount, Seats seats, int version) {
         validate(seatCount);
         this.id = id;
         this.movieId = movieId;
@@ -49,6 +52,7 @@ public class Screening extends BaseEntity {
         this.screeningTime = screeningTime;
         this.seatCount = seatCount;
         this.seats = seats;
+        this.version = version;
     }
 
     private void validate(int seatCount) {
@@ -69,13 +73,13 @@ public class Screening extends BaseEntity {
         seatCount--;
     }
 
-    public void decreaseSeatCount(int count){
+    public void decreaseSeatCount(int count) {
         for (int i = 0; i < count; i++) {
             decreaseSeatCount();
         }
     }
 
-    public boolean isBookingImpossible(int seatCount){
+    public boolean isBookingImpossible(int seatCount) {
         return this.seatCount < seatCount;
     }
 
