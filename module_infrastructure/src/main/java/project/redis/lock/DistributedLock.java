@@ -15,7 +15,7 @@ public @interface DistributedLock {
     TimeUnit timeUnit() default TimeUnit.SECONDS;
 
     // TODO : 고민 후 얼마로 할지 수정 및 README에 작성
-    long waitTime() default 5L;
+    long waitTime() default 2L;
 
-    long leaseTime() default 3L;
+    long leaseTime() default 4L;
 }
