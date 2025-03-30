@@ -2,6 +2,7 @@ package com.hanghae.booking;
 
 import com.hanghae.booking.dto.BookScreeningRequest;
 import com.hanghae.booking.dto.BookScreeningResponse;
+import com.hanghae.event.Events;
 import com.hanghae.lock.DistributedLock;
 import com.hanghae.lock.DistributedLockManager;
 import com.hanghae.theater.Screening;
@@ -39,6 +40,8 @@ public class BookingService {
         Booking booking = bookingRepository.save(request.toBooking());
         booking.addBookSeats(request.toBookingSeats());
 
+        //예약 성공 이벤트 발생
+        Events.raise(new BookScreeningSuccessEvent(request.getMemberId(), request.getScreeningId()));
         return BookScreeningResponse.from(booking);
     }
 
@@ -50,11 +53,14 @@ public class BookingService {
         int seatCount = request.getBookingSeats().size();
 
         //함수형 분산락 적용 - 좌석 감소시만 락 적용되도록 범위 한정
-        lockManager.executeWithLock("bookingScreening", ()-> {
+        lockManager.executeWithLock("bookingScreening", () -> {
             screening.decreaseSeatCount(seatCount);
         });
         Booking booking = bookingRepository.save(request.toBooking());
-            booking.addBookSeats(request.toBookingSeats());
+        booking.addBookSeats(request.toBookingSeats());
+
+        //예약 성공 이벤트 발생
+        Events.raise(new BookScreeningSuccessEvent(request.getMemberId(), request.getScreeningId()));
         return BookScreeningResponse.from(booking);
     }
 }
