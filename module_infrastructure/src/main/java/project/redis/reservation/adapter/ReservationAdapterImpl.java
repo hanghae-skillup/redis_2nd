@@ -26,6 +26,15 @@ public class ReservationAdapterImpl implements ReservationAdapter {
     }
 
     @Override
+    public List<Reservation> findAllReservationByUserId(Long userId) {
+        List<ReservationEntity> reservationEntities
+                = reservationRepository.findAllByUser_UserId(userId);
+        return reservationEntities.stream()
+                .map(reservationMapper::toDomain)
+                .toList();
+    }
+
+    @Override
     public Long saveReservation(Reservation reservation) {
         ReservationEntity reservationEntity = reservationMapper.toEntity(reservation);
         ReservationEntity savedReservation = reservationRepository.save(reservationEntity);

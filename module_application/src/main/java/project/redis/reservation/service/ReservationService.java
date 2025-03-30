@@ -19,6 +19,8 @@ import project.redis.user.adapter.UserAdapter;
 @RequiredArgsConstructor
 public class ReservationService {
 
+    private static final int MAX_USER_RESERVATION_COUNT = 5;
+
     private final UserAdapter userAdapter;
     private final ScreeningAdapter screeningAdapter;
     private final ReservationAdapter reservationAdapter;
@@ -38,17 +40,24 @@ public class ReservationService {
             throw new IllegalArgumentException("존재하지 않는 상영 id 입니다.");
         }
 
-        // TODO : user의 reservation 개수에 대한 검증 필요
-
         List<String> seatRows = reservationSeatsRequestDto.getSeatRows();
         List<Integer> seatColumns = reservationSeatsRequestDto.getSeatColumns();
+
+        int reservationCount = seatRows.size();
+
+        // TODO : user의 reservation 개수에 대한 검증 필요
+        List<Reservation> userReservations
+                = reservationAdapter.findAllReservationByUserId(reservationSeatsRequestDto.getUserId());
+        if (userReservations.size() + reservationCount > MAX_USER_RESERVATION_COUNT) {
+            throw new IllegalArgumentException("유저당 예약은 " + MAX_USER_RESERVATION_COUNT + " 개까지 가능합니다.");
+        }
 
         List<Reservation> reservations
                 = reservationAdapter.findAllReservationByScreeningId(reservationSeatsRequestDto.getScreeningId());
 
         List<Long> reservationsId = new ArrayList<>();
 
-        for (int index = 0; index < seatRows.size(); index++) {
+        for (int index = 0; index < reservationCount; index++) {
             String seatRow = seatRows.get(index);
             Integer seatColumn = seatColumns.get(index);
             boolean isAlreadyReserved = reservations.stream()
