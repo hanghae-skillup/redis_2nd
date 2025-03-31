@@ -23,13 +23,11 @@ import java.util.stream.Collectors;
 @Service
 public class MovieService {
 
-    private final MovieRepository movieRepository;
     private final ShowtimeRepository showtimeRepository;
 
 
     @Autowired
-    public MovieService(MovieRepository movieRepository, ShowtimeRepository showtimeRepository) {
-        this.movieRepository = movieRepository;
+    public MovieService(ShowtimeRepository showtimeRepository) {
         this.showtimeRepository = showtimeRepository;
     }
 
@@ -39,7 +37,6 @@ public class MovieService {
         return loadAllMovies(movieRequestDto);
     }
 
-//    @DistributedLock(key = "movieLock")
     public List<MovieResponseDto> loadAllMovies(MovieRequestDto movieRequestDto) {
         LocalDate today = LocalDate.now();
         List<Showtime> showtimes = showtimeRepository.findShowtimesByDateAndTitleAndGenre(

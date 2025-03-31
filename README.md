@@ -26,3 +26,22 @@ Domain 모듈에 정의해 놓은 Repository 인터페이스로 Adapter 를 구�
 
 ## 5. 부하 테스트 
 [부하테스트](./부하테스트.md)
+
+## 6. 분산락 테스트
+![Pasted Graphic.png](..%2F..%2F..%2FLibrary%2FGroup%20Containers%2Fgroup.com.apple.notes%2FAccounts%2F547DBCAB-EC86-4B59-AA5B-C9548915CDD6%2FMedia%2F87036087-6E2F-4483-81C6-56EBD006B36B%2F1_CE196611-2D61-4292-8073-8DE351F4DB38%2FPasted%20Graphic.png)
+![1 testen.png](..%2F..%2F..%2FLibrary%2FContainers%2Fcom.apple.Notes%2FData%2Ftmp%2FTemporaryItems%2FNSIRD_%EB%A9%94%EB%AA%A8_4gL9Kv%2FHardLinkURLTemp%2F92034EF6-D2CE-4548-88FE-2B51D1F697A4%2F1743317032%2F1%20testen.png)
+아무것도 적용하지 않았을 때, 같은 영화 같은 좌석에 예매를 성공함
+
+![Pasted Graphic 2.png](..%2F..%2F..%2FLibrary%2FGroup%20Containers%2Fgroup.com.apple.notes%2FAccounts%2F547DBCAB-EC86-4B59-AA5B-C9548915CDD6%2FMedia%2FF5824959-C68C-4541-8652-2CF388489C49%2F1_638C5DA1-2A76-43FE-B047-3CD8AC386A43%2FPasted%20Graphic%202.png)
+분산락을 적용한 이후 정상적으로 예약이 되는 것을 확인
+
+
+### AOP 분산 락 테스트 결과 (http_req_duration)
+| avg      | min    | med     | max    | p(90)    | p(95)    |
+|----------|--------|---------|--------|----------|----------|
+| 224.62ms | 3.13ms | 18.06ms | 1.11ms | 530.71ms | 541.03ms |
+
+### 함수형 분산 락 테스트 결과 (http_req_duration)
+| avg      | min    | med      | max      | p(90)    | p(95)    |
+|----------|--------|----------|----------|----------|----------|
+| 296.34ms | 3.65ms | 517.88ms | 818.06ms | 536.81ms | 552.41ms |
