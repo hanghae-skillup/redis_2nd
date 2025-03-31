@@ -13,15 +13,27 @@ public class Schedule {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(mappedBy = "schedule", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Booking> bookings;
-
     @ManyToOne(fetch = FetchType.LAZY)
     private Movie movie;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Theater theater;
 
-    @Column
-    private LocalDateTime showtime;
+    @Column(nullable = false)
+    private LocalDateTime startTime;
+
+    @Column(nullable = false)
+    private LocalDateTime endTime;
+
+    @Column(nullable = false)
+    private String createdBy;
+
+    @Column(nullable = false)
+    private LocalDateTime createdAt;
+
+    @Column(nullable = false)
+    private String updatedBy;
+
+    @Column(nullable = false)
+    private LocalDateTime updatedAt;
 }

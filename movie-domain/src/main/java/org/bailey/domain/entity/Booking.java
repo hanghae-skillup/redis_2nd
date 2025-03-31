@@ -30,19 +30,17 @@ public class Booking {
     private BookingStatus bookingStatus;
 
     @Column(nullable = false)
-    private LocalDateTime updatedAt;
+    private LocalDateTime bookingDate;
 
-    @Column(nullable = false, updatable = false)
+    @Column(nullable = false)
+    private String createdBy;
+
+    @Column(nullable = false)
     private LocalDateTime createdAt;
 
-    @PrePersist
-    protected void onCreate() {
-        this.createdAt = LocalDateTime.now();
-        this.updatedAt = LocalDateTime.now();
-    }
+    @Column(nullable = false)
+    private String updatedBy;
 
-    @PreUpdate
-    protected void onUpdate() {
-        this.updatedAt = LocalDateTime.now();
-    }
+    @Column(nullable = false)
+    private LocalDateTime updatedAt;
 }

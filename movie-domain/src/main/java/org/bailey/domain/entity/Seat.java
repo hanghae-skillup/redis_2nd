@@ -3,6 +3,7 @@ package org.bailey.domain.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
@@ -16,15 +17,24 @@ public class Seat {
     @JoinColumn(name = "theater_id", nullable = false)
     private Theater theater;
 
-    @OneToMany(mappedBy = "seat")
-    private List<Booking> bookings;
-
     @Column(nullable = false)
     private String seatRow;
 
     @Column(nullable = false)
-    private String seatColumn;
+    private int seatColumn;
 
     @Column(nullable = false)
     private String seatNumber;
+
+    @Column(nullable = false)
+    private String createdBy;
+
+    @Column(nullable = false)
+    private LocalDateTime createdAt;
+
+    @Column(nullable = false)
+    private String updatedBy;
+
+    @Column(nullable = false)
+    private LocalDateTime updatedAt;
 }

@@ -7,6 +7,7 @@ pluginManagement {
 
 rootProject.name = 'redis_2nd'
 
-include 'movie-api'
+include 'movie-app'
 include 'movie-domain'
-include 'movie-storage'
+include 'movie-infra'
+include 'movie-presentation'

@@ -3,6 +3,7 @@ package org.bailey.domain.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
@@ -12,12 +13,18 @@ public class Theater {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany
-    private List<Seat> seats;
-
-    @OneToMany
-    private List<Movie> movies;
-
     @Column
     private String name;
+
+    @Column(nullable = false)
+    private String createdBy;
+
+    @Column(nullable = false)
+    private LocalDateTime createdAt;
+
+    @Column(nullable = false)
+    private String updatedBy;
+
+    @Column(nullable = false)
+    private LocalDateTime updatedAt;
 }

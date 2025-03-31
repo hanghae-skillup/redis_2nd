@@ -1,0 +1,20 @@
+# version: '3.8'
+
+services:
+  postgresql:
+    image: mysql:8.0
+    container_name: movie_mysql
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: movie
+      MYSQL_USER: bailey
+      MYSQL_PASSWORD: bailey
+    volumes:
+      - ./initdb:/docker-entrypoint-initdb.d
+      - ./mysql/conf.d:/etc/mysql/conf.d
+      - mysql-data:/var/lib/mysql
+
+volumes:
+  mysql-data:
