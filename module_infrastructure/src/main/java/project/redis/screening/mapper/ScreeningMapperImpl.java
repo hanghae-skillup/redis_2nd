@@ -3,10 +3,12 @@ package project.redis.screening.mapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import project.redis.movie.Movie;
+import project.redis.movie.entity.MovieEntity;
 import project.redis.movie.mapper.MovieMapper;
 import project.redis.screening.Screening;
 import project.redis.screening.entity.ScreeningEntity;
 import project.redis.theater.Theater;
+import project.redis.theater.entity.TheaterEntity;
 import project.redis.theater.mapper.TheaterMapper;
 
 @Component
@@ -22,5 +24,12 @@ public class ScreeningMapperImpl implements ScreeningMapper {
         Theater theater = theaterMapper.toDomain(screeningEntity.getTheater());
         return Screening.of(screeningEntity.getScreeningId(), movie, theater,
                 screeningEntity.getStartedAt(), screeningEntity.getEndedAt());
+    }
+
+    @Override
+    public ScreeningEntity toEntity(Screening screening) {
+        MovieEntity movieEntity = movieMapper.toEntity(screening.getMovie());
+        TheaterEntity theaterEntity = theaterMapper.toEntity(screening.getTheater());
+        return ScreeningEntity.of(screening, movieEntity, theaterEntity);
     }
 }

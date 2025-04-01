@@ -7,7 +7,6 @@ import com.querydsl.core.types.dsl.*;
 import com.querydsl.core.types.PathMetadata;
 import javax.annotation.processing.Generated;
 import com.querydsl.core.types.Path;
-import com.querydsl.core.types.dsl.PathInits;
 
 
 /**
@@ -17,8 +16,6 @@ import com.querydsl.core.types.dsl.PathInits;
 public class QSeatEntity extends EntityPathBase<SeatEntity> {
 
     private static final long serialVersionUID = -394982862L;
-
-    private static final PathInits INITS = PathInits.DIRECT2;
 
     public static final QSeatEntity seatEntity = new QSeatEntity("seatEntity");
 
@@ -30,15 +27,11 @@ public class QSeatEntity extends EntityPathBase<SeatEntity> {
     //inherited
     public final NumberPath<Long> createdBy = _super.createdBy;
 
-    public final BooleanPath isReserved = createBoolean("isReserved");
-
     public final NumberPath<Integer> seatColumn = createNumber("seatColumn", Integer.class);
 
     public final NumberPath<Long> seatId = createNumber("seatId", Long.class);
 
     public final StringPath seatRow = createString("seatRow");
-
-    public final project.redis.theater.entity.QTheaterEntity theater;
 
     //inherited
     public final DateTimePath<java.time.LocalDateTime> updatedAt = _super.updatedAt;
@@ -47,24 +40,15 @@ public class QSeatEntity extends EntityPathBase<SeatEntity> {
     public final NumberPath<Long> updatedBy = _super.updatedBy;
 
     public QSeatEntity(String variable) {
-        this(SeatEntity.class, forVariable(variable), INITS);
+        super(SeatEntity.class, forVariable(variable));
     }
 
     public QSeatEntity(Path<? extends SeatEntity> path) {
-        this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
+        super(path.getType(), path.getMetadata());
     }
 
     public QSeatEntity(PathMetadata metadata) {
-        this(metadata, PathInits.getFor(metadata, INITS));
-    }
-
-    public QSeatEntity(PathMetadata metadata, PathInits inits) {
-        this(SeatEntity.class, metadata, inits);
-    }
-
-    public QSeatEntity(Class<? extends SeatEntity> type, PathMetadata metadata, PathInits inits) {
-        super(type, metadata, inits);
-        this.theater = inits.isInitialized("theater") ? new project.redis.theater.entity.QTheaterEntity(forProperty("theater"), inits.get("theater")) : null;
+        super(SeatEntity.class, metadata);
     }
 
 }

@@ -5,4 +5,6 @@ import project.redis.screening.entity.ScreeningEntity;
 
 public interface ScreeningMapper {
     Screening toDomain(ScreeningEntity screeningEntity);
+
+    ScreeningEntity toEntity(Screening screening);
 }

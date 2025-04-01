@@ -5,4 +5,6 @@ import project.redis.cinema.entity.CinemaEntity;
 
 public interface CinemaMapper {
     Cinema toDomain(CinemaEntity cinemaEntity);
+
+    CinemaEntity toEntity(Cinema cinema);
 }

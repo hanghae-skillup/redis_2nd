@@ -4,12 +4,11 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+@Getter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Cinema {
 
     private Long cinemaId;
-
-    @Getter
     private String cinemaName;
 
     public static Cinema of(Long cinemaId, String cinemaName) {

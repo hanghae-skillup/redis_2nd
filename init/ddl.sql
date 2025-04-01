@@ -41,15 +41,12 @@ CREATE TABLE IF NOT EXISTS screening (
 -- Seat 테이블 생성
 CREATE TABLE IF NOT EXISTS seat (
     seat_id BIGINT AUTO_INCREMENT PRIMARY KEY,  -- 좌석 ID
-    is_reserved BOOLEAN NOT NULL,  -- 예약 여부
     seat_row VARCHAR(10) NOT NULL,  -- 좌석 행 (예: A, B, C 등)
     seat_column INT NOT NULL,  -- 좌석 열 (예: 1, 2, 3 등)
-    theater_id BIGINT NOT NULL,  -- 극장 ID (Foreign Key)
     created_by BIGINT NULL,            -- BaseEntity 필드
     created_at DATETIME NULL,          -- BaseEntity 필드
     updated_by BIGINT NULL,            -- BaseEntity 필드
     updated_at DATETIME NULL,          -- BaseEntity 필드
-    FOREIGN KEY (theater_id) REFERENCES theater(theater_id) ON DELETE CASCADE  -- 극장 외래키
 );
 
 -- Theater 테이블 생성
@@ -63,6 +60,32 @@ CREATE TABLE IF NOT EXISTS theater (
     updated_at DATETIME NULL,          -- BaseEntity 필드
     FOREIGN KEY (cinema_id) REFERENCES cinema(cinema_id) ON DELETE CASCADE  -- 영화관 외래키
 );
+
+-- User 테이블 생성
+CREATE TABLE IF NOT EXISTS user (
+    user_id BIGINT AUTO_INCREMENT PRIMARY KEY,  -- 사용자 ID
+    username VARCHAR(255) NOT NULL,  -- 사용자 이름
+    created_by BIGINT NULL,  -- BaseEntity 필드
+    created_at DATETIME NULL,  -- BaseEntity 필드
+    updated_by BIGINT NULL,  -- BaseEntity 필드
+    updated_at DATETIME NULL  -- BaseEntity 필드
+);
+
+-- Reservation 테이블 생성
+CREATE TABLE IF NOT EXISTS reservation (
+    reservation_id BIGINT AUTO_INCREMENT PRIMARY KEY,  -- 예약 ID
+    screening_id BIGINT NOT NULL,  -- 상영 ID (Foreign Key)
+    seat_id BIGINT NOT NULL,  -- 좌석 ID (Foreign Key)
+    user_id BIGINT NOT NULL,  -- 사용자 ID (Foreign Key)
+    created_by BIGINT NULL,  -- BaseEntity 필드
+    created_at DATETIME NULL,  -- BaseEntity 필드
+    updated_by BIGINT NULL,  -- BaseEntity 필드
+    updated_at DATETIME NULL,  -- BaseEntity 필드
+    FOREIGN KEY (screening_id) REFERENCES screening(screening_id) ON DELETE CASCADE,  -- 상영 외래키
+    FOREIGN KEY (seat_id) REFERENCES seat(seat_id) ON DELETE CASCADE,  -- 좌석 외래키
+    FOREIGN KEY (user_id) REFERENCES user(user_id) ON DELETE CASCADE  -- 사용자 외래키
+);
+
 
 CREATE INDEX idx_movie_released_title_genre ON movie(released_at, title, genre);
 CREATE INDEX idx_screening_started_at ON screening(started_at);

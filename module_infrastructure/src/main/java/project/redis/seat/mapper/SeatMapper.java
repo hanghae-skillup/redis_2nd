@@ -5,4 +5,6 @@ import project.redis.seat.entity.SeatEntity;
 
 public interface SeatMapper {
     Seat toDomain(SeatEntity seatEntity);
+
+    SeatEntity toEntity(Seat seat);
 }

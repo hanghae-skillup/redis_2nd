@@ -16,6 +16,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import project.redis.common.entity.BaseEntity;
 import project.redis.movie.entity.MovieEntity;
+import project.redis.screening.Screening;
 import project.redis.theater.entity.TheaterEntity;
 
 @Entity
@@ -43,4 +44,14 @@ public class ScreeningEntity extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "theater_id", nullable = false)  // 영화관과의 관계 설정
     private TheaterEntity theater;
+
+    public static ScreeningEntity of(Screening screening, MovieEntity movie, TheaterEntity theater) {
+        return ScreeningEntity.builder()
+                .screeningId(screening.getScreeningId())
+                .startedAt(screening.getStartedAt())
+                .endedAt(screening.getEndedAt())
+                .movie(movie)
+                .theater(theater)
+                .build();
+    }
 }

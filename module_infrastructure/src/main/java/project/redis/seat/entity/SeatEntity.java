@@ -5,8 +5,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -14,7 +12,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import project.redis.common.entity.BaseEntity;
-import project.redis.theater.entity.TheaterEntity;
+import project.redis.seat.Seat;
 
 @Entity
 @Table(name = "seat")
@@ -29,15 +27,15 @@ public class SeatEntity extends BaseEntity {
     private Long seatId;
 
     @Column(nullable = false)
-    private Boolean isReserved;
-
-    @Column(nullable = false)
     private String seatRow;
 
     @Column(nullable = false)
     private Integer seatColumn;
 
-    @ManyToOne
-    @JoinColumn(name = "theater_id")
-    private TheaterEntity theater;
+    public static SeatEntity of(Seat seat) {
+        return SeatEntity.builder()
+                .seatRow(seat.getSeatRow())
+                .seatColumn(seat.getSeatColumn())
+                .build();
+    }
 }

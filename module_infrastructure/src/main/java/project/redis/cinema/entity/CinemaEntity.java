@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import project.redis.cinema.Cinema;
 import project.redis.common.entity.BaseEntity;
 
 @Entity
@@ -24,4 +25,11 @@ public class CinemaEntity extends BaseEntity {
     private Long cinemaId;
 
     private String cinemaName;
+
+    public static CinemaEntity of(Cinema cinema) {
+        return CinemaEntity.builder()
+                .cinemaId(cinema.getCinemaId())
+                .cinemaName(cinema.getCinemaName())
+                .build();
+    }
 }

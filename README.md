@@ -41,7 +41,7 @@
 ## Table Design
 
 **ERD**
-![DB 테이블](db_table_v2.png)
+![DB 테이블](db_table_v3.png)
 
 <br>
 
@@ -49,14 +49,24 @@
 
 - Movie 테이블 - Screening 테이블 = 1 : N
 - Screening 테이블 - Theater 테이블 = 1 : N
-- Theater 테이블 - Seat 테이블 = 1 : N
 - Cinema 테이블 - Theater 테이블 = 1 : N
+- Screening 테이블 - Reservation 테이블 = 1 : N
+- User 테이블 - Reservation 테이블 = 1 : N
+- Seat 테이블 - Reservation 테이블 = 1: N
 
 <br> 
 
 Movie와 Theater가 N : M 이라고 판단
 
 따라서 중간 테이블인 Screening 테이블 생성
+
+Theater와 Seat이 가지고 있던 연관 관계 삭제
+
+왜냐하면 연관 관계 가지고 있다면 하나의 예약에서 Seat 예약 시 다른 상영에서 해당 Seat 예약 할 수 없게 됨
+
+Seat은 Reservation에서 가지고 있는 가상의 좌석이라고 생각
+
+Seat의 지정된 범위만 (5*5) 넘지 않고 같은 상영에서 같은 Seat 예약 할 수 없도록
 
 <br>
 
@@ -70,5 +80,18 @@ Movie와 Theater가 N : M 이라고 판단
 
 ## 성능 테스트 보고서
 
-링크 : [성능 테스트 보고서](https://cj-1998.notion.site/1be173b71de2801ca6faeb654507de83)
+링크 : [캐시 성능 테스트 보고서](https://cj-1998.notion.site/1be173b71de2801ca6faeb654507de83)
 
+링크 : [예약 API 성능 테스트 보고서](https://cj-1998.notion.site/1c2173b71de280d9a3cde32e4563d9dd?pvs=73)
+
+<br>
+
+## Lock에 설정한 시간 설명
+
+lease time : 4s
+
+이유 : 예약 API 요청 시 평균적으로 1500ms = 1.5s 걸려서 여유를 주고 4s로 설정
+
+wait time : 3s
+
+이유 : '사용자가 기다릴 수 있는 최대 허용 시간' 이라는 원칙으로 3s로 설정
