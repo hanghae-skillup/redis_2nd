@@ -1,15 +1,36 @@
 package com.hanghae.theater;
 
-public class Seat {
+import com.hanghae.common.entity.BaseEntity;
+import jakarta.persistence.*;
+import lombok.Getter;
 
-    private final SeatCol col;
-    private final SeatRow row;
+@Getter
+@Entity
+public class Seat extends BaseEntity {
 
-    public Seat(int row, int col) {
-        this(new SeatRow(row), new SeatCol(col));
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    private Long id;
+
+    @Embedded
+    private SeatCol col;
+
+    @Embedded
+    private SeatRow row;
+
+    protected Seat() {
     }
 
-    public Seat(SeatRow row, SeatCol col) {
+    public Seat(char row, int col) {
+        this(null, new SeatRow(row), new SeatCol(col));
+    }
+
+    public Seat(int row, int col) {
+        this(null, new SeatRow(row), new SeatCol(col));
+    }
+
+    public Seat(Long id, SeatRow row, SeatCol col) {
+        this.id = id;
         this.row = row;
         this.col = col;
     }
