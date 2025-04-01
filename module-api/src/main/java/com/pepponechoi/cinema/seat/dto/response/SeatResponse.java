@@ -1,31 +1,27 @@
 package com.pepponechoi.cinema.seat.dto.response;
-
 import com.pepponechoi.cinema.screen.entity.Screen;
 import com.pepponechoi.cinema.seat.entity.Seat;
-import lombok.Data;
 
-@Data
-public class SeatResponse {
-    private Long id;
-    private Character row;
-    private Integer column;
-    private NestedScreenResponse screen;
+public record SeatResponse(
+    Long id,
+    Character row,
+    Integer column,
+    NestedScreenResponse screen,
+    Boolean isReserved
+) {
+    public static SeatResponse of(final Seat seat) {
 
-    public SeatResponse(Seat seat) {
-        this.id = seat.getId();
-        this.row = seat.getRowNo();
-        this.column = seat.getColumnNo();
-        this.screen = new NestedScreenResponse(seat.getScreen());
+        Boolean getReserved = seat.getReservation() != null;
+        return new SeatResponse(seat.getId(), seat.getRowNo(), seat.getColumnNo(),
+            NestedScreenResponse.of(seat.getScreen()), getReserved);
     }
 
-    @Data
-    private static class NestedScreenResponse {
-        private Long id;
-        private String name;
-
-        public NestedScreenResponse(Screen screen) {
-            this.id = screen.getId();
-            this.name = screen.getName();
+    private record NestedScreenResponse(
+        Long id,
+        String name
+    ) {
+        public static NestedScreenResponse of(Screen screen) {
+            return new NestedScreenResponse(screen.getId(), screen.getName());
         }
     }
 }

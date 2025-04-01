@@ -3,46 +3,63 @@ package com.pepponechoi.cinema.reservation.dto.response;
 import com.pepponechoi.cinema.reservation.entity.Reservation;
 import com.pepponechoi.cinema.schedule.entity.Schedule;
 import com.pepponechoi.cinema.seat.entity.Seat;
+import com.pepponechoi.cinema.user.entity.User;
 import java.time.LocalDateTime;
-import lombok.Data;
+import java.util.List;
 
-@Data
-public class ReservationResponse {
-    private Long id;
-    private NestedScheduleResponse schedule;
-    private NestedSeatResponse seat;
+public record ReservationResponse(
+    Long id,
+    NestedScheduleResponse schedule,
+    List<NestedSeatResponse> seats,
+    NestedUserResponse user
+) {
 
-    public ReservationResponse(Reservation reservation) {
-        this.id = reservation.getId();
-        this.schedule = new NestedScheduleResponse(reservation.getSchedule());
-        this.seat = new NestedSeatResponse(reservation.getSeat());
+    public static ReservationResponse of(Reservation reservation) {
+        return new ReservationResponse(
+            reservation.getId(),
+            NestedScheduleResponse.of(reservation.getSchedule()),
+                reservation.getSeats().stream().map(NestedSeatResponse::of).toList(),
+                NestedUserResponse.of(reservation.getUser())
+        );
     }
 
-    @Data
-    private static class NestedScheduleResponse {
-        private Long id;
-        private String movieTitle;
-        private LocalDateTime start;
-        private LocalDateTime end;
-
-        public NestedScheduleResponse(Schedule schedule) {
-            this.id = schedule.getId();
-            this.movieTitle = schedule.getMovie().getTitle();
-            this.start = schedule.getStart();
-            this.end = schedule.getEnd();
+    public record NestedUserResponse(Long id, String email, String nickname) {
+        public static NestedUserResponse of(User user) {
+            return new NestedUserResponse(
+                    user.getId(),
+                    user.getEmail(),
+                    user.getNickname()
+            );
         }
     }
 
-    @Data
-    private static class NestedSeatResponse {
-        private Long id;
-        private Character row;
-        private Integer column;
+    public record NestedScheduleResponse(
+        Long id,
+        String movieTitle,
+        LocalDateTime start,
+        LocalDateTime end
+    ) {
+        public static NestedScheduleResponse of(Schedule schedule) {
+            return new NestedScheduleResponse(
+                schedule.getId(),
+                schedule.getMovie().getTitle(),
+                schedule.getStart(),
+                schedule.getEnd()
+            );
+        }
+    }
 
-        public NestedSeatResponse(Seat seat) {
-            this.id = seat.getId();
-            this.row = seat.getRowNo();
-            this.column = seat.getColumnNo();
+    private record NestedSeatResponse(
+        Long id,
+        Character row,
+        Integer column
+    ) {
+        public static NestedSeatResponse of(Seat seat) {
+            return new NestedSeatResponse(
+                seat.getId(),
+                seat.getRowNo(),
+                seat.getColumnNo()
+            );
         }
     }
 }

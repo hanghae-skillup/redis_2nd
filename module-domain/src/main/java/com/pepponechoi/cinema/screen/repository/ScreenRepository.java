@@ -7,7 +7,6 @@ import java.util.Optional;
 
 public interface ScreenRepository {
     Screen save(Screen screen);
-
     Optional<Screen> findById(Long id);
     List<Screen> findAll();
 

@@ -3,29 +3,28 @@ package com.pepponechoi.cinema.schedule.dto.response;
 import com.pepponechoi.cinema.movie.entity.Movie;
 import com.pepponechoi.cinema.schedule.entity.Schedule;
 import java.time.LocalDateTime;
-import lombok.Data;
 
-@Data
-public class ScheduleResponse {
-    private Long id;
-    private NestedMovieResponse movie;
-    private LocalDateTime start;
-    private LocalDateTime end;
-
-    public ScheduleResponse(Schedule schedule) {
-        this.id = schedule.getId();
-        this.movie = new NestedMovieResponse(schedule.getMovie());
-        this.start = schedule.getStart();
-        this.end = schedule.getEnd();
+public record ScheduleResponse(
+    Long id,
+    NestedMovieResponse movie,
+    LocalDateTime start,
+    LocalDateTime end
+) {
+    public static ScheduleResponse of(Schedule schedule) {
+        return new ScheduleResponse(
+            schedule.getId(),
+            NestedMovieResponse.of(schedule.getMovie()),
+            schedule.getStart(),
+            schedule.getEnd()
+        );
     }
 
-    @Data
-    private static class NestedMovieResponse {
-        private Long id;
-        private String title;
-        public NestedMovieResponse(Movie movie) {
-            this.id = movie.getId();
-            this.title = movie.getTitle();
+    public record NestedMovieResponse(
+        Long id,
+        String title
+    ) {
+        public static NestedMovieResponse of(Movie movie) {
+            return new NestedMovieResponse(movie.getId(), movie.getTitle());
         }
     }
 }

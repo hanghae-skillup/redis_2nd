@@ -1,4 +1,21 @@
 ### 영화 리스트 리퀘스트
-GET http://localhost:8080/api/v1/movies
+GET http://localhost:8080/api/v1/movies?genre=ACTION&title=기생충
 
-###
+### 영화 상영 계획 생성
+POST http://localhost:8080/api/v1/reservations
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "seats": [
+    {
+      "rowNo": "A",
+      "columnNo": 1
+    },
+    {
+      "rowNo": "A",
+      "columnNo": 2
+    }
+  ],
+  "scheduleId": 1
+}

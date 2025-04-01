@@ -8,6 +8,22 @@ repositories {
 	mavenCentral()
 }
 
+ext {
+	querydslVersion = '5.0.0' // 실제 사용 버전으로 일치시킴
+}
+
+bootJar {
+	enabled = false
+}
+
+jar {
+	enabled = true
+}
+
+bootRun {
+	enabled = false
+}
+
 allprojects {
 	group = 'com.pepponechoi'
 	version = '0.0.1-SNAPSHOT'
@@ -16,6 +32,11 @@ allprojects {
 		toolchain {
 			languageVersion = JavaLanguageVersion.of(21)
 		}
+	}
+
+	tasks.withType(JavaCompile) {
+		options.fork = true
+		options.incremental = true
 	}
 }
 
@@ -46,39 +67,109 @@ subprojects {
 	tasks.named('test') {
 		useJUnitPlatform()
 	}
+
+	bootJar {
+		enabled = false
+	}
+
+	jar {
+		enabled = true
+	}
+
+	bootRun {
+		enabled = false
+	}
 }
 
+// 공통 모듈: 데이터 엑세스 계층 담당
 project(":module-common") {
 	dependencies {
+		implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+		implementation("org.springframework.boot:spring-boot-starter-web")
+		implementation 'org.springframework.boot:spring-boot-starter-validation'
 		runtimeOnly 'com.mysql:mysql-connector-j'
-		implementation 'org.springframework.boot:spring-boot-starter-web'
-		implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	}
 }
 
-project(":module-api") {
-	dependencies {
-		implementation 'org.springframework.boot:spring-boot-starter-web'
-		implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-		annotationProcessor "jakarta.persistence:jakarta.persistence-api"
-		implementation project(":module-domain")
-		implementation project(":module-common")
-	}
-}
-
-project(":module-application") {
-	dependencies {
-		implementation project(":module-api")
-		implementation project(":module-common")
-		implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-		annotationProcessor "jakarta.persistence:jakarta.persistence-api"
-	}
-}
-
+// 도메인 모듈: 엔티티와 비즈니스 로직 관리
 project(":module-domain") {
 	dependencies {
-		implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 		implementation project(":module-common")
+		implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+		implementation "com.querydsl:querydsl-jpa:${querydslVersion}:jakarta"
+		annotationProcessor "com.querydsl:querydsl-apt:${querydslVersion}:jakarta"
+		annotationProcessor "jakarta.persistence:jakarta.persistence-api"
+	}
+
+	def querydslDir = "$buildDir/generated/querydsl"
+
+	sourceSets {
+		main.java.srcDirs += [ querydslDir ]
+	}
+
+	tasks.withType(JavaCompile) {
+		options.annotationProcessorGeneratedSourcesDirectory = file(querydslDir)
+	}
+
+	clean.doLast {
+		file(querydslDir).deleteDir()
 	}
 }
 
+project(":module-core") {
+	bootJar {
+		enabled = false
+	}
+
+	jar {
+		enabled = true
+	}
+
+	dependencies {
+		implementation project(":module-common")
+		implementation project(":module-domain")
+		implementation 'org.springframework.boot:spring-boot-starter-cache'
+		implementation 'org.springframework.boot:spring-boot-starter-aop'
+		implementation("org.springframework.boot:spring-boot-starter")
+		implementation 'org.redisson:redisson-spring-boot-starter:3.23.2'
+		// JSON 직렬화 및 역직렬화 관련 Jackson 라이브러리
+		implementation 'com.fasterxml.jackson.core:jackson-databind'
+		implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
+	}
+}
+
+// API 모듈: 컨트롤러와 API 엔드포인트 관리
+project(":module-api") {
+	dependencies {
+		implementation project(":module-domain")
+		implementation("org.springframework.boot:spring-boot-starter-web")
+		implementation project(":module-common")
+		implementation project(":module-core")
+		implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+		implementation 'com.github.ben-manes.caffeine:caffeine'
+		implementation 'org.redisson:redisson-spring-boot-starter:3.23.2'
+	}
+}
+
+// 애플리케이션 모듈: 실행 가능한 애플리케이션
+project(":module-application") {
+	bootJar {
+		enabled = true
+	}
+
+	jar {
+		enabled = false
+	}
+
+	bootRun {
+		enabled = true
+	}
+
+	dependencies {
+		implementation project(":module-common")
+		implementation("org.springframework.boot:spring-boot-starter-web")
+		implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+		implementation project(":module-core")
+		implementation project(":module-api")
+	}
+}
