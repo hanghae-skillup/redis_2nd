@@ -11,7 +11,7 @@ export let options = {
 };
 
 export default function () {
-    const res = http.get('http://localhost:8080/v1/movies/nowMovie?movieNm=위로&genre=COMEDI'); // API 엔드포인트
+    const res = http.get('http://localhost:8080/v1/movies/nowMovie?movieNm=위로&genre=COMEDY'); // API 엔드포인트
     check(res, {
         'status is 200': (r) => r.status === 200,
         'response time < 200ms': (r) => r.timings.duration < 200,

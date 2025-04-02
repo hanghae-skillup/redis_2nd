@@ -1,0 +1,917 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="redis_2nd:jar" />
+    </artifacts-to-build>
+  </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="3498bdff-6cd7-4b2c-abb6-88d6d8ec3706" name="변경" comment="3주차 레디스 설정 및 캐시적용, 락 테스트는 진행중...">
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/3주차/cinema_movie_time.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/3주차/common_img.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/3주차/movie_info.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/3주차/movie_reser.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/3주차/movie_reser_sub.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/3주차/movie_seat.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/3주차/movie_user.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/3주차/레디스 (1).png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.10/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.10/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.10/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.10/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.10/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.10/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.10/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.10/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.10/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.10/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/build/classes/java/main/com/redis/api/exception/GlobalExceptionHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/api/build/classes/java/main/com/redis/api/exception/GlobalExceptionHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/build/classes/java/main/com/redis/api/reservation/application/convert/ReservationDtoMapper.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/build/classes/java/main/com/redis/api/reservation/presentation/controller/ReservationController.class" beforeDir="false" afterPath="$PROJECT_DIR$/api/build/classes/java/main/com/redis/api/reservation/presentation/controller/ReservationController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/build/classes/java/test/com/redis/api/ReservationTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/api/build/classes/java/test/com/redis/api/ReservationTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/build/reports/tests/test/classes/com.redis.api.ReservationTest.html" beforeDir="false" afterPath="$PROJECT_DIR$/api/build/reports/tests/test/classes/com.redis.api.ReservationTest.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/build/reports/tests/test/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/api/build/reports/tests/test/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/build/reports/tests/test/packages/com.redis.api.html" beforeDir="false" afterPath="$PROJECT_DIR$/api/build/reports/tests/test/packages/com.redis.api.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/build/test-results/test/TEST-com.redis.api.ReservationTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/api/build/test-results/test/TEST-com.redis.api.ReservationTest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/build/test-results/test/binary/output.bin" beforeDir="false" afterPath="$PROJECT_DIR$/api/build/test-results/test/binary/output.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/build/test-results/test/binary/output.bin.idx" beforeDir="false" afterPath="$PROJECT_DIR$/api/build/test-results/test/binary/output.bin.idx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/build/test-results/test/binary/results.bin" beforeDir="false" afterPath="$PROJECT_DIR$/api/build/test-results/test/binary/results.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/build/tmp/compileJava/compileTransaction/stash-dir/ReservationController.class.uniqueId1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/build/tmp/compileJava/compileTransaction/stash-dir/ScreenController.class.uniqueId2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/build/tmp/compileJava/compileTransaction/stash-dir/ScreenService.class.uniqueId0" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/api/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/build/tmp/compileTestJava/compileTransaction/stash-dir/ReservationTest.class.uniqueId0" beforeDir="false" afterPath="$PROJECT_DIR$/api/build/tmp/compileTestJava/compileTransaction/stash-dir/ReservationTest.class.uniqueId0" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/build/tmp/compileTestJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/api/build/tmp/compileTestJava/previous-compilation-data.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/src/test/java/com/redis/api/ReservationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/test/java/com/redis/api/ReservationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/build/classes/java/main/com/redis/application/message/event/MessageEventListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/application/build/classes/java/main/com/redis/application/message/event/MessageEventListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/build/classes/java/main/com/redis/application/reservation/application/service/ReservationService.class" beforeDir="false" afterPath="$PROJECT_DIR$/application/build/classes/java/main/com/redis/application/reservation/application/service/ReservationService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/build/libs/application-0.0.1-SNAPSHOT-plain.jar" beforeDir="false" afterPath="$PROJECT_DIR$/application/build/libs/application-0.0.1-SNAPSHOT-plain.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/build/tmp/compileJava/compileTransaction/stash-dir/ApplicationReservationDtoMapper.class.uniqueId1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/build/tmp/compileJava/compileTransaction/stash-dir/ReservationService.class.uniqueId2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/build/tmp/compileJava/compileTransaction/stash-dir/ScreenRedisCacheController.class.uniqueId0" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/build/tmp/compileJava/compileTransaction/stash-dir/ScreenRedisCacheService.class.uniqueId3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/application/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/src/main/java/com/redis/application/message/service/MessageService.java" beforeDir="false" afterPath="$PROJECT_DIR$/application/src/main/java/com/redis/application/message/service/MessageService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/src/main/java/com/redis/application/reservation/application/service/ReservationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/application/src/main/java/com/redis/application/reservation/application/service/ReservationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/src/main/java/com/redis/application/screen/application/service/ScreenRedisCacheService.java" beforeDir="false" afterPath="$PROJECT_DIR$/application/src/main/java/com/redis/application/screen/application/service/ScreenRedisCacheService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/redis/dump.rdb" beforeDir="false" afterPath="$PROJECT_DIR$/data/redis/dump.rdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/build/classes/java/main/com/redis/domain/seat/entity/MovieSeat$MovieSeatBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/domain/build/classes/java/main/com/redis/domain/seat/entity/MovieSeat$MovieSeatBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/build/classes/java/main/com/redis/domain/seat/entity/MovieSeat.class" beforeDir="false" afterPath="$PROJECT_DIR$/domain/build/classes/java/main/com/redis/domain/seat/entity/MovieSeat.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/build/libs/domain-0.0.1-SNAPSHOT-plain.jar" beforeDir="false" afterPath="$PROJECT_DIR$/domain/build/libs/domain-0.0.1-SNAPSHOT-plain.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/build/tmp/compileJava/compileTransaction/stash-dir/ScreenRepository.class.uniqueId0" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/domain/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/com/redis/domain/seat/entity/MovieSeat.java" beforeDir="false" afterPath="$PROJECT_DIR$/domain/src/main/java/com/redis/domain/seat/entity/MovieSeat.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+    <projectState path="$PROJECT_DIR$/api">
+      <ProjectState />
+    </projectState>
+    <projectState path="$PROJECT_DIR$/api-module">
+      <ProjectState />
+    </projectState>
+    <projectState path="$PROJECT_DIR$/batch">
+      <ProjectState />
+    </projectState>
+    <projectState path="$PROJECT_DIR$/batch-module">
+      <ProjectState />
+    </projectState>
+    <projectState path="$PROJECT_DIR$/cinema">
+      <ProjectState />
+    </projectState>
+    <projectState path="$PROJECT_DIR$/cinema/movie">
+      <ProjectState />
+    </projectState>
+    <projectState path="$PROJECT_DIR$/cinema/user">
+      <ProjectState />
+    </projectState>
+    <projectState path="$PROJECT_DIR$/domain">
+      <ProjectState />
+    </projectState>
+    <projectState path="$PROJECT_DIR$/gradle">
+      <ProjectState />
+    </projectState>
+    <projectState path="$PROJECT_DIR$/module-InnerApi">
+      <ProjectState />
+    </projectState>
+    <projectState path="$PROJECT_DIR$/module-api">
+      <ProjectState />
+    </projectState>
+    <projectState path="$PROJECT_DIR$/module-cinema">
+      <ProjectState />
+    </projectState>
+    <projectState path="$PROJECT_DIR$/module-common">
+      <ProjectState />
+    </projectState>
+    <projectState path="$PROJECT_DIR$/module-domain">
+      <ProjectState />
+    </projectState>
+    <projectState path="$PROJECT_DIR$/module-innerApi">
+      <ProjectState />
+    </projectState>
+    <projectState path="$PROJECT_DIR$/module-innerApi2">
+      <ProjectState />
+    </projectState>
+    <projectState path="$PROJECT_DIR$/module-movie">
+      <ProjectState />
+    </projectState>
+    <projectState path="$PROJECT_DIR$/movie">
+      <ProjectState />
+    </projectState>
+    <projectState path="$PROJECT_DIR$/reservation">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$/cinema">
+          <activation />
+        </task>
+        <task path="$PROJECT_DIR$/batch-module">
+          <activation />
+        </task>
+        <task path="$PROJECT_DIR$/api">
+          <activation />
+        </task>
+        <task path="$PROJECT_DIR$/gradle">
+          <activation />
+        </task>
+        <task path="$PROJECT_DIR$/domain">
+          <activation />
+        </task>
+        <task path="$PROJECT_DIR$/movie">
+          <activation />
+        </task>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <task path="$PROJECT_DIR$/module-api">
+          <activation />
+        </task>
+        <task path="$PROJECT_DIR$/module-common">
+          <activation />
+        </task>
+        <task path="$PROJECT_DIR$/module-domain">
+          <activation />
+        </task>
+        <task path="$PROJECT_DIR$/module-cinema">
+          <activation />
+        </task>
+        <task path="$PROJECT_DIR$/module-innerApi">
+          <activation />
+        </task>
+        <task path="$PROJECT_DIR$/infra">
+          <activation />
+        </task>
+        <task path="$PROJECT_DIR$/common">
+          <activation />
+        </task>
+        <task path="$PROJECT_DIR$/application">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="redis_2nd" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="redis_2nd" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="redis_2nd" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="build" type="c8890929:TasksNode$1" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="CSS File" />
+        <option value="HTML File" />
+        <option value="JavaScript File" />
+        <option value="Dockerfile" />
+        <option value="OpenAPI" />
+        <option value="com.intellij.jpb.NewClass" />
+        <option value="Enum" />
+        <option value="module-info" />
+        <option value="com.intellij.jpb.JpaEntity" />
+        <option value="HTTP Request" />
+        <option value="package.json" />
+        <option value="package-info" />
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <favorite-branches>
+      <branch-storage>
+        <map>
+          <entry type="LOCAL">
+            <value>
+              <list>
+                <branch-info repo="$PROJECT_DIR$" source="3주차" />
+              </list>
+            </value>
+          </entry>
+        </map>
+      </branch-storage>
+    </favorite-branches>
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="2주차" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;rondomos&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/rondomos/redis_2nd.git&quot;,
+    &quot;accountId&quot;: &quot;65436ca4-db54-4071-adee-aaf7976e7cd9&quot;
+  }
+}</component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.tomcat.embed/tomcat-embed-core/10.1.36/3ccaa558e32e317e35d6674d65d7d9aa182e082f/tomcat-embed-core-10.1.36.jar!/jakarta/servlet/http/HttpServlet.class" root0="SKIP_INSPECTION" />
+    <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.tomcat.embed/tomcat-embed-core/10.1.36/3ccaa558e32e317e35d6674d65d7d9aa182e082f/tomcat-embed-core-10.1.36.jar!/org/apache/catalina/authenticator/AuthenticatorBase.class" root0="SKIP_INSPECTION" />
+    <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.tomcat.embed/tomcat-embed-core/10.1.36/3ccaa558e32e317e35d6674d65d7d9aa182e082f/tomcat-embed-core-10.1.36.jar!/org/apache/catalina/connector/CoyoteAdapter.class" root0="SKIP_INSPECTION" />
+    <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.tomcat.embed/tomcat-embed-core/10.1.36/3ccaa558e32e317e35d6674d65d7d9aa182e082f/tomcat-embed-core-10.1.36.jar!/org/apache/catalina/core/ApplicationFilterChain.class" root0="SKIP_INSPECTION" />
+    <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.tomcat.embed/tomcat-embed-core/10.1.36/3ccaa558e32e317e35d6674d65d7d9aa182e082f/tomcat-embed-core-10.1.36.jar!/org/apache/catalina/core/StandardContextValve.class" root0="SKIP_INSPECTION" />
+    <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.tomcat.embed/tomcat-embed-core/10.1.36/3ccaa558e32e317e35d6674d65d7d9aa182e082f/tomcat-embed-core-10.1.36.jar!/org/apache/catalina/core/StandardEngineValve.class" root0="SKIP_INSPECTION" />
+    <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.tomcat.embed/tomcat-embed-core/10.1.36/3ccaa558e32e317e35d6674d65d7d9aa182e082f/tomcat-embed-core-10.1.36.jar!/org/apache/catalina/core/StandardHostValve.class" root0="SKIP_INSPECTION" />
+    <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.tomcat.embed/tomcat-embed-core/10.1.36/3ccaa558e32e317e35d6674d65d7d9aa182e082f/tomcat-embed-core-10.1.36.jar!/org/apache/catalina/core/StandardWrapperValve.class" root0="SKIP_INSPECTION" />
+    <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.tomcat.embed/tomcat-embed-core/10.1.36/3ccaa558e32e317e35d6674d65d7d9aa182e082f/tomcat-embed-core-10.1.36.jar!/org/apache/catalina/valves/ErrorReportValve.class" root0="SKIP_INSPECTION" />
+    <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.tomcat.embed/tomcat-embed-core/10.1.36/3ccaa558e32e317e35d6674d65d7d9aa182e082f/tomcat-embed-core-10.1.36.jar!/org/apache/coyote/AbstractProcessorLight.class" root0="SKIP_INSPECTION" />
+    <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.tomcat.embed/tomcat-embed-core/10.1.36/3ccaa558e32e317e35d6674d65d7d9aa182e082f/tomcat-embed-core-10.1.36.jar!/org/apache/coyote/AbstractProtocol.class" root0="SKIP_INSPECTION" />
+    <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.tomcat.embed/tomcat-embed-core/10.1.36/3ccaa558e32e317e35d6674d65d7d9aa182e082f/tomcat-embed-core-10.1.36.jar!/org/apache/coyote/http11/Http11Processor.class" root0="SKIP_INSPECTION" />
+    <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.tomcat.embed/tomcat-embed-core/10.1.36/3ccaa558e32e317e35d6674d65d7d9aa182e082f/tomcat-embed-core-10.1.36.jar!/org/apache/tomcat/util/net/NioEndpoint.class" root0="SKIP_INSPECTION" />
+    <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.tomcat.embed/tomcat-embed-websocket/10.1.36/222960bc8895aa543e405382094c7fb118544d0d/tomcat-embed-websocket-10.1.36.jar!/org/apache/tomcat/websocket/server/WsFilter.class" root0="SKIP_INSPECTION" />
+    <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-webmvc/6.2.3/485f6e351bba471fc8f841f39eaf6488896369ff/spring-webmvc-6.2.3.jar!/org/springframework/web/servlet/DispatcherServlet.class" root0="SKIP_INSPECTION" />
+    <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-webmvc/6.2.3/485f6e351bba471fc8f841f39eaf6488896369ff/spring-webmvc-6.2.3.jar!/org/springframework/web/servlet/FrameworkServlet.class" root0="SKIP_INSPECTION" />
+    <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-webmvc/6.2.3/485f6e351bba471fc8f841f39eaf6488896369ff/spring-webmvc-6.2.3.jar!/org/springframework/web/servlet/mvc/method/AbstractHandlerMethodAdapter.class" root0="SKIP_INSPECTION" />
+    <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-webmvc/6.2.3/485f6e351bba471fc8f841f39eaf6488896369ff/spring-webmvc-6.2.3.jar!/org/springframework/web/servlet/mvc/method/annotation/RequestMappingHandlerAdapter.class" root0="SKIP_INSPECTION" />
+    <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-webmvc/6.2.3/485f6e351bba471fc8f841f39eaf6488896369ff/spring-webmvc-6.2.3.jar!/org/springframework/web/servlet/mvc/method/annotation/ServletInvocableHandlerMethod.class" root0="SKIP_INSPECTION" />
+    <setting file="jar://$USER_HOME$/.jdks/openjdk-23.0.2/lib/src.zip!/java.base/java/lang/Iterable.java" root0="SKIP_INSPECTION" />
+  </component>
+  <component name="JpbToolWindowState">
+    <option name="isToolWindowVisible" value="false" />
+  </component>
+  <component name="KubernetesApiPersistence">{}</component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
+  <component name="LogFilters">
+    <option name="FILTER_ERRORS" value="false" />
+    <option name="FILTER_WARNINGS" value="false" />
+    <option name="FILTER_INFO" value="true" />
+    <option name="FILTER_DEBUG" value="true" />
+    <option name="CUSTOM_FILTER" />
+  </component>
+  <component name="PackageJsonUpdateNotifier">
+    <dismissed value="$PROJECT_DIR$/package.json" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
+  <component name="ProjectId" id="2uL5BucEzGdIcXXpCa3mG1Cjh7q" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "DefaultHtmlFileTemplate": "HTML File",
+    "Docker.Docker 이미지.executor": "Run",
+    "Docker.Dockerfile.executor": "Run",
+    "Docker.cinema/compose.yaml.redis: Compose 배포.executor": "Run",
+    "Docker.cinema/compose.yaml: Compose 배포.executor": "Run",
+    "Docker.cinema/compose.yml.app: Compose 배포.executor": "Run",
+    "Docker.docker-compose.yml.grafana: Compose 배포.executor": "Run",
+    "Docker.docker-compose.yml.mysql: Compose 배포.executor": "Run",
+    "Docker.docker-compose.yml.redis: Compose 배포.executor": "Run",
+    "Docker.docker-compose.yml: Compose 배포.executor": "Run",
+    "Docker.mysql_8.0.executor": "Run",
+    "Docker.reids_2nd-redis-6.2.executor": "Run",
+    "Downloaded.Files.Path.Enabled": "true",
+    "Gradle.'api'에 있는 테스트.executor": "Debug",
+    "Gradle.'domain'에 있는 테스트.executor": "Debug",
+    "Gradle.'domain.untitled'에 있는 테스트.executor": "Debug",
+    "Gradle.'module-innerApi'에 있는 테스트.executor": "Debug",
+    "Gradle.'module-innerApi2'에 있는 테스트.executor": "Debug",
+    "Gradle.'module-movie'에 있는 테스트.executor": "Debug",
+    "Gradle.'movie'에 있는 테스트.executor": "Debug",
+    "Gradle.'redis_2nd.module-api'에 있는 테스트.executor": "Debug",
+    "Gradle.ReservationTest.executor": "Run",
+    "Gradle.api 빌드.executor": "Run",
+    "Gradle.batch-module 빌드.executor": "Run",
+    "Gradle.cinema [bootJar].executor": "Run",
+    "Gradle.cinema [build].executor": "Run",
+    "Gradle.cinema [clean].executor": "Run",
+    "Gradle.cinema [jar].executor": "Run",
+    "Gradle.domain.executor": "Debug",
+    "Gradle.gradle [build].executor": "Run",
+    "Gradle.gradle [classes].executor": "Run",
+    "Gradle.gradle [clean].executor": "Run",
+    "Gradle.gradle [init].executor": "Run",
+    "Gradle.gradle [wrapper].executor": "Run",
+    "Gradle.gradle 빌드.executor": "Run",
+    "Gradle.module-api 빌드.executor": "Run",
+    "Gradle.module-cinema [build].executor": "Run",
+    "Gradle.module-cinema [clean].executor": "Run",
+    "Gradle.module-cinema [dependencies].executor": "Run",
+    "Gradle.module-cinema 빌드.executor": "Run",
+    "Gradle.module-common [bootJar].executor": "Run",
+    "Gradle.module-common [clean].executor": "Coverage",
+    "Gradle.module-common 빌드.executor": "Run",
+    "Gradle.module-domain 빌드.executor": "Run",
+    "Gradle.module-innerApi [dependencies].executor": "Run",
+    "Gradle.module-innerApi 빌드.executor": "Run",
+    "Gradle.module-movie 빌드.executor": "Run",
+    "Gradle.redis_2nd [bootJar].executor": "Run",
+    "Gradle.redis_2nd [buildDependents].executor": "Run",
+    "Gradle.redis_2nd [build].executor": "Run",
+    "Gradle.redis_2nd [clean].executor": "Run",
+    "Gradle.redis_2nd [dependencies].executor": "Run",
+    "Gradle.redis_2nd [jar].executor": "Run",
+    "Gradle.redis_2nd 빌드.executor": "Run",
+    "Gradle.redis_2nd.executor": "Run",
+    "Gradle.redis_2nd:api [build].executor": "Run",
+    "Gradle.redis_2nd:api [classes].executor": "Run",
+    "Gradle.redis_2nd:api [clean].executor": "Run",
+    "Gradle.redis_2nd:application [build].executor": "Run",
+    "Gradle.redis_2nd:application [clean].executor": "Run",
+    "Gradle.redis_2nd:common [assemble].executor": "Run",
+    "Gradle.redis_2nd:common [build].executor": "Run",
+    "Gradle.redis_2nd:common [clean].executor": "Run",
+    "Gradle.redis_2nd:domain [bootJar].executor": "Run",
+    "Gradle.redis_2nd:domain [build].executor": "Run",
+    "Gradle.redis_2nd:domain [classes].executor": "Run",
+    "Gradle.redis_2nd:domain [clean].executor": "Run",
+    "Gradle.redis_2nd:infra [bootRun].executor": "Run",
+    "Gradle.redis_2nd:infra [buildDependents].executor": "Run",
+    "Gradle.redis_2nd:infra [build].executor": "Debug",
+    "Gradle.redis_2nd:infra [classes].executor": "Run",
+    "Gradle.redis_2nd:infra [clean].executor": "Run",
+    "Gradle.소스 다운로드.executor": "Run",
+    "HTTP 요청.KMdb | #1.executor": "Run",
+    "HTTP 요청.KMdb | GET request to example server.executor": "Run",
+    "HTTP 요청.KMdb 내 전체.executor": "Run",
+    "HTTP 요청.KMdbApi | GET request to example server.executor": "Run",
+    "HTTP 요청.movieNow | 상영중인 영화 가져오기.executor": "Run",
+    "HTTP 요청.movieNow 내 전체.executor": "Run",
+    "HTTP 요청.reidsTest | #1.executor": "Run",
+    "HTTP 요청.reidsTest | 상영중인 영화 가져오기.executor": "Run",
+    "JUnit.CinemaApplicationTests.executor": "Run",
+    "JUnit.ReservationServiceTest.executor": "Run",
+    "JUnit.api-module22의 전부.executor": "Debug",
+    "JUnit.api의 전부 (1).executor": "Debug",
+    "JUnit.api의 전부.executor": "Debug",
+    "JUnit.core-module의 전부.executor": "Debug",
+    "JUnit.module-InnerApi의 전부.executor": "Debug",
+    "JUnit.redis_2nd의 전부 (1).executor": "Run",
+    "JUnit.redis_2nd의 전부.executor": "Debug",
+    "Node.js.test.js.executor": "Run",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Shell Script.gradlew.executor": "Run",
+    "Spring Boot.ApiApplication (1).executor": "Run",
+    "Spring Boot.ApiApplication.executor": "Run",
+    "Spring Boot.CinemaApplication.executor": "Run",
+    "Spring Boot.InfraApplication.executor": "Run",
+    "Spring Boot.Main$ApiApplication.executor": "Run",
+    "Spring Boot.ModuleApiApplication.executor": "Debug",
+    "Spring Boot.RedisCacheApplication.executor": "Run",
+    "Tomcat 서버.tomcat7.executor": "Run",
+    "database.data.extractors.current.export.id": "SQL Insert",
+    "database.data.extractors.current.id": "SQL Insert",
+    "deletionFromPopupRequiresConfirmation": "false",
+    "git-widget-placeholder": "3주차",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/isaac/IdeaProjects/redis_2nd/domain/src/main/java/com/redis/domain/reservation/repository",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "onboarding.tips.debug.path": "C:/Users/isaac/IdeaProjects/redis_2nd/application/src/main/java/com/redis/Main.java",
+    "project.structure.last.edited": "모듈",
+    "project.structure.proportion": "0.15917969",
+    "project.structure.side.proportion": "0.30697674",
+    "run.configurations.included.in.services": "true",
+    "settings.editor.selected.configurable": "project.propCompiler",
+    "vue.rearranger.settings.migration": "true",
+    "애플리케이션.Main (1).executor": "Run",
+    "애플리케이션.Main.executor": "Run"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
+    ]
+  }
+}]]></component>
+  <component name="ReactorSettings">
+    <option name="notificationShown" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\isaac\IdeaProjects\redis_2nd\domain\src\main\java\com\redis\domain\reservation\repository" />
+      <recent name="C:\Users\isaac\IdeaProjects\redis_2nd\application\src\main\java\com\redis\application\screen" />
+      <recent name="C:\Users\isaac\IdeaProjects\redis_2nd\application\src\main\java\com\redis\application\message\event" />
+      <recent name="C:\Users\isaac\IdeaProjects\redis_2nd\infra" />
+      <recent name="C:\Users\isaac\IdeaProjects\redis_2nd" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\isaac\IdeaProjects\redis_2nd\doc\3주차" />
+      <recent name="C:\Users\isaac\IdeaProjects\redis_2nd\infra\test\resources" />
+      <recent name="C:\Users\isaac\IdeaProjects\redis_2nd\infra" />
+      <recent name="C:\Users\isaac\IdeaProjects\redis_2nd\doc" />
+      <recent name="C:\Users\isaac\IdeaProjects\redis_2nd\doc\2주차" />
+    </key>
+    <key name="CreateBuilderDialog.RecentsKey">
+      <recent name="com.redis.cinema.common.dto" />
+      <recent name="com.redis.cinema.common.entity" />
+      <recent name="com.redis.cinema.entity" />
+    </key>
+    <key name="ExtractSuperBase.RECENT_KEYS">
+      <recent name="com.redis.batch.writer" />
+      <recent name="com.redis.batchmodule.writer" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="" />
+      <recent name="KMdbItemWriter" />
+      <recent name="com.redis.batchmodule" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.redis.application.message.service" />
+      <recent name="com.redis.domain.screening.dto" />
+      <recent name="com.redis.api.movie_info.application.dto" />
+      <recent name="com.redis.api.exception" />
+      <recent name="com.redis.infra.test" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="configurationTypes">
+      <set>
+        <option value="KtorApplicationConfigurationType" />
+        <option value="MicronautRunConfigurationType" />
+        <option value="QuarkusRunConfigurationType" />
+        <option value="SpringBootApplicationConfigurationType" />
+      </set>
+    </option>
+  </component>
+  <component name="RunManager" selected="Gradle.ReservationTest">
+    <configuration name="ReservationTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":api:test" />
+            <option value="--tests" />
+            <option value="&quot;com.redis.api.ReservationTest&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="redis_2nd [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="build" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="redis_2nd [clean]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="clean" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="ReservationServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="redis_2nd.application.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.redis.application.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.redis.application" />
+      <option name="MAIN_CLASS_NAME" value="com.redis.application.ReservationServiceTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="redis_2nd의 전부" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="redis_2nd" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="redis_2nd" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="redis_2nd" />
+      <option name="filePath" />
+      <method v="2" />
+    </configuration>
+    <configuration name="ApiApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="redis_2nd.api.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.ApiApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
+      <deployment type="docker-compose.yml">
+        <settings />
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="docker-deploy" factoryName="docker-image" temporary="true">
+      <deployment type="docker-image">
+        <settings />
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="docker-deploy" factoryName="dockerfile" temporary="true">
+      <deployment type="dockerfile">
+        <settings />
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Gradle.redis_2nd [build]" />
+      <item itemvalue="Gradle.redis_2nd [clean]" />
+      <item itemvalue="Gradle.ReservationTest" />
+      <item itemvalue="JUnit.ReservationServiceTest" />
+      <item itemvalue="JUnit.redis_2nd의 전부" />
+      <item itemvalue="Spring Boot.ApiApplication" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.ReservationTest" />
+        <item itemvalue="Gradle.redis_2nd [build]" />
+        <item itemvalue="Gradle.redis_2nd [clean]" />
+        <item itemvalue="JUnit.ReservationServiceTest" />
+        <item itemvalue="JUnit.redis_2nd의 전부" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-a94e463ab2e7-intellij.indexing.shared.core-IU-243.25659.59" />
+        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-IU-243.25659.59" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="애플리케이션 수준" UseSingleDictionary="true" transferred="true" />
+  <component name="StructureViewState">
+    <option name="selectedTab" value="논리" />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="디폴트 작업">
+      <changelist id="3498bdff-6cd7-4b2c-abb6-88d6d8ec3706" name="변경" comment="" />
+      <created>1742014883873</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1742014883873</updated>
+      <workItem from="1742014885150" duration="462000" />
+      <workItem from="1742015370751" duration="24641000" />
+      <workItem from="1742119372377" duration="11907000" />
+      <workItem from="1742189521030" duration="5425000" />
+      <workItem from="1742278350760" duration="9483000" />
+      <workItem from="1742362984911" duration="1820000" />
+      <workItem from="1742364981140" duration="16075000" />
+      <workItem from="1742389348865" duration="7827000" />
+      <workItem from="1742435265944" duration="1773000" />
+      <workItem from="1742443271615" duration="156000" />
+      <workItem from="1742443437470" duration="3143000" />
+      <workItem from="1742449043504" duration="6504000" />
+      <workItem from="1742463946176" duration="8288000" />
+      <workItem from="1742474683222" duration="5691000" />
+      <workItem from="1742525468351" duration="11459000" />
+      <workItem from="1742538128149" duration="1781000" />
+      <workItem from="1742563125841" duration="3316000" />
+      <workItem from="1742566572000" duration="727000" />
+      <workItem from="1742567320634" duration="5365000" />
+      <workItem from="1742572761530" duration="3149000" />
+      <workItem from="1742575950246" duration="2819000" />
+      <workItem from="1742579556782" duration="40191000" />
+      <workItem from="1742661288570" duration="994000" />
+      <workItem from="1742662310867" duration="39000" />
+      <workItem from="1742663068547" duration="12394000" />
+      <workItem from="1742727394591" duration="4763000" />
+      <workItem from="1742732466976" duration="8425000" />
+      <workItem from="1742806361384" duration="1291000" />
+      <workItem from="1742882817411" duration="7179000" />
+      <workItem from="1742890889003" duration="64456000" />
+      <workItem from="1743166436158" duration="4613000" />
+      <workItem from="1743171102809" duration="46199000" />
+      <workItem from="1743347650584" duration="857000" />
+      <workItem from="1743348537660" duration="453000" />
+      <workItem from="1743349011303" duration="6659000" />
+    </task>
+    <task id="LOCAL-00001" summary="아직 제작중입니다...&#10;조만간 제작해서 올려두겠습니다ㅠㅜ&#10;완성한게 아직 없어용...">
+      <option name="closed" value="true" />
+      <created>1742050860092</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1742050860092</updated>
+    </task>
+    <task id="LOCAL-00002" summary="ERD 업로드">
+      <option name="closed" value="true" />
+      <created>1742051568416</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1742051568416</updated>
+    </task>
+    <task id="LOCAL-00003" summary="ERD 수정 업로드">
+      <option name="closed" value="true" />
+      <created>1742051839221</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1742051839221</updated>
+    </task>
+    <task id="LOCAL-00004" summary="ERD 수정 업로드">
+      <option name="closed" value="true" />
+      <created>1742192351792</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1742192351792</updated>
+    </task>
+    <task id="LOCAL-00005" summary="ERD 수정 업로드">
+      <option name="closed" value="true" />
+      <created>1742448150618</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1742448150618</updated>
+    </task>
+    <task id="LOCAL-00006" summary="ERD 수정 업로드">
+      <option name="closed" value="true" />
+      <created>1742448177664</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1742448177664</updated>
+    </task>
+    <task id="LOCAL-00007" summary="2주차 수정">
+      <option name="closed" value="true" />
+      <created>1742658302606</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1742658302606</updated>
+    </task>
+    <task id="LOCAL-00008" summary="2주차 검색 기능 수정">
+      <option name="closed" value="true" />
+      <created>1742673371215</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1742673371215</updated>
+    </task>
+    <task id="LOCAL-00009" summary="2주차 테이블과 데이터 sql파일 수정">
+      <option name="closed" value="true" />
+      <created>1742674497238</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1742674497238</updated>
+    </task>
+    <task id="LOCAL-00010" summary="2주차 테스트 결과 이미지 파일 커밋">
+      <option name="closed" value="true" />
+      <created>1742727474434</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1742727474434</updated>
+    </task>
+    <task id="LOCAL-00011" summary="2주차 이미지파일 이름 수정">
+      <option name="closed" value="true" />
+      <created>1742727607322</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1742727607322</updated>
+    </task>
+    <task id="LOCAL-00012" summary="3주차 레디스 설정 및 캐시적용, 락 테스트는 진행중...">
+      <option name="closed" value="true" />
+      <created>1743352101145</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1743352101145</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="아직 제작중입니다...&#10;조만간 제작해서 올려두겠습니다ㅠㅜ&#10;완성한게 아직 없어용..." />
+    <MESSAGE value="ERD 업로드" />
+    <MESSAGE value="ERD 수정 업로드" />
+    <MESSAGE value="2주차 수정" />
+    <MESSAGE value="2주차 검색 기능 수정" />
+    <MESSAGE value="2주차 테이블과 데이터 sql파일 수정" />
+    <MESSAGE value="2주차 테스트 결과 이미지 파일 커밋" />
+    <MESSAGE value="2주차 이미지파일 이름 수정" />
+    <MESSAGE value="3주차 레디스 설정 및 캐시적용, 락 테스트는 진행중..." />
+    <option name="LAST_COMMIT_MESSAGE" value="3주차 레디스 설정 및 캐시적용, 락 테스트는 진행중..." />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/cinema/src/main/resources/templates/checkJoin.jsp</url>
+          <line>2</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/module-api(배치로사용예정)/src/main/java/com/redis/moduleapi/controller/KMdbApiController.java</url>
+          <line>23</line>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/module-api(배치로사용예정)/src/main/java/com/redis/moduleapi/service/KMdbApiService.java</url>
+          <line>60</line>
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/module-api(배치로사용예정)/src/main/java/com/redis/moduleapi/service/KMdbApiService.java</url>
+          <line>76</line>
+          <option name="timeStamp" value="19" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/module-api(배치로사용예정)/src/main/java/com/redis/moduleapi/service/KMdbApiService.java</url>
+          <line>79</line>
+          <option name="timeStamp" value="20" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/module-cinema/src/main/java/com/redis/Main.java</url>
+          <line>13</line>
+          <option name="timeStamp" value="21" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/module-common/src/main/java/com/redis/Main.java</url>
+          <line>13</line>
+          <option name="timeStamp" value="23" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/reservatiom/src/main/java/com/redis/Main.java</url>
+          <line>13</line>
+          <option name="timeStamp" value="24" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/screening/src/main/java/com/redis/Main.java</url>
+          <line>13</line>
+          <option name="timeStamp" value="35" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/common/src/main/java/com/redis/Main.java</url>
+          <line>13</line>
+          <option name="timeStamp" value="42" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/application/src/main/java/com/redis/Main.java</url>
+          <line>13</line>
+          <option name="timeStamp" value="43" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/api/src/test/java/com/redis/api/ReservationTest.java</url>
+          <line>144</line>
+          <option name="timeStamp" value="50" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/api/src/test/java/com/redis/api/ReservationTest.java</url>
+          <line>154</line>
+          <properties>
+            <option name="lambda-ordinal" value="-1" />
+          </properties>
+          <option name="timeStamp" value="51" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="SpringBootApplicationConfigurationType">
+        <watch expression="i" />
+      </configuration>
+    </watches-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/redis_2nd$module_common__clean_.ic" NAME="module-common [clean] 커버리지 결과" MODIFIED="1742563178933" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
+  </component>
+</project>

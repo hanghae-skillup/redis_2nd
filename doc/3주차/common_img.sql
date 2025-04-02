@@ -1,0 +1,5 @@
+INSERT INTO redisstudy.common_img (img_seq, img_nm, img_path, created_at, created_by, modify_at, updated_by) VALUES (1, 'movie_poster1.jpg', '/images/movie1.jpg', null, '2025-03-30 14:37:45', null, '2025-03-30 14:37:46');
+INSERT INTO redisstudy.common_img (img_seq, img_nm, img_path, created_at, created_by, modify_at, updated_by) VALUES (2, 'movie_poster2.jpg', '/images/movie2.jpg', null, '2025-03-30 14:37:45', null, '2025-03-30 14:37:46');
+INSERT INTO redisstudy.common_img (img_seq, img_nm, img_path, created_at, created_by, modify_at, updated_by) VALUES (3, 'movie_poster3.jpg', '/images/movie3.jpg', null, '2025-03-30 14:37:45', null, '2025-03-30 14:37:46');
+INSERT INTO redisstudy.common_img (img_seq, img_nm, img_path, created_at, created_by, modify_at, updated_by) VALUES (4, 'movie_poster4.jpg', '/images/movie4.jpg', null, '2025-03-30 14:37:45', null, '2025-03-30 14:37:46');
+INSERT INTO redisstudy.common_img (img_seq, img_nm, img_path, created_at, created_by, modify_at, updated_by) VALUES (5, 'movie_poster5.jpg', '/images/movie5.jpg', null, '2025-03-30 14:37:45', null, '2025-03-30 14:37:46');

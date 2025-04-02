@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/api/redis_2nd.api.main.iml" filepath="$PROJECT_DIR$/.idea/modules/api/redis_2nd.api.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/application/redis_2nd.application.main.iml" filepath="$PROJECT_DIR$/.idea/modules/application/redis_2nd.application.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/common/redis_2nd.common.main.iml" filepath="$PROJECT_DIR$/.idea/modules/common/redis_2nd.common.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/domain/redis_2nd.domain.main.iml" filepath="$PROJECT_DIR$/.idea/modules/domain/redis_2nd.domain.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/infra/redis_2nd.infra.main.iml" filepath="$PROJECT_DIR$/.idea/modules/infra/redis_2nd.infra.main.iml" />
     </modules>
   </component>
 </project>

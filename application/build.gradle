@@ -1,0 +1,48 @@
+plugins {
+    id 'java-library'
+    id 'java'
+    id 'org.springframework.boot' version '3.4.3'
+    id 'io.spring.dependency-management' version '1.1.7'
+
+}
+
+repositories {
+    mavenCentral()
+}
+
+bootJar {
+    enabled = false
+}
+
+jar {
+    enabled = true
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+    implementation project(':domain')
+    implementation project(':common')
+    implementation project(':infra')
+
+
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'// ✅ JPA 추가
+    implementation 'org.springframework.boot:spring-boot-starter-web'  // ✅ Spring Web 추가 (선택 사항)
+    runtimeOnly 'com.mysql:mysql-connector-j' // ✅ MySQL 사용 시 추가 (DB에 맞게 수정)
+
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+
+    // JUnit 4 의존성 추가
+    testImplementation 'junit:junit:4.13.2'
+}
+
+test {
+    useJUnitPlatform()
+}

@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="3543073f-aaa3-4a8d-8793-21038ab1766c" name="변경" comment="">
+      <change afterPath="$PROJECT_DIR$/../../../../../.github/pull_request_template_A_01.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../../../.idea/artifacts/redis_2nd_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../../../.idea/jpa.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../../../.idea/modules/api/redis_2nd.api.main.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../../../.idea/modules/domain/redis_2nd.domain.main.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../../../api/KMdbApi/KMdbApi.http" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../../../api/http/movieNow.http" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../../../api/src/main/java/com/redis/exception/BaseException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../../../api/src/main/java/com/redis/movie/application/convert/DtoConvertor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../../../api/src/main/java/com/redis/movie/application/dto/MoviesNowShowingDetail.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../../../api/src/main/java/com/redis/movie/application/dto/ScreenDetail.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../../../api/src/main/java/com/redis/movie/application/dto/ScreenTime.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../../../api/src/main/java/com/redis/movie/application/service/MovieService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../../../api/src/main/java/com/redis/movie/presentation/controller/MovieController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../../../api/src/main/java/com/redis/response/BaseErrorResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../../../api/src/main/java/com/redis/response/BaseResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../../../api/src/main/java/com/redis/response/code/BaseCode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../../../api/src/main/java/com/redis/response/status/ResponseStatus.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../../../application.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../../../build.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/com/redis/BaseEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/com/redis/movie/entity/cinema/Seat.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/com/redis/movie/entity/cinema/cinema.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/com/redis/movie/entity/movie/Genre.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/com/redis/movie/entity/movie/Grade.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/com/redis/movie/entity/movie/ImagePic.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/com/redis/movie/entity/movie/Movie.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/com/redis/movie/entity/movie/Screening.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/com/redis/movie/entity/movie/VedioRating.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/com/redis/movie/repository/MovieRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/com/redis/movie/repository/dto/MoviesNowShowDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/com/redis/reservation/entity/Reservation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/com/redis/user/entity/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/module-info.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/userImg.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../../../k6-test/test.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../../../package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../.github/pull_request_template.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../.github/pull_request_template.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../.idea/modules/cinema.main.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../.idea/redis_2nd.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../cinema/.gitattributes" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../cinema/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../cinema/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../cinema/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../cinema/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../cinema/gradlew" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../cinema/gradlew.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../cinema/settings.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../cinema/src/main/java/com/CinemaApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../cinema/src/main/java/com/redis/cinema/common/controller/LoginController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../cinema/src/main/java/com/redis/cinema/common/dto/UserDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../cinema/src/main/java/com/redis/cinema/common/entity/Img.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../cinema/src/main/java/com/redis/cinema/common/entity/MovieApiEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../cinema/src/main/java/com/redis/cinema/common/entity/Role.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../cinema/src/main/java/com/redis/cinema/common/entity/User.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../cinema/src/main/java/com/redis/cinema/common/repository/UserRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../cinema/src/main/java/com/redis/cinema/common/service/UserService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../cinema/src/main/java/com/redis/cinema/movie/controller/MovieController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../cinema/src/main/java/com/redis/cinema/movie/entity/MovieGenreCd.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../cinema/src/main/java/com/redis/cinema/movie/entity/MovieInfo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../cinema/src/main/java/com/redis/cinema/schedule/controller/MovieSchedulerController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../cinema/src/main/java/com/redis/cinema/schedule/service/MovieShedulerService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../cinema/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../cinema/src/main/resources/doc.ERD/레디스250316_02.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../cinema/src/main/resources/doc.ERD/레디스_250316.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../cinema/src/main/resources/doc.ERD/레디스_250316_01.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../cinema/src/main/resources/static/assets/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../cinema/src/main/resources/static/css/login.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../cinema/src/main/resources/static/css/styles.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../cinema/src/main/resources/static/js/KobisOpenAPIRestService.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../cinema/src/main/resources/static/js/bootstrap.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../cinema/src/main/resources/static/js/jquery-1.8.3.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../cinema/src/main/resources/static/js/login.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../cinema/src/main/resources/static/js/scripts.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../cinema/src/main/resources/templates/checkJoin.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../cinema/src/main/resources/templates/complete.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../cinema/src/main/resources/templates/fragments/frage/footer.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../cinema/src/main/resources/templates/fragments/frage/header.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../cinema/src/main/resources/templates/fragments/layouts/deafult.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../cinema/src/main/resources/templates/home.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../cinema/src/main/resources/templates/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../cinema/src/main/resources/templates/join.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../cinema/src/main/resources/templates/login/login.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../cinema/src/main/resources/templates/movieApi/sample2.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../cinema/src/test/java/com/redis/cinema/CinemaApplicationTests.java" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../../../.." />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "rondomos"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/rondomos/redis_2nd.git",
+    "accountId": "65436ca4-db54-4071-adee-aaf7976e7cd9"
+  }
+}]]></component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 0
+}]]></component>
+  <component name="ProjectId" id="2ufwqnGXCuBwhgQsswvDhNKV65p" />
+  <component name="ProjectViewState">
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "2주차",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/isaac/IdeaProjects/redis_2nd/domain/src/main/resources/img",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-a94e463ab2e7-intellij.indexing.shared.core-IU-243.25659.59" />
+        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-IU-243.25659.59" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="애플리케이션 수준" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="디폴트 작업">
+      <changelist id="3543073f-aaa3-4a8d-8793-21038ab1766c" name="변경" comment="" />
+      <created>1742653130053</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1742653130053</updated>
+      <workItem from="1742653131196" duration="11000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
