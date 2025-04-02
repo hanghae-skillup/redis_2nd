@@ -31,7 +31,15 @@ dependencies {
     implementation("com.mysql:mysql-connector-j")
     
     // Test
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation("org.testcontainers:mysql:${libs.versions.test.containers.get()}")
-    testImplementation("org.testcontainers:junit-jupiter:${libs.versions.test.containers.get()}")
+    testImplementation("org.springframework.boot:spring-boot-starter-test") {
+        exclude(module = "mockito-core")
+    }
+    testImplementation("com.h2database:h2")
+    testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
+    testImplementation("org.testcontainers:testcontainers:1.19.6")
+    testImplementation("org.testcontainers:junit-jupiter:1.19.6")
+    testImplementation("org.testcontainers:mysql:1.19.6")
+    
+    // Infrastructure module for testing
+    testImplementation(project(":cinema-infrastructure"))
 } 

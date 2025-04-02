@@ -10,4 +10,8 @@ class ScheduleRepositoryImpl(private val scheduleJpaRepository: ScheduleJpaRepos
     override fun findByMovieId(movieId: Long): List<Schedule> {
         return scheduleJpaRepository.findByMovieId(movieId)
     }
+
+    override fun findById(id: Long): Schedule? {
+        return scheduleJpaRepository.findById(id).orElse(null)
+    }
 } 
