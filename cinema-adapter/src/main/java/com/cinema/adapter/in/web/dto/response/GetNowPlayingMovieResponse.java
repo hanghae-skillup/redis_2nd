@@ -1,4 +1,4 @@
-package com.cinema.application.dto;
+package com.cinema.adapter.in.web.dto.response;
 
 import lombok.Builder;
 
@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Builder
-public record MovieScheduleQueryResult(
+public record GetNowPlayingMovieResponse(
         Long movieId,
         String title,
         String rating,
