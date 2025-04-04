@@ -4,5 +4,5 @@ import project.redis.seat.Seat;
 import project.redis.seat.entity.SeatEntity;
 
 public interface SeatAdapter {
-    SeatEntity saveSeat(Seat seat);
+    SeatEntity save(Seat seat);
 }

@@ -18,10 +18,10 @@ public class ReservationController {
     private final ReservationService reservationService;
 
     @PostMapping("/seats")
-    public ApiResponse<ReservationSeatsResponseDto> reservationSeats(
+    public ApiResponse<ReservationSeatsResponseDto> reserveSeats(
             @RequestBody ReservationSeatsRequestDto reservationSeatsRequestDto) {
         ReservationSeatsResponseDto reservationSeatsResponseDto
-                = reservationService.reservationSeats(reservationSeatsRequestDto);
+                = reservationService.reserveSeats(reservationSeatsRequestDto);
         return ApiResponse.ok(reservationSeatsResponseDto);
     }
 }

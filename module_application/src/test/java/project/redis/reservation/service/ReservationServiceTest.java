@@ -27,7 +27,7 @@ class ReservationServiceTest {
 
     @DisplayName("같은 상영의 같은 좌석에 대해 동시에 예약이 될 수 없어야 한다.")
     @Test
-    void reservationSeatsTest() {
+    void reserveSeatsTest() {
 
         Long userId = 1L;
         Long screeningId = 10L;
@@ -46,7 +46,7 @@ class ReservationServiceTest {
             try {
                 latch.await(); // 동시에 시작되도록 대기
                 ReservationSeatsResponseDto reservationSeatsResponseDto
-                        = reservationService.reservationSeats(requestDto1);
+                        = reservationService.reserveSeats(requestDto1);
                 // Long userIdResult = reservationSeatsResponseDto.getUserId();
                 // List<Long> reservationsIdResult = reservationSeatsResponseDto.getReservationsId();
 
@@ -61,7 +61,7 @@ class ReservationServiceTest {
             try {
                 latch.await(); // 동시에 시작되도록 대기
                 ReservationSeatsResponseDto reservationSeatsResponseDto
-                        = reservationService.reservationSeats(requestDto2);
+                        = reservationService.reserveSeats(requestDto2);
                 // assertThat(reservationSeatsResponseDto.getReservationsId().size()).isEqualTo(0);
             } catch (Exception e) {
                 e.printStackTrace();

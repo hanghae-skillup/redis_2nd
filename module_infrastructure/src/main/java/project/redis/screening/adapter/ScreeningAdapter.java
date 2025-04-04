@@ -5,7 +5,7 @@ import project.redis.movie.Movie;
 import project.redis.screening.Screening;
 
 public interface ScreeningAdapter {
-    List<Screening> findScreeningsByMovie(Movie movie);
+    List<Screening> findScreenings(Movie movie);
 
-    Screening findScreeningById(Long screeningId);
+    Screening findScreening(Long screeningId);
 }

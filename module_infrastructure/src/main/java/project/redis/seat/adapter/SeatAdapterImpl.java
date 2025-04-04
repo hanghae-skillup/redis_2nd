@@ -15,7 +15,7 @@ public class SeatAdapterImpl implements SeatAdapter {
     private final SeatMapper seatMapper;
 
     @Override
-    public SeatEntity saveSeat(Seat seat) {
+    public SeatEntity save(Seat seat) {
         SeatEntity seatEntity = seatMapper.toEntity(seat);
         return seatRepository.save(seatEntity);
     }

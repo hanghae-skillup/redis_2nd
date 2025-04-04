@@ -18,7 +18,7 @@ public class ScreeningAdapterImpl implements ScreeningAdapter {
     private final ScreeningMapper screeningMapper;
 
     @Override
-    public List<Screening> findScreeningsByMovie(Movie movie) {
+    public List<Screening> findScreenings(Movie movie) {
         MovieEntity movieEntity = MovieEntity.of(movie);
         List<ScreeningEntity> screeningEntities = screeningRepository.findByMovie(movieEntity);
         return screeningEntities.stream()
@@ -27,7 +27,7 @@ public class ScreeningAdapterImpl implements ScreeningAdapter {
     }
 
     @Override
-    public Screening findScreeningById(Long screeningId) {
+    public Screening findScreening(Long screeningId) {
         ScreeningEntity screeningEntity = screeningRepository.findById(screeningId).orElse(null);
         return screeningMapper.toDomain(screeningEntity);
     }

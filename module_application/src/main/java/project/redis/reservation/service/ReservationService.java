@@ -35,8 +35,8 @@ public class ReservationService {
 
     @Transactional
     @DistributedLock(key = "seat-lock:#reservationSeatsRequestDto.userId")
-    public ReservationSeatsResponseDto reservationSeats(ReservationSeatsRequestDto reservationSeatsRequestDto) {
-        validReservationSeatsRequestDto(reservationSeatsRequestDto);
+    public ReservationSeatsResponseDto reserveSeats(ReservationSeatsRequestDto reservationSeatsRequestDto) {
+        valid(reservationSeatsRequestDto);
 
         User user = findUserByUserId(reservationSeatsRequestDto);
         Screening screening = findScreeningByScreeningId(reservationSeatsRequestDto);
@@ -51,7 +51,7 @@ public class ReservationService {
         return ReservationSeatsResponseDto.of(user.getUserId(), reservationsId);
     }
 
-    private void validReservationSeatsRequestDto(ReservationSeatsRequestDto requestDto) {
+    private void valid(ReservationSeatsRequestDto requestDto) {
         List<String> seatRows = requestDto.getSeatRows();
         List<Integer> seatColumns = requestDto.getSeatColumns();
 
@@ -81,7 +81,7 @@ public class ReservationService {
     }
 
     private User findUserByUserId(ReservationSeatsRequestDto reservationSeatsRequestDto) {
-        User user = userAdapter.findUserById(reservationSeatsRequestDto.getUserId());
+        User user = userAdapter.find(reservationSeatsRequestDto.getUserId());
         if (user == null) {
             throw new IllegalArgumentException("존재하지 않는 유저 id 입니다.");
         }
@@ -89,7 +89,7 @@ public class ReservationService {
     }
 
     private Screening findScreeningByScreeningId(ReservationSeatsRequestDto reservationSeatsRequestDto) {
-        Screening screening = screeningAdapter.findScreeningById(reservationSeatsRequestDto.getScreeningId());
+        Screening screening = screeningAdapter.findScreening(reservationSeatsRequestDto.getScreeningId());
         if (screening == null) {
             throw new IllegalArgumentException("존재하지 않는 상영 id 입니다.");
         }
@@ -115,7 +115,7 @@ public class ReservationService {
             String seatRow = reservationSeatsRequestDto.getSeatRows().get(index);
             Integer seatColumn = reservationSeatsRequestDto.getSeatColumns().get(index);
 
-            checkReservedSeat(reservations, seatRow, seatColumn);
+            containsSameSeat(reservations, seatRow, seatColumn);
 
             Long savedReservationId = createReservation(seatRow, seatColumn, screening, user);
             reservationsId.add(savedReservationId);
@@ -127,18 +127,18 @@ public class ReservationService {
         return reservationSeatsRequestDto.getSeatRows().size();
     }
 
-    private void checkReservedSeat(List<Reservation> reservations, String seatRow, Integer seatColumn) {
-        boolean isAlreadyReserved = reservations.stream()
-                .anyMatch(reservation -> reservation.isSeatReserved(seatRow, seatColumn));
+    private void containsSameSeat(List<Reservation> reservations, String seatRow, Integer seatColumn) {
+        boolean hasSameSeat = reservations.stream()
+                .anyMatch(reservation -> reservation.checkSameSeat(seatRow, seatColumn));
 
-        if (isAlreadyReserved) {
+        if (hasSameSeat) {
             throw new IllegalArgumentException("현재 예약된 좌석은 예약할 수 없습니다.");
         }
     }
 
     private Long createReservation(String seatRow, Integer seatColumn, Screening screening, User user) {
         Seat reservedSeat = Seat.of(seatRow, seatColumn);
-        SeatEntity seatEntity = seatAdapter.saveSeat(reservedSeat);
+        SeatEntity seatEntity = seatAdapter.save(reservedSeat);
 
         Reservation reservation = Reservation.create(reservedSeat, screening, user);
         Long savedReservationId = reservationAdapter.saveReservation(reservation, seatEntity);
