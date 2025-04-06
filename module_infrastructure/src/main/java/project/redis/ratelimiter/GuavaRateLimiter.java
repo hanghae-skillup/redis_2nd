@@ -17,7 +17,7 @@ public class GuavaRateLimiter implements RateLimiter {
     private static final Map<String, LocalDateTime> blockedTimeForIp = new ConcurrentHashMap<>();
 
     @Override
-    public void tryApiCall(LimitRequestPerTime limitRequestPerTime, ProceedingJoinPoint joinPoint)
+    public Object tryApiCall(LimitRequestPerTime limitRequestPerTime, ProceedingJoinPoint joinPoint)
             throws Throwable {
 
         String key = limitRequestPerTime.key();
@@ -52,12 +52,12 @@ public class GuavaRateLimiter implements RateLimiter {
                     blockedTimeForIp.put(key, now);
                     // TODO : 예외 처리
                 }
-                joinPoint.proceed();
+                return joinPoint.proceed();
             }
         }
         requestTimeForIp.put(key, now);
         requestCountPerIp.put(key, 1);
-        joinPoint.proceed();
+        return joinPoint.proceed();
 
         /*
          TODO:
@@ -85,6 +85,5 @@ public class GuavaRateLimiter implements RateLimiter {
             없다면
                 현재 시간 넣기 & requestCountPerIp에 1 넣기
          */
-
     }
 }
