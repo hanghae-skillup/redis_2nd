@@ -30,7 +30,7 @@ public class ApiControllerAdvice {
     }
 
     @ResponseStatus(HttpStatus.CONFLICT)
-    @ExceptionHandler(IllegalArgumentException.class)
+    @ExceptionHandler(IllegalStateException.class)
     public ApiResponse<Object> IllegalStateException(IllegalStateException e) {
         return ApiResponse.of(
                 HttpStatus.CONFLICT,
