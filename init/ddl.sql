@@ -1,6 +1,6 @@
 -- Cinema 테이블 생성
 CREATE TABLE IF NOT EXISTS cinema (
-    cinema_id BIGINT AUTO_INCREMENT PRIMARY KEY,  -- 영화관 ID
+    cinema_id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,  -- 영화관 ID
     cinema_name VARCHAR(255) NOT NULL  -- 영화관 이름
     created_by BIGINT NULL,            -- BaseEntity 필드
     created_at DATETIME NULL,          -- BaseEntity 필드
@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS cinema (
 
 -- Movie 테이블 생성
 CREATE TABLE IF NOT EXISTS movie (
-    movie_id BIGINT AUTO_INCREMENT PRIMARY KEY,  -- 영화 ID
+    movie_id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,  -- 영화 ID
     title VARCHAR(255) NOT NULL,  -- 영화 제목
     rating VARCHAR(50) NOT NULL,  -- 영화 등급 (Enum 값으로 저장, 예: 'G', 'PG', 'R' 등)
     released_at DATE NOT NULL,  -- 개봉일
@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS movie (
 
 -- Screening 테이블 생성
 CREATE TABLE IF NOT EXISTS screening (
-    screening_id BIGINT AUTO_INCREMENT PRIMARY KEY,  -- 상영 ID
+    screening_id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,  -- 상영 ID
     started_at DATETIME NOT NULL,  -- 상영 시작 시간
     ended_at DATETIME NOT NULL,  -- 상영 종료 시간
     movie_id BIGINT NOT NULL,  -- 영화 ID (Foreign Key)
@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS screening (
 
 -- Seat 테이블 생성
 CREATE TABLE IF NOT EXISTS seat (
-    seat_id BIGINT AUTO_INCREMENT PRIMARY KEY,  -- 좌석 ID
+    seat_id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,  -- 좌석 ID
     seat_row VARCHAR(10) NOT NULL,  -- 좌석 행 (예: A, B, C 등)
     seat_column INT NOT NULL,  -- 좌석 열 (예: 1, 2, 3 등)
     created_by BIGINT NULL,            -- BaseEntity 필드
@@ -51,7 +51,7 @@ CREATE TABLE IF NOT EXISTS seat (
 
 -- Theater 테이블 생성
 CREATE TABLE IF NOT EXISTS theater (
-    theater_id BIGINT AUTO_INCREMENT PRIMARY KEY,  -- 극장 ID
+    theater_id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,  -- 극장 ID
     theater_name VARCHAR(255) NOT NULL,  -- 극장 이름
     cinema_id BIGINT NOT NULL,  -- 영화관 ID (Foreign Key)
     created_by BIGINT NULL,            -- BaseEntity 필드
@@ -63,7 +63,7 @@ CREATE TABLE IF NOT EXISTS theater (
 
 -- User 테이블 생성
 CREATE TABLE IF NOT EXISTS user (
-    user_id BIGINT AUTO_INCREMENT PRIMARY KEY,  -- 사용자 ID
+    user_id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,  -- 사용자 ID
     username VARCHAR(255) NOT NULL,  -- 사용자 이름
     created_by BIGINT NULL,  -- BaseEntity 필드
     created_at DATETIME NULL,  -- BaseEntity 필드
@@ -73,7 +73,7 @@ CREATE TABLE IF NOT EXISTS user (
 
 -- Reservation 테이블 생성
 CREATE TABLE IF NOT EXISTS reservation (
-    reservation_id BIGINT AUTO_INCREMENT PRIMARY KEY,  -- 예약 ID
+    reservation_id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,  -- 예약 ID
     screening_id BIGINT NOT NULL,  -- 상영 ID (Foreign Key)
     seat_id BIGINT NOT NULL,  -- 좌석 ID (Foreign Key)
     user_id BIGINT NOT NULL,  -- 사용자 ID (Foreign Key)
@@ -87,6 +87,6 @@ CREATE TABLE IF NOT EXISTS reservation (
 );
 
 
-CREATE INDEX idx_movie_released_title_genre ON movie(released_at, title, genre);
+CREATE INDEX idx_movie_released_title_genre ON movie(title, genre, released_at);
 CREATE INDEX idx_screening_started_at ON screening(started_at);
 
