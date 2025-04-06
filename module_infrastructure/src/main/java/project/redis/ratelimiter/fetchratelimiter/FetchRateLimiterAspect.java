@@ -1,4 +1,4 @@
-package project.redis.ratelimiter;
+package project.redis.ratelimiter.fetchratelimiter;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -8,17 +8,17 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Aspect
-public class RateLimiterAspect {
+public class FetchRateLimiterAspect {
 
-    private final RateLimiter rateLimiter;
+    private final FetchRateLimiter fetchRateLimiter;
 
-    public RateLimiterAspect(@Qualifier("GuavaRateLimiter") RateLimiter rateLimiter) {
-        this.rateLimiter = rateLimiter;
+    public FetchRateLimiterAspect(@Qualifier("GuavaRateLimiter") FetchRateLimiter fetchRateLimiter) {
+        this.fetchRateLimiter = fetchRateLimiter;
     }
 
     @Around("@annotation(limitRequestPerTime)")
     public Object setRateLimiter(ProceedingJoinPoint joinPoint, LimitRequestPerTime limitRequestPerTime)
             throws Throwable {
-        return rateLimiter.tryApiCall(limitRequestPerTime, joinPoint);
+        return fetchRateLimiter.tryApiCall(limitRequestPerTime, joinPoint);
     }
 }

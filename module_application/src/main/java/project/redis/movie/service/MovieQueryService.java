@@ -9,7 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import project.redis.movie.MovieGenre;
 import project.redis.movie.dto.NowPlayMovieDto;
-import project.redis.ratelimiter.LimitRequestPerTime;
+import project.redis.ratelimiter.fetchratelimiter.LimitRequestPerTime;
 import project.redis.screening.dto.ScreeningResponseDto;
 import project.redis.screening.dto.ScreeningTimeDto;
 import project.redis.screening.repository.ScreeningRepositoryCustom;

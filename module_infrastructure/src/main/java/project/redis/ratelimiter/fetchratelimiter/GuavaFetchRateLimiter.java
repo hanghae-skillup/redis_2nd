@@ -1,4 +1,4 @@
-package project.redis.ratelimiter;
+package project.redis.ratelimiter.fetchratelimiter;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -12,7 +12,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 @Component("GuavaRateLimiter")
 @RequiredArgsConstructor
-public class GuavaRateLimiter implements RateLimiter {
+public class GuavaFetchRateLimiter implements FetchRateLimiter {
 
     private static final Map<String, Integer> requestCountPerIp = new ConcurrentHashMap<>();
     private static final Map<String, LocalDateTime> requestTimeForIp = new ConcurrentHashMap<>();

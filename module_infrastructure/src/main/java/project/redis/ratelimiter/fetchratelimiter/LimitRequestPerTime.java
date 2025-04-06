@@ -1,4 +1,4 @@
-package project.redis.ratelimiter;
+package project.redis.ratelimiter.fetchratelimiter;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

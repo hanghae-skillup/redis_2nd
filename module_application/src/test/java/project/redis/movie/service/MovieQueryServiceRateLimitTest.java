@@ -12,7 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.web.server.ResponseStatusException;
 import project.redis.CinemaApplication;
 import project.redis.movie.dto.NowPlayMovieDto;
-import project.redis.ratelimiter.RateLimiter;
+import project.redis.ratelimiter.fetchratelimiter.FetchRateLimiter;
 
 @SpringBootTest(classes = CinemaApplication.class)
 class MovieQueryServiceRateLimitTest {
@@ -21,11 +21,11 @@ class MovieQueryServiceRateLimitTest {
     private MovieQueryService movieQueryService;
 
     @Autowired
-    private RateLimiter rateLimiter;
+    private FetchRateLimiter fetchRateLimiter;
 
     @BeforeEach
     void clear() {
-        rateLimiter.clear();
+        fetchRateLimiter.clear();
     }
 
     @DisplayName("1분에 50회 이상 조회한 IP는 예외와 함께 차단 당한다.")
