@@ -10,6 +10,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import project.redis.movie.MovieGenre;
 import project.redis.movie.dto.NowPlayMovieDto;
+import project.redis.ratelimiter.LimitRequestPerTime;
 import project.redis.screening.dto.ScreeningResponseDto;
 import project.redis.screening.dto.ScreeningTimeDto;
 import project.redis.screening.repository.ScreeningRepositoryCustom;
@@ -22,6 +23,7 @@ public class MovieQueryService {
 
     // @Cacheable(cacheNames = "movieCache")
     @Cacheable(cacheNames = "redisCache")
+    @LimitRequestPerTime(key = "#clientIp")
     public List<NowPlayMovieDto> getNowPlayingMovies(String movieTitle, String movieGenre, String clientIp) {
         MovieGenre movieGenreEnum = getMovieGenre(movieGenre);
 
