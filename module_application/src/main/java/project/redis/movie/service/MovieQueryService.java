@@ -22,7 +22,7 @@ public class MovieQueryService {
 
     // @Cacheable(cacheNames = "movieCache")
     @Cacheable(cacheNames = "redisCache")
-    public List<NowPlayMovieDto> getNowPlayingMovies(String movieTitle, String movieGenre) {
+    public List<NowPlayMovieDto> getNowPlayingMovies(String movieTitle, String movieGenre, String clientIp) {
         MovieGenre movieGenreEnum = getMovieGenre(movieGenre);
 
         List<ScreeningResponseDto> nowPlayingMovies
