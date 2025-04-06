@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import project.redis.lock.DistributedLock;
 import project.redis.message.MessageService;
+import project.redis.ratelimiter.reserveratelimiter.LimitReservationPerTime;
 import project.redis.reservation.Reservation;
 import project.redis.reservation.adapter.ReservationAdapter;
 import project.redis.reservation.dto.ReservationSeatsRequestDto;
@@ -37,6 +38,7 @@ public class ReservationService {
 
     @Transactional
     @DistributedLock(key = "seat-lock:#reservationSeatsRequestDto.userId")
+    @LimitReservationPerTime(userId = "#reservationSeatsRequestDto.userId", screeningId = "#reservationSeatsRequestDto.screeningId")
     public ReservationSeatsResponseDto reserveSeats(ReservationSeatsRequestDto reservationSeatsRequestDto) {
         reservationValidator.valid(reservationSeatsRequestDto);
 

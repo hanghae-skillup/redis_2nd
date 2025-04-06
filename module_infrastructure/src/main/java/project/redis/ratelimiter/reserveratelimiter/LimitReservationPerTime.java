@@ -10,9 +10,9 @@ import java.util.concurrent.TimeUnit;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface LimitReservationPerTime {
 
-    long userId();
+    String userId();
 
-    long screeningId();
+    String screeningId();
 
     /**
      * 차단 시간

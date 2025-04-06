@@ -19,8 +19,8 @@ public class GuavaReserveRateLimiter implements ReserveRateLimiter {
     @Override
     public Object tryApiCall(LimitReservationPerTime limitReservationPerTime, ProceedingJoinPoint joinPoint)
             throws Throwable {
-        String userId = String.valueOf(limitReservationPerTime.userId());
-        String screeningId = String.valueOf(limitReservationPerTime.screeningId());
+        String userId = limitReservationPerTime.userId();
+        String screeningId = limitReservationPerTime.screeningId();
 
         String key = userId + "_" + screeningId;
 
