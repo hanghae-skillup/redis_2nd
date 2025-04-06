@@ -6,7 +6,9 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import lombok.RequiredArgsConstructor;
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
+import org.springframework.web.server.ResponseStatusException;
 
 @Component("GuavaRateLimiter")
 @RequiredArgsConstructor
@@ -32,7 +34,7 @@ public class GuavaRateLimiter implements RateLimiter {
             int blockTime = limitRequestPerTime.blockTime();
 
             if (diffMinutes <= blockTime) {
-                // TODO : 예외 처리
+                throw new ResponseStatusException(HttpStatus.TOO_MANY_REQUESTS, "Too many requests");
             }
             blockedTimeForIp.remove(key);
         }
@@ -50,7 +52,7 @@ public class GuavaRateLimiter implements RateLimiter {
                 int limitCount = limitRequestPerTime.limitCount();
                 if (requestCountPerIp.get(key) == limitCount) {
                     blockedTimeForIp.put(key, now);
-                    // TODO : 예외 처리
+                    throw new ResponseStatusException(HttpStatus.TOO_MANY_REQUESTS, "Too many requests");
                 }
                 return joinPoint.proceed();
             }
