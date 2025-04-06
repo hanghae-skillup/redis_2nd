@@ -12,7 +12,7 @@ public class FetchRateLimiterAspect {
 
     private final FetchRateLimiter fetchRateLimiter;
 
-    public FetchRateLimiterAspect(@Qualifier("MapRateLimiter") FetchRateLimiter fetchRateLimiter) {
+    public FetchRateLimiterAspect(@Qualifier("RedisRateLimiter") FetchRateLimiter fetchRateLimiter) {
         this.fetchRateLimiter = fetchRateLimiter;
     }
 
