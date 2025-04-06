@@ -1,5 +1,6 @@
 package project.redis.ratelimiter;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -16,8 +17,47 @@ public class GuavaRateLimiter implements RateLimiter {
     private static final Map<String, LocalDateTime> blockedTimeForIp = new ConcurrentHashMap<>();
 
     @Override
-    public void tryApiCall(String key, LimitRequestPerTime limitRequestPerTime, ProceedingJoinPoint joinPoint)
+    public void tryApiCall(LimitRequestPerTime limitRequestPerTime, ProceedingJoinPoint joinPoint)
             throws Throwable {
+
+        String key = limitRequestPerTime.key();
+
+        LocalDateTime now = LocalDateTime.now();
+
+        if (blockedTimeForIp.containsKey(key)) {
+            LocalDateTime blockedTime = blockedTimeForIp.get(key);
+            Duration duration = Duration.between(blockedTime, now);
+
+            long diffMinutes = duration.toMinutes();
+            int blockTime = limitRequestPerTime.blockTime();
+
+            if (diffMinutes <= blockTime) {
+                // TODO : 예외 처리
+            }
+            blockedTimeForIp.remove(key);
+        }
+
+        if (requestTimeForIp.containsKey(key)) {
+            LocalDateTime requestedTime = requestTimeForIp.get(key);
+            Duration duration = Duration.between(requestedTime, now);
+
+            long diffMinutes = duration.toMinutes();
+            int limitTime = limitRequestPerTime.limitTime();
+
+            if (diffMinutes <= limitTime) {
+                requestCountPerIp.compute(key, (k, requestCount) -> requestCount + 1);
+
+                int limitCount = limitRequestPerTime.limitCount();
+                if (requestCountPerIp.get(key) == limitCount) {
+                    blockedTimeForIp.put(key, now);
+                    // TODO : 예외 처리
+                }
+                joinPoint.proceed();
+            }
+        }
+        requestTimeForIp.put(key, now);
+        requestCountPerIp.put(key, 1);
+        joinPoint.proceed();
 
         /*
          TODO:
