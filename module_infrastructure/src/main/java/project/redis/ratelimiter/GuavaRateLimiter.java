@@ -19,6 +19,13 @@ public class GuavaRateLimiter implements RateLimiter {
     private static final Map<String, LocalDateTime> blockedTimeForIp = new ConcurrentHashMap<>();
 
     @Override
+    public void clear() {
+        requestCountPerIp.clear();
+        requestTimeForIp.clear();
+        blockedTimeForIp.clear();
+    }
+
+    @Override
     public Object tryApiCall(LimitRequestPerTime limitRequestPerTime, ProceedingJoinPoint joinPoint)
             throws Throwable {
 
