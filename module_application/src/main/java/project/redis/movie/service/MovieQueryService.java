@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import project.redis.movie.MovieGenre;
 import project.redis.movie.dto.NowPlayMovieDto;
@@ -22,7 +21,7 @@ public class MovieQueryService {
     private final ScreeningRepositoryCustom screeningRepository;
 
     // @Cacheable(cacheNames = "movieCache")
-    @Cacheable(cacheNames = "redisCache")
+    // @Cacheable(cacheNames = "redisCache")
     @LimitRequestPerTime(key = "#clientIp")
     public List<NowPlayMovieDto> getNowPlayingMovies(String movieTitle, String movieGenre, String clientIp) {
         MovieGenre movieGenreEnum = getMovieGenre(movieGenre);
