@@ -21,3 +21,5 @@ spring:
         show-sql: true                            # 실행되는 SQL 쿼리 로그 출력
         dialect: org.hibernate.dialect.MySQL8Dialect
 
+server:
+  forward-headers-strategy: framework
