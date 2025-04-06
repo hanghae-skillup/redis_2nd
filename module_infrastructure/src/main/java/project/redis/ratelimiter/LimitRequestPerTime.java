@@ -10,25 +10,27 @@ import java.util.concurrent.TimeUnit;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface LimitRequestPerTime {
 
-    /**
-     * 분당호출 제한시킬 unique key prefix
-     */
-    String prefix() default "";
+    String key();
 
     /**
-     * 호출 제한 시간
+     * 차단 시간
      */
-    int ttl() default 1;
-
-
-    /**
-     * 호출 제한 시간 단위
-     */
-    TimeUnit ttlTimeUnit() default TimeUnit.MINUTES;
+    int blockTime() default 60;
 
     /**
-     * 분당 호출제한 카운트
+     * 요청 횟수 체크할 시간
      */
-    int count();
+    int limitTime() default 1;
+
+    /**
+     * 시간 당 최대 요청 횟수
+     */
+    int limitCount() default 50;
+
+    /**
+     * 시간 단위
+     */
+    TimeUnit timeUnit() default TimeUnit.MINUTES;
+
 
 }
