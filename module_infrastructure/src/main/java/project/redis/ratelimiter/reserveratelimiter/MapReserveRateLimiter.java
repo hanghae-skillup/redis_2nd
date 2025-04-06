@@ -10,9 +10,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ResponseStatusException;
 
-@Component("GuavaReserveRateLimiter")
+@Component("MapReserveRateLimiter")
 @RequiredArgsConstructor
-public class GuavaReserveRateLimiter implements ReserveRateLimiter {
+public class MapReserveRateLimiter implements ReserveRateLimiter {
 
     private static final Map<String, LocalDateTime> reservedTimeForUser = new ConcurrentHashMap<>();
 

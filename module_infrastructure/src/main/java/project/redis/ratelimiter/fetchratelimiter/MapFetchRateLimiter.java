@@ -10,9 +10,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ResponseStatusException;
 
-@Component("GuavaRateLimiter")
+@Component("MapRateLimiter")
 @RequiredArgsConstructor
-public class GuavaFetchRateLimiter implements FetchRateLimiter {
+public class MapFetchRateLimiter implements FetchRateLimiter {
 
     private static final Map<String, Integer> requestCountPerIp = new ConcurrentHashMap<>();
     private static final Map<String, LocalDateTime> requestTimeForIp = new ConcurrentHashMap<>();
