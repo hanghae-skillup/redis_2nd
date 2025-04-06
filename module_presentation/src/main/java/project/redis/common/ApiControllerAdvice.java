@@ -29,4 +29,15 @@ public class ApiControllerAdvice {
         );
     }
 
+    @ResponseStatus(HttpStatus.CONFLICT)
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ApiResponse<Object> IllegalStateException(IllegalStateException e) {
+        return ApiResponse.of(
+                HttpStatus.CONFLICT,
+                e.getMessage(),
+                null
+        );
+    }
+
+
 }
