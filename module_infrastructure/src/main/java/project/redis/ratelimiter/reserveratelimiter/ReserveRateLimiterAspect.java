@@ -12,7 +12,7 @@ public class ReserveRateLimiterAspect {
 
     private final ReserveRateLimiter reserveRateLimiter;
 
-    public ReserveRateLimiterAspect(@Qualifier("MapReserveRateLimiter") ReserveRateLimiter reserveRateLimiter) {
+    public ReserveRateLimiterAspect(@Qualifier("RedisReserveRateLimiter") ReserveRateLimiter reserveRateLimiter) {
         this.reserveRateLimiter = reserveRateLimiter;
     }
 

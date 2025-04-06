@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.web.server.ResponseStatusException;
 import project.redis.CinemaApplication;
@@ -19,7 +20,7 @@ class ReservationServiceRateLimitTest {
     private ReservationService reservationService;
 
     @Autowired
-    private ReserveRateLimiter reserveRateLimiter;
+    private @Qualifier("RedisReserveRateLimiter") ReserveRateLimiter reserveRateLimiter;
 
     @BeforeEach
     void clear() {
