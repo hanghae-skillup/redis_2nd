@@ -26,6 +26,8 @@ dependencies {
 
     implementation 'org.redisson:redisson-spring-boot-starter:3.45.1'
 
+    implementation 'com.google.guava:guava:33.4.6-jre'
+
     runtimeOnly 'com.mysql:mysql-connector-j'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
