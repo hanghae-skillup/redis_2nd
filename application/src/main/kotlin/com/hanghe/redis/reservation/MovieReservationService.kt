@@ -1,13 +1,15 @@
 package com.hanghe.redis.reservation
 
-import com.hanghe.redis.message.MessageClient
+import com.hanghe.redis.message.fcm.FCMMessageClient
 import com.hanghe.redis.movie.seat.SeatCodes
 import com.hanghe.redis.movie.seat.SeatEntity
-import com.hanghe.redis.mysql.reservation.ReservationRepository
-import com.hanghe.redis.mysql.screening.ScreeningRepository
-import com.hanghe.redis.mysql.seat.SeatRepository
+import com.hanghe.redis.reservation.ReservationRepository
+import com.hanghe.redis.screening.ScreeningRepository
+import com.hanghe.redis.seat.SeatRepository
+import com.hanghe.redis.ratelimiter.RateLimiter
 import com.hanghe.redis.screening.ScreeningEntity
 import org.slf4j.LoggerFactory
+import org.springframework.context.ApplicationEventPublisher
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -25,9 +27,10 @@ class MovieReservationService(
     val reservationRepository: ReservationRepository,
     val seatRepository: SeatRepository,
     val screeningRepository: ScreeningRepository,
-    val messageClient: MessageClient,
 
-    private val reservationPolicy: UserReservationPolicy
+    val eventPublisher: ApplicationEventPublisher,
+    private val reservationPolicy: UserReservationPolicy,
+    private val rateLimiter: RateLimiter
 ) {
 
     private val logger = LoggerFactory.getLogger(MovieReservationService::class.java)
@@ -37,6 +40,8 @@ class MovieReservationService(
         userId: String,
         seatIds: List<Long>
     ) {
+        rateLimiter.reservedRateLimit(screeningId, userId)
+
         val reservations = reservationRepository.findByScreeningId(screeningId)
         reservationPolicy.validate(userId, reservations.countByUser(userId), seatIds.size)
 
@@ -58,12 +63,20 @@ class MovieReservationService(
         val newReservations = reservationEntities(seats, screening, userId)
         reservationRepository.saveAll(newReservations)
 
-        // TODO: 비동기 적용
-        messageClient.send(userId, screening.theaterName, screening.movie.title, requestSeatCodes)
+        eventPublisher.publishEvent(
+            FCMMessageClient.ReservationCompletedEvent(
+                userId,
+                screening.theaterName,
+                screening.movie.title,
+                requestSeatCodes
+            )
+        )
     }
 
 
     fun reservationWithPessimisticLock(screeningId: Long, userId: String, seatIds: List<Long>) {
+        rateLimiter.reservedRateLimit(screeningId, userId)
+
         val reservations = reservationRepository.findByScreeningId(screeningId)
         reservationPolicy.validate(userId, reservations.countByUser(userId), seatIds.size)
 
@@ -78,8 +91,14 @@ class MovieReservationService(
         val newReservations = reservationEntities(seats, screening, userId)
         reservationRepository.saveAll(newReservations)
 
-        // TODO: 비동기 적용
-        messageClient.send(userId, screening.theaterName, screening.movie.title, requestSeatCodes)
+        eventPublisher.publishEvent(
+            FCMMessageClient.ReservationCompletedEvent(
+                userId,
+                screening.theaterName,
+                screening.movie.title,
+                requestSeatCodes
+            )
+        )
     }
 
 
@@ -98,8 +117,14 @@ class MovieReservationService(
         val newReservations = reservationEntities(seats, screening, userId)
         reservationRepository.saveAll(newReservations)
 
-        // TODO: 비동기 적용
-        messageClient.send(userId, screening.theaterName, screening.movie.title, requestSeatCodes)
+        eventPublisher.publishEvent(
+            FCMMessageClient.ReservationCompletedEvent(
+                userId,
+                screening.theaterName,
+                screening.movie.title,
+                requestSeatCodes
+            )
+        )
     }
 
     private fun reservationEntities(

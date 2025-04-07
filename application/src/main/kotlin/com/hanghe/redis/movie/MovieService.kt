@@ -3,8 +3,8 @@ package com.hanghe.redis.movie
 import com.hanghe.redis.cache.CacheInfo
 import com.hanghe.redis.cache.CacheManager
 import com.hanghe.redis.movie.response.GetMovieScreeningResponses
-import com.hanghe.redis.mysql.movie.MovieRepository
-import com.hanghe.redis.mysql.screening.ScreeningRepository
+import com.hanghe.redis.ratelimiter.RateLimiter
+import com.hanghe.redis.screening.ScreeningRepository
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -14,14 +14,19 @@ class MovieService(
     private val movieRepository: MovieRepository,
     private val screeningRepository: ScreeningRepository,
 
-    private val cacheManager: CacheManager
+    private val cacheManager: CacheManager,
+    private val rateLimiter: RateLimiter
 ) {
 
     fun getAllScreeningMovies(
         title: String?,
-        genre: String?
+        genre: String?,
+        ip: String
     ): GetMovieScreeningResponses {
         validateParams(title, genre)
+
+        rateLimiter.getMoviesRateLimitWithLuaScript(ip)
+//        rateLimiter.getMoviesRateLimit(ip)
 
         return if (title.isNullOrEmpty()) {
             searchCached(title, genre)
