@@ -1,14 +1,16 @@
 package com.pepponechoi.cinema.message;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+@Slf4j
 @Component
 public class MessageService {
     public void send(Long memberId, String message) {
         try {
-            System.out.println("Reservation created. memberId: " + memberId + " message send: " + message);
+            log.info("Reservation created. memberId: {} message send: {}", memberId, message);
             Thread.sleep(500);
-            System.out.println("Message sent.");
+            log.info("Message sent.");
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }

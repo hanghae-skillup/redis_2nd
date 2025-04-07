@@ -9,11 +9,11 @@ Content-Type: application/json
   "userId": 1,
   "seats": [
     {
-      "rowNo": "A",
+      "rowNo": "B",
       "columnNo": 1
     },
     {
-      "rowNo": "A",
+      "rowNo": "B",
       "columnNo": 2
     }
   ],
