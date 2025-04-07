@@ -8,12 +8,14 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.web.server.ResponseStatusException;
-import project.redis.CinemaApplication;
+import project.redis.TestApplication;
 import project.redis.ratelimiter.reserveratelimiter.ReserveRateLimiter;
 import project.redis.reservation.dto.ReservationSeatsRequestDto;
 
-@SpringBootTest(classes = CinemaApplication.class)
+@ActiveProfiles("test")
+@SpringBootTest(classes = TestApplication.class)
 class ReservationServiceRateLimitTest {
 
     @Autowired

@@ -10,12 +10,14 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.web.server.ResponseStatusException;
-import project.redis.CinemaApplication;
+import project.redis.TestApplication;
 import project.redis.movie.dto.NowPlayMovieDto;
 import project.redis.ratelimiter.fetchratelimiter.FetchRateLimiter;
 
-@SpringBootTest(classes = CinemaApplication.class)
+@ActiveProfiles("test")
+@SpringBootTest(classes = TestApplication.class)
 class MovieQueryServiceRateLimitTest {
 
     @Autowired

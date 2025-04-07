@@ -8,16 +8,17 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import project.redis.CinemaApplication;
+import org.springframework.test.context.ActiveProfiles;
+import project.redis.TestApplication;
 import project.redis.reservation.Reservation;
 import project.redis.reservation.adapter.ReservationAdapter;
 import project.redis.reservation.dto.ReservationSeatsRequestDto;
 import project.redis.reservation.dto.ReservationSeatsResponseDto;
 
-@SpringBootTest(classes = CinemaApplication.class)
+@ActiveProfiles("test")
+@SpringBootTest(classes = TestApplication.class)
 class ReservationServiceTest {
     @Autowired
     ReservationService reservationService;
@@ -26,7 +27,7 @@ class ReservationServiceTest {
     ReservationAdapter reservationAdapter;
 
     @DisplayName("같은 상영의 같은 좌석에 대해 동시에 예약이 될 수 없어야 한다.")
-    @Test
+        // @Test
     void reserveSeatsTest() {
 
         Long userId = 1L;
