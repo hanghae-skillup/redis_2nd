@@ -24,8 +24,8 @@ public class Reservation {
         return new Reservation(null, screening, seat, user);
     }
 
-    public Boolean isSeatReserved(String seatRow, Integer seatCol) {
-        return this.seat.isThisSeat(seatRow, seatCol);
+    public Boolean checkSameSeat(String seatRow, Integer seatCol) {
+        return this.seat.isSameSeat(seatRow, seatCol);
     }
 
 

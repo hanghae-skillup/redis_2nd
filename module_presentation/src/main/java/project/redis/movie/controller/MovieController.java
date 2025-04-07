@@ -1,5 +1,6 @@
 package project.redis.movie.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.constraints.Size;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -25,8 +26,11 @@ public class MovieController {
             @Size(max = 255, message = "Title length must not exceed 255 characters")
             String movieTitle,
             @RequestParam(required = false, name = "movie-genre")
-            String movieGenre) {
-        List<NowPlayMovieDto> nowPlayMovieDtos = movieQueryService.getNowPlayingMovies(movieTitle, movieGenre);
+            String movieGenre,
+            HttpServletRequest request) {
+        String clientIp = request.getRemoteAddr();
+        List<NowPlayMovieDto> nowPlayMovieDtos
+                = movieQueryService.getNowPlayingMovies(movieTitle, movieGenre, clientIp);
         // List<NowPlayMovieDto> nowPlayMovieDtos = movieService.getNowPlayingMovies();
         return ApiResponse.ok(nowPlayMovieDtos);
     }

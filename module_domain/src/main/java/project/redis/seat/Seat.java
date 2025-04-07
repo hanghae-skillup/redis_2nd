@@ -35,7 +35,7 @@ public class Seat {
         return Integer.compare(this.seatColumn, otherSeat.seatColumn);
     }
 
-    public Boolean isThisSeat(String seatRow, Integer seatColumn) {
+    public Boolean isSameSeat(String seatRow, Integer seatColumn) {
         return this.seatRow.equals(seatRow) && this.seatColumn.equals(seatColumn);
     }
 

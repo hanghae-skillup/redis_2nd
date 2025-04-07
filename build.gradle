@@ -1,45 +1,103 @@
 plugins {
-	id 'java'
-	id 'org.springframework.boot' version '3.4.3'
-	id 'io.spring.dependency-management' version '1.1.7'
+    id 'java'
+    id 'org.springframework.boot' version '3.4.3'
+    id 'io.spring.dependency-management' version '1.1.7'
+    id 'jacoco'
 }
 
 repositories {
-	mavenCentral()
+    mavenCentral()
 }
 
-bootJar{
-	enabled=false
+bootJar {
+    enabled = false
 }
 
 subprojects {
-	group = 'project.redis'
-	version = '0.0.1-SNAPSHOT'
+    group = 'project.redis'
+    version = '0.0.1-SNAPSHOT'
 
-	java {
-		toolchain {
-			languageVersion = JavaLanguageVersion.of(21)
-		}
-	}
+    java {
+        toolchain {
+            languageVersion = JavaLanguageVersion.of(21)
+        }
+    }
 
-	apply plugin: 'java'
-	apply plugin: 'java-library'
-	apply plugin: 'org.springframework.boot'
-	apply plugin: 'io.spring.dependency-management'
+    apply plugin: 'java'
+    apply plugin: 'java-library'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+    apply plugin: 'jacoco'
 
-	configurations {
-		compileOnly {
-			extendsFrom annotationProcessor
-		}
-	}
+    configurations {
+        compileOnly {
+            extendsFrom annotationProcessor
+        }
+    }
 
-	dependencies {
-		compileOnly 'org.projectlombok:lombok'
-		annotationProcessor 'org.projectlombok:lombok'
-	}
+    dependencies {
+        compileOnly 'org.projectlombok:lombok'
+        annotationProcessor 'org.projectlombok:lombok'
+    }
 
-	tasks.named('test') {
-		useJUnitPlatform()
-	}
+    test {
+        useJUnitPlatform()
+        finalizedBy 'jacocoTestReport'
+    }
+
+    jacoco {
+        toolVersion = "0.8.11"
+    }
+
+    jacocoTestReport {
+        dependsOn test
+
+        reports {
+            html.required = true
+        }
+    }
 }
 
+task jacocoRootReport(type: JacocoReport) {
+    group = "verification"
+    description = "Generates an aggregate JaCoCo coverage report."
+
+    dependsOn subprojects.test // 모든 모듈 테스트 먼저 수행
+
+    def execFiles = files()
+    def classDirs = files()
+    def sourceDirs = files()
+
+    subprojects.each { subproject ->
+        def buildDir = subproject.buildDir
+
+        // exec 파일
+        def execFile = file("${buildDir}/jacoco/test.exec")
+        if (execFile.exists()) {
+            execFiles += execFile
+        }
+
+        // 클래스 디렉토리
+        def classDir = file("${buildDir}/classes/java/main")
+        if (classDir.exists()) {
+            classDirs += classDir
+        }
+
+        // 소스 디렉토리
+        def srcDir = file("${subproject.projectDir}/src/main/java")
+        if (srcDir.exists()) {
+            sourceDirs += srcDir
+        }
+    }
+
+    executionData.setFrom(execFiles)
+    classDirectories.setFrom(classDirs)
+    sourceDirectories.setFrom(sourceDirs)
+
+    reports {
+        html.required.set(true)
+        html.outputLocation = layout.buildDirectory.dir("jacocoRootReport/html")
+        xml.required.set(true)
+        csv.required.set(false)
+    }
+}

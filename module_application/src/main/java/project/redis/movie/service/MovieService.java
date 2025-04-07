@@ -42,7 +42,7 @@ public class MovieService {
     private List<NowPlayMovieDto> makeNowPlayingMoviesInfo(List<Movie> movies) {
         List<NowPlayMovieDto> nowPlayMovieDtos = new ArrayList<>();
         for (Movie movie : movies) {
-            List<Screening> movieAllScreening = screeningAdapter.findScreeningsByMovie(movie);
+            List<Screening> movieAllScreening = screeningAdapter.findScreenings(movie);
 
             Map<String, List<Screening>> cinemaNameScreening = mapByCinemaName(movieAllScreening);
 

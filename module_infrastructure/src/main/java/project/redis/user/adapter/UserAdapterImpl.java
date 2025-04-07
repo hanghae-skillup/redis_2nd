@@ -14,7 +14,7 @@ public class UserAdapterImpl implements UserAdapter {
     private final UserMapper userMapper;
 
     @Override
-    public User findUserById(Long userId) {
+    public User find(Long userId) {
         UserEntity userEntity = userRepository.findById(userId).orElse(null);
         return userMapper.toDomain(userEntity);
     }
