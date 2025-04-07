@@ -58,3 +58,46 @@ subprojects {
     }
 }
 
+task jacocoRootReport(type: JacocoReport) {
+    group = "verification"
+    description = "Generates an aggregate JaCoCo coverage report."
+
+    dependsOn subprojects.test // 모든 모듈 테스트 먼저 수행
+
+    def execFiles = files()
+    def classDirs = files()
+    def sourceDirs = files()
+
+    subprojects.each { subproject ->
+        def buildDir = subproject.buildDir
+
+        // exec 파일
+        def execFile = file("${buildDir}/jacoco/test.exec")
+        if (execFile.exists()) {
+            execFiles += execFile
+        }
+
+        // 클래스 디렉토리
+        def classDir = file("${buildDir}/classes/java/main")
+        if (classDir.exists()) {
+            classDirs += classDir
+        }
+
+        // 소스 디렉토리
+        def srcDir = file("${subproject.projectDir}/src/main/java")
+        if (srcDir.exists()) {
+            sourceDirs += srcDir
+        }
+    }
+
+    executionData.setFrom(execFiles)
+    classDirectories.setFrom(classDirs)
+    sourceDirectories.setFrom(sourceDirs)
+
+    reports {
+        html.required.set(true)
+        html.outputLocation = layout.buildDirectory.dir("jacocoRootReport/html")
+        xml.required.set(true)
+        csv.required.set(false)
+    }
+}
