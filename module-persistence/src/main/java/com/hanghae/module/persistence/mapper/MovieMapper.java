@@ -10,8 +10,6 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface MovieMapper {
 
-  MovieMapper INSTANCE = Mappers.getMapper(MovieMapper.class);
-
   /**
    * 영화 엔티티를 도메인 모델로 변환
    */

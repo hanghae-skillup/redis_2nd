@@ -8,7 +8,9 @@ public enum Genre {
   SF("SF"),
   ANIMATION("애니메이션"),
   ROMANCE("로맨스"),
-  THRILLER("스릴러");
+  THRILLER("스릴러"),
+  FANTASY("판타지"),    // 추가
+  ADVENTURE("모험");    // 추가
 
   private final String displayName;
 

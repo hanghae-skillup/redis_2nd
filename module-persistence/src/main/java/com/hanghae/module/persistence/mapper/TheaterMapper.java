@@ -7,10 +7,8 @@ import org.mapstruct.factory.Mappers;
 
 import java.util.List;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface TheaterMapper {
-
-  TheaterMapper INSTANCE = Mappers.getMapper(TheaterMapper.class);
 
   /**
    * 극장 엔티티를 도메인 모델로 변환

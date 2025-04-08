@@ -10,12 +10,6 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "movie"
-//  ,
-//  indexes = {
-//    @Index(name = "idx_movie_title", columnList = "title"),
-//    @Index(name = "idx_movie_genre", columnList = "genre"),
-//    @Index(name = "idx_movie_release_date", columnList = "releaseDate DESC")
-//  }
   )
 @Builder
 @Getter

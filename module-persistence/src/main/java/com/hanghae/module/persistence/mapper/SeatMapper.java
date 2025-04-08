@@ -3,14 +3,10 @@ package com.hanghae.module.persistence.mapper;
 import com.hanghae.module.domain.model.Seat;
 import com.hanghae.module.persistence.entity.SeatEntity;
 import org.mapstruct.Mapper;
-import org.mapstruct.factory.Mappers;
-
 import java.util.List;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface SeatMapper {
-
-  SeatMapper INSTANCE = Mappers.getMapper(SeatMapper.class);
 
   /**
    * 좌석 엔티티를 도메인 모델로 변환

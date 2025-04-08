@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -33,7 +34,7 @@ public class MovieCustomRepository {
     QScreeningEntity screening = QScreeningEntity.screeningEntity;
     QTheaterEntity theater = QTheaterEntity.theaterEntity;
 
-    LocalDateTime now = LocalDateTime.now();
+    LocalDateTime now = LocalDateTime.now().truncatedTo(ChronoUnit.DAYS);
 
     // 영화와 상영 정보를 조인하고, 특정 극장 ID로 필터링 (선택적)
     List<MovieDTO> movies = queryFactory
@@ -42,7 +43,7 @@ public class MovieCustomRepository {
       .join(theater).on(screening.theater.eq(theater.id))
       .where(
         // 현재 상영 중인 영화 조건
-        screening.startTime.after(now),
+        screening.startTime.goe(now).and(screening.startTime.lt(now.plusWeeks(2))),
         eqTheaterId(screening, theaterId),
         eqTitle(movie, title),
         eqGenre(movie, genre)

@@ -4,7 +4,6 @@ public enum ReservationStatus {
   PENDING("대기중"),
   CONFIRMED("확정됨"),
   CANCELED("취소됨"),
-  COMPLETED("완료됨"),
   EXPIRED("만료됨");
 
   private final String description;

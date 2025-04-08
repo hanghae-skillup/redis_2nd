@@ -2,7 +2,6 @@ package com.hanghae.module.persistence.entity;
 
 import com.hanghae.module.common.audit.BaseEntity;
 import com.hanghae.module.common.enums.ReservationStatus;
-import com.hanghae.module.domain.model.Reservation;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

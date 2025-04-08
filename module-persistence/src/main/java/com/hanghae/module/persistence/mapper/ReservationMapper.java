@@ -11,13 +11,12 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface ReservationMapper {
 
-  ReservationMapper INSTANCE = Mappers.getMapper(ReservationMapper.class);
-
   /**
    * 예약 엔티티를 도메인 모델로 변환
    * createdAt은 BaseEntity에서 상속받은 필드라서 명시적으로 매핑
    */
   @Mapping(source = "createdAt", target = "createdAt")
+  @Mapping(target = "seatNumbers", ignore = true)
   Reservation toDomain(ReservationEntity entity);
 
   /**

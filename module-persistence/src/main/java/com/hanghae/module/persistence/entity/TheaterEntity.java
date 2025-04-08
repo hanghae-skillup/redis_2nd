@@ -1,7 +1,6 @@
 package com.hanghae.module.persistence.entity;
 
 import com.hanghae.module.common.audit.BaseEntity;
-import com.hanghae.module.domain.model.Theater;
 import jakarta.persistence.*;
 import lombok.*;
 

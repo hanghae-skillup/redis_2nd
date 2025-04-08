@@ -26,7 +26,4 @@ public class ReservationSeatEntity extends BaseEntity {
 
   @Column(name = "seat_id", nullable = false)
   private Long seat;
-
-  @Column(nullable = false)
-  private BigDecimal amount;
 }

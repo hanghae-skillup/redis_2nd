@@ -11,8 +11,6 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface ReservationSeatMapper {
 
-  ReservationSeatMapper INSTANCE = Mappers.getMapper(ReservationSeatMapper.class);
-
   /**
    * 예약좌석 엔티티를 도메인 모델로 변환
    * createdAt을 reservedAt으로 매핑

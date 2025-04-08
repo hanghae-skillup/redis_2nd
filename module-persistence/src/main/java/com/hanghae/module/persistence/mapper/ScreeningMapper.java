@@ -6,11 +6,10 @@ import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
 import java.util.List;
+import java.util.Optional;
 
 @Mapper(componentModel = "spring")
 public interface ScreeningMapper {
-
-  ScreeningMapper INSTANCE = Mappers.getMapper(ScreeningMapper.class);
 
   /**
    * 상영 엔티티를 도메인 모델로 변환
