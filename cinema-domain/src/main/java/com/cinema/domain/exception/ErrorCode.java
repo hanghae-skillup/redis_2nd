@@ -6,5 +6,6 @@ public enum ErrorCode {
     DB_ERROR,
     CLIENT_ERROR,
     SERVER_ERROR,
-    CONFLICT,
+    LOCK_ACQUISITION_FAILED,
+    TOO_MANY_REQUESTS,
 }

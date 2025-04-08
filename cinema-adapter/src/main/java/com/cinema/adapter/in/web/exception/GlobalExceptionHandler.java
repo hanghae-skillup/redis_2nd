@@ -64,8 +64,11 @@ public class GlobalExceptionHandler {
             case CLIENT_ERROR -> {
                 return HttpStatus.BAD_REQUEST;
             }
-            case CONFLICT -> {
+            case LOCK_ACQUISITION_FAILED -> {
                 return HttpStatus.CONFLICT;
+            }
+            case TOO_MANY_REQUESTS -> {
+                return HttpStatus.TOO_MANY_REQUESTS;
             }
             default -> {
                 return HttpStatus.OK;

@@ -1,5 +1,6 @@
-package com.cinema.adapter.out.persistence.lock;
+package com.cinema.adapter.out.persistence.aspect;
 
+import com.cinema.adapter.in.web.aspect.CustomSpringELParser;
 import com.cinema.application.service.DistributedLockAOP;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,27 +26,27 @@ public class DistributedLockAspect {
     private final AopForTransaction aopForTransaction;
 
     @Around("@annotation(distributedLock)")
-    public Object lock(final ProceedingJoinPoint joinPoint, DistributedLockAOP distributedLockAOP) throws Throwable {
+    public Object lock(final ProceedingJoinPoint joinPoint, DistributedLockAOP distributedLock) throws Throwable {
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         Method method = signature.getMethod();
 
-//        String key = REDISSON_LOCK_PREFIX + CustomSpringELParser.getDynamicValue(signature.getParameterNames(), joinPoint.getArgs(), distributedLock.key());
-        String key = REDISSON_LOCK_PREFIX + distributedLockAOP.key();
+        String key = REDISSON_LOCK_PREFIX + CustomSpringELParser.getDynamicValue(signature.getParameterNames(), joinPoint.getArgs(), distributedLock.key());
         RLock rLock = redissonClient.getLock(key);
 
         try {
-            boolean available = rLock.tryLock(distributedLockAOP.waitTime(), distributedLockAOP.leaseTime(), distributedLockAOP.timeUnit());
+            boolean available = rLock.tryLock(distributedLock.waitTime(), distributedLock.leaseTime(), distributedLock.timeUnit());
             if (!available) {
                 return false;
             }
             return aopForTransaction.proceed(joinPoint);
         } catch (InterruptedException e) {
+            log.warn("Redisson Lock Interrupted serviceName: {}, key: {}", method.getName(), key);
             throw new InterruptedException();
         } finally {
             try {
                 rLock.unlock();
             } catch (IllegalMonitorStateException e) {
-                log.info("Redisson Lock Already UnLock serviceName: {}, key: {}", method.getName(), key);
+                log.warn("Redisson Lock Already UnLock serviceName: {}, key: {}", method.getName(), key);
             }
         }
     }

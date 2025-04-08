@@ -7,10 +7,12 @@ import com.cinema.application.mapper.ReservationMapper;
 import com.cinema.application.port.in.CreateReservationUseCase;
 import com.cinema.application.port.out.DistributedLock;
 import com.cinema.application.port.out.TicketReservationPort;
+import com.cinema.application.validator.ReservationValidator;
 import com.cinema.domain.model.TicketReservation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
