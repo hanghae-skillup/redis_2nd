@@ -20,22 +20,4 @@ public class UserEntity {
 
   @Column(nullable = false)
   private String name;
-
-  public User toDomain() {
-    return User.builder()
-      .id(this.id)
-      .name(this.name)
-      .build();
-  }
-
-  public static UserEntity from(User domain) {
-    if (domain == null) {
-      return null;
-    }
-
-    return UserEntity.builder()
-      .id(domain.id())
-      .name(domain.name())
-      .build();
-  }
 }

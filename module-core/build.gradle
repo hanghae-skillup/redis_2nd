@@ -5,4 +5,10 @@ plugins {
 dependencies {
     implementation project(':module-domain')
     implementation project(':module-common')
+    api 'org.springframework.boot:spring-boot-starter-cache'
+    api 'com.github.ben-manes.caffeine:caffeine'
+    api 'org.redisson:redisson-spring-boot-starter:3.43.0'
+    api 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
+
+
 }

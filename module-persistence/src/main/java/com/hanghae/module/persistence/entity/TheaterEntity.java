@@ -1,7 +1,6 @@
 package com.hanghae.module.persistence.entity;
 
 import com.hanghae.module.common.audit.BaseEntity;
-import com.hanghae.module.domain.model.Theater;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -19,22 +18,4 @@ public class TheaterEntity extends BaseEntity {
 
   @Column(nullable = false)
   private String name;
-
-  public Theater toDomain() {
-    return Theater.builder()
-      .id(this.id)
-      .name(this.name)
-      .build();
-  }
-
-  public static TheaterEntity from(Theater domain) {
-    if (domain == null) {
-      return null;
-    }
-
-    return TheaterEntity.builder()
-      .id(domain.id())
-      .name(domain.name())
-      .build();
-  }
 }

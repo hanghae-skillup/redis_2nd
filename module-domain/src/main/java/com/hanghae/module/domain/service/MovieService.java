@@ -1,4 +1,4 @@
-package com.hanghae.module.core.service;
+package com.hanghae.module.domain.service;
 
 
 import com.hanghae.module.common.dto.MovieDTO;
