@@ -10,6 +10,9 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     
+    // Google Guava
+    implementation("com.google.guava:guava:32.1.3-jre")
+    
     // MySQL
     implementation("com.mysql:mysql-connector-j")
     
@@ -32,6 +35,9 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.testcontainers:mysql:${libs.versions.test.containers.get()}")
     testImplementation("org.testcontainers:junit-jupiter:${libs.versions.test.containers.get()}")
+    
+    // Mockito Kotlin
+    testImplementation("org.mockito.kotlin:mockito-kotlin:5.2.1")
 }
 
 tasks.getByName("bootJar") {
