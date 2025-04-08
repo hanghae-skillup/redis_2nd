@@ -1,5 +1,6 @@
 package com.app.movie.presentation;
 
+import com.app.movie.aop.RateLimitCheck;
 import com.app.movie.application.MovieService;
 import com.app.movie.presentation.dto.MovieRequestDto;
 import com.app.movie.presentation.dto.MovieResponseDto;
@@ -13,7 +14,7 @@ import java.util.List;
 @RequestMapping("/movie")
 public class MovieRestController {
 
-    MovieService movieService;
+    private final MovieService movieService;
 
     @Autowired
     public MovieRestController(MovieService movieService) {
@@ -21,7 +22,12 @@ public class MovieRestController {
     }
 
     @GetMapping()
-    public List<MovieResponseDto> getMovies(@Valid @ModelAttribute MovieRequestDto movieRequestDto) {
+    @RateLimitCheck
+    public List<MovieResponseDto> getMovies(@RequestHeader(value = "X-Forwarded-For", required = false) String ipAddress,
+                                            @Valid @ModelAttribute MovieRequestDto movieRequestDto) {
+
         return movieService.getAllMovies(movieRequestDto);
     }
+
+
 }
