@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface DistributedMultiLock {
     String expression();
-    long waitTime() default 2L;
-    long leaseTime() default 3L;
-    TimeUnit timeUnit() default TimeUnit.SECONDS;
+    long waitTime() default 2000L;      // milliseconds
+    long leaseTime() default 1500L;     // milliseconds
+    TimeUnit timeUnit() default TimeUnit.MILLISECONDS;
 }

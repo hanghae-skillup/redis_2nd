@@ -24,7 +24,7 @@ public class LockTemplate {
 
         boolean acquired = false;
         try {
-            acquired = multiLock.tryLock(2, 3, TimeUnit.SECONDS); // waitTime, leaseTime
+            acquired = multiLock.tryLock(2000, 1500, TimeUnit.MILLISECONDS); // waitTime, leaseTime
             if (!acquired) {
                 throw new IllegalStateException("락 획득 실패: " + rawKeys);
             }
