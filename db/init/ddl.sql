@@ -1,5 +1,6 @@
 CREATE TABLE users (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(20),
     created_at DATETIME,
     created_by BIGINT,
     updated_at DATETIME,
@@ -19,9 +20,9 @@ CREATE TABLE movies (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(30),
     rating VARCHAR(20),
-    released_at DATETIME,
+    released_date DATE,
     thumbnail_image VARCHAR(50),
-    running_time INT,
+    running_time_min INT,
     genre VARCHAR(20),
     created_at DATETIME,
     created_by BIGINT,
@@ -44,8 +45,8 @@ CREATE TABLE screenings (
 
 CREATE TABLE screening_seats (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    `row` int,
-    `col` int,
+    seat_row int,
+    seat_col int,
     theater_id BIGINT NOT NULL,
     created_at DATETIME,
     created_by BIGINT,
@@ -55,9 +56,11 @@ CREATE TABLE screening_seats (
 
 CREATE TABLE reservations (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    version BIGINT DEFAULT 0,
     screening_seat_id BIGINT NOT NULL,
+    is_reserved BOOLEAN NOT NULL DEFAULT false,
     screening_id BIGINT NOT NULL,
-    user_id BIGINT NOT NULL,
+    user_id BIGINT,
     created_at DATETIME,
     created_by BIGINT,
     updated_at DATETIME,

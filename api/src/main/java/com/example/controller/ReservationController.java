@@ -1,6 +1,9 @@
-package com.example;
+package com.example.controller;
 
+import com.example.service.ReservationService;
 import com.example.dto.request.ReservationRequest;
+import com.example.dto.response.ApiResponse;
+import com.example.dto.response.ReservationResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,7 +17,7 @@ public class ReservationController {
     private final ReservationService reservationService;
 
     @PostMapping("/reservations")
-    public String reserveSeats(@Valid @RequestBody ReservationRequest request){
-        return reservationService.reserveSeats(request.toServiceRequest());
+    public ApiResponse<ReservationResponse> reserveSeats(@Valid @RequestBody ReservationRequest request){
+        return ApiResponse.ok(ReservationResponse.from(reservationService.reserveSeats(request.toServiceRequest())));
     }
 }

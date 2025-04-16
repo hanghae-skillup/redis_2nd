@@ -12,9 +12,8 @@ FROM (
 ) t
 LIMIT 100;
 
-
 -- MOVIES (10000 rows)
-INSERT INTO movies (title, rating, released_at, thumbnail_image, running_time, genre, created_at, created_by, updated_at, updated_by)
+INSERT INTO movies (title, rating, released_date, thumbnail_image, running_time_min, genre, created_at, created_by, updated_at, updated_by)
 SELECT
     CONCAT('Movie_', n),
     CASE FLOOR(RAND() * 3)
@@ -22,7 +21,7 @@ SELECT
         WHEN 1 THEN 'R_15'
         ELSE 'R_19'
     END,
-    DATE_ADD('2010-01-01', INTERVAL FLOOR(RAND() * 5843) DAY),
+    CAST(DATE_ADD('2010-01-01', INTERVAL FLOOR(RAND() * 5843) DAY) AS DATE),
     CONCAT('movie_', n, '.jpg'),
     FLOOR(RAND() * 60 + 90),
     CASE FLOOR(RAND() * 12)
@@ -52,43 +51,30 @@ FROM (
 ) t
 LIMIT 10000;
 
-
--- SCREENINGS (100000 rows) - started_at < ended_at 보장
+-- SCREENINGS (50000 rows)
 INSERT INTO screenings (date, started_at, ended_at, movie_id, theater_id, created_at, created_by, updated_at, updated_by)
 SELECT
-    DATE_ADD('2024-01-01', INTERVAL rand_day DAY) AS rand_date,
-    start_dt,
-    end_dt,
-    FLOOR(RAND() * 10000) + 1,
-    FLOOR(RAND() * 100) + 1,
+    DATE_ADD(m.released_date, INTERVAL FLOOR(RAND(m.id + s.n) * 100) DAY),
+    TIMESTAMP(DATE_ADD(m.released_date, INTERVAL FLOOR(RAND(m.id + s.n) * 100) DAY), SEC_TO_TIME(rand_sec)),
+    TIMESTAMP(DATE_ADD(m.released_date, INTERVAL FLOOR(RAND(m.id + s.n) * 100) DAY), SEC_TO_TIME(LEAST(rand_sec + duration_sec, 86399))),
+    m.id,
+    FLOOR(RAND(m.id + s.n) * 100) + 1,
     NOW(), 1, NOW(), 1
-FROM (
+FROM movies m
+JOIN (
+    SELECT 0 AS n UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4
+) s -- 🎯 각 영화당 5개의 상영 정보
+JOIN (
     SELECT
-        rand_day,
-        TIMESTAMP(DATE_ADD('2024-01-01', INTERVAL rand_day DAY), SEC_TO_TIME(rand_sec)) AS start_dt,
-        TIMESTAMP(DATE_ADD('2024-01-01', INTERVAL rand_day DAY), SEC_TO_TIME(LEAST(rand_sec + duration_sec, 86399))) AS end_dt
-    FROM (
-        SELECT
-            @rownum := @rownum + 1 AS rownum,
-            FLOOR(RAND(@rownum) * 365) AS rand_day,
-            FLOOR(RAND(@rownum + 1) * 79200) AS rand_sec,
-            FLOOR(RAND(@rownum + 2) * 10800) + 1 AS duration_sec  -- 최소 1초 이상 보장
-        FROM (
-            SELECT 1 FROM
-                (SELECT 1 UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9 UNION SELECT 10) a,
-                (SELECT 1 UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9 UNION SELECT 10) b,
-                (SELECT 1 UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9 UNION SELECT 10) c,
-                (SELECT 1 UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9 UNION SELECT 10) d,
-                (SELECT 1 UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9 UNION SELECT 10) e,
-                (SELECT @rownum := 0) r
-        ) base
-    ) derived
-) final
-LIMIT 100000;
-
+        @row := @row + 1,
+        FLOOR(RAND(@row) * 79200) AS rand_sec,
+        FLOOR(RAND(@row + 1) * 10800) + 1 AS duration_sec
+    FROM (SELECT 1 FROM dual LIMIT 10000) rand_gen, (SELECT @row := 0) r
+) r_gen
+LIMIT 50000;
 
 -- SCREENING_SEATS (100 theaters * 25 seats = 2500 rows)
-INSERT INTO screening_seats (`row`, `col`, theater_id, created_at, created_by, updated_at, updated_by)
+INSERT INTO screening_seats (seat_row, seat_col, theater_id, created_at, created_by, updated_at, updated_by)
 SELECT
     r.r + 1 AS seat_row,
     c.c + 1 AS seat_col,
@@ -103,10 +89,9 @@ JOIN (
 ) AS r
 ORDER BY t.id, seat_row, seat_col;
 
-
 -- USERS (100 rows)
-INSERT INTO users (created_at, created_by, updated_at, updated_by)
-SELECT NOW(), 1, NOW(), 1
+INSERT INTO users (name, created_at, created_by, updated_at, updated_by)
+SELECT CONCAT('user_', num), NOW(), 1, NOW(), 1
 FROM (
     SELECT a.N + b.N * 10 + 1 AS num
     FROM (
@@ -120,3 +105,17 @@ FROM (
     ORDER BY num
     LIMIT 100
 ) AS numbers;
+
+-- RESERVATIONS (10 rows)
+INSERT INTO reservations (is_reserved, screening_seat_id, screening_id, user_id)
+VALUES
+    (false, 1, 1, null),
+    (false, 2, 1, null),
+    (false, 3, 1, null),
+    (false, 4, 1, null),
+    (false, 5, 1, null),
+    (false, 6, 1, null),
+    (false, 7, 1, null),
+    (false, 8, 1, null),
+    (false, 9, 1, null),
+    (false, 10, 1, null);
