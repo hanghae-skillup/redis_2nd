@@ -81,7 +81,15 @@ subprojects {
 
         // redis
         implementation("org.springframework.boot:spring-boot-starter-data-redis")
+        implementation("org.redisson:redisson-spring-boot-starter:3.25.2")
 
+        // caffine
+        implementation("org.springframework.boot:spring-boot-starter-cache")
+        implementation("com.github.ben-manes.caffeine:caffeine")
+
+        // jackson
+        implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
+        implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     }
 
     kapt {

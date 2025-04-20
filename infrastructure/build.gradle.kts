@@ -11,6 +11,11 @@ dependencies {
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+
+	// redis
+	implementation("org.redisson:redisson-spring-boot-starter:3.45.1")
+	implementation("org.redisson:redisson:3.45.1")
+
 }
 
 tasks.bootJar {
